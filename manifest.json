@@ -1,0 +1,32 @@
+{
+  "name": "Ramu",
+  "short_name" : "Ramu",
+  "description": "Your favourite ramu at your fingertips",
+  "version": "0.1.1",
+  "background": {
+    "scripts": ["data.js", "background.js"],
+    "persistent": false
+  },
+  "omnibox": { "keyword" : "ramu" },
+  "incognito": "split",
+  "chrome_url_overrides": {
+    "newtab": "new.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "16": "image/icon16.png",
+      "32": "image/icon32.png",
+      "48": "image/icon48.png",
+      "128": "image/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "image/icon16.png",
+    "32": "image/icon32.png",
+    "48": "image/icon48.png",
+    "128": "image/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-inline'; object-src 'self'",
+  "manifest_version": 2
+}
