@@ -1,13 +1,13 @@
 {
-  "name": "Ramu",
-  "short_name" : "Ramu",
-  "description": "Your favourite ramu at your fingertips",
-  "version": "0.1.1",
+  "name": "GoTo",
+  "short_name" : "GoTo",
+  "description": "GoTo and Search popular sites from your NewTab",
+  "version": "0.2.0",
   "background": {
-    "scripts": ["data.js", "background.js"],
+    "scripts": ["secret.js","data.js", "background.js"],
     "persistent": false
   },
-  "omnibox": { "keyword" : "ramu" },
+  "omnibox": { "keyword" : "goto" },
   "incognito": "split",
   "chrome_url_overrides": {
     "newtab": "new.html"

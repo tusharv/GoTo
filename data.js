@@ -1,138 +1,357 @@
 var config = {
     "git": {
-        "default" : "https://github.com",
-        "search" : "https://github.com/search?q={0}",
+        "default": "https://github.com",
+        "search": "https://github.com/search?q={0}",
         "repositories": "https://github.com/search?q={0}&type=Repositories",
+        "repo": "https://github.com/search?q={0}&type=Repositories",
         "code": "https://github.com/search?q={0}&type=Code",
         "commits": "https://github.com/search?q={0}&type=Commits",
         "issues": "https://github.com/search?q={0}&type=Issues",
         "marketplace": "https://github.com/search?q={0}&type=Marketplace",
+        "market": "https://github.com/search?q={0}&type=Marketplace",
         "topics": "https://github.com/search?q={0}&type=Topics",
         "wikis": "https://github.com/search?q={0}&type=Wikis",
         "users": "https://github.com/search?q={0}&type=Users",
+        "param": "meshde"
     },
     "youtube": {
-        "default" : "https://youtube.com",
-        "search" : "https://www.youtube.com/results?search_query={0}",
+        "default": "https://youtube.com",
+        "search": "https://www.youtube.com/results?search_query={0}",
+        "param": "origami"
     },
     "yt": {
-        "default" : "https://youtube.com",
-        "search" : "https://www.youtube.com/results?search_query={0}",
+        "default": "https://youtube.com",
+        "search": "https://www.youtube.com/results?search_query={0}",
+        "param": "coding tech"
     },
     "bing": {
-        "default" : "https://www.bing.com/",
-        "search" : "https://www.bing.com/search?q={0}",
+        "default": "https://www.bing.com/",
+        "search": "https://www.bing.com/search?q={0}",
+        "param": ""
     },
     "imdb": {
-        "default" : "https://imdb.com",
-        "search" : "https://www.imdb.com/find?q={0}&s=all",
+        "default": "https://imdb.com",
+        "search": "https://www.imdb.com/find?q={0}&s=all",
+        "param": "despicable me"
     },
     "gmail": {
-        "default" : "https://gmail.com",
-        "search" : "https://mail.google.com/mail/u/0/#search/{0}",
-        "from" : "https://mail.google.com/mail/u/0/#advanced-search/from={0}",
-        "from" : "https://mail.google.com/mail/u/0/#advanced-search/from={0}"
+        "default": "https://gmail.com",
+        "search": "https://mail.google.com/mail/u/0/#search/{0}",
+        "from": "https://mail.google.com/mail/u/0/#advanced-search/from={0}",
+        "from": "https://mail.google.com/mail/u/0/#advanced-search/from={0}",
+        "param": "in:sent"
     },
     "mail": {
-        "default" : "https://gmail.com",
-        "search" : "https://mail.google.com/mail/u/0/#search/{0}",
+        "default": "https://gmail.com",
+        "search": "https://mail.google.com/mail/u/0/#search/{0}",
+        "param": "varsha"
     },
     "drive": {
-        "default" : "https://drive.google.com/",
-        "search" : "https://drive.google.com/drive/search?q={0}",
+        "default": "https://drive.google.com/",
+        "search": "https://drive.google.com/drive/search?q={0}",
+        "param": "salary slips"
     },
     "dri": {
-        "default" : "https://drive.google.com/",
-        "search" : "https://drive.google.com/drive/search?q={0}",
+        "default": "https://drive.google.com/",
+        "search": "https://drive.google.com/drive/search?q={0}",
+        "param": "Report"
     },
     "map": {
-        "default" : "https://www.google.com/maps/",
-        "search" : "https://www.google.com/maps/search/{0}",
+        "default": "https://www.google.com/maps/",
+        "search": "https://www.google.com/maps/search/{0}",
+        "param": "Goa"
     },
     "amazon": {
-        "default" : "https://www.amazon.com/",
-        "search" : "https://www.amazon.in/s/field-keywords={0}",
+        "default": "https://www.amazon.com/",
+        "search": "https://www.amazon.in/s/field-keywords={0}",
+        "param": "OnePlus 7"
     },
     "ama": {
-        "default" : "https://www.amazon.com/",
-        "search" : "https://www.amazon.in/s/field-keywords={0}",
+        "default": "https://www.amazon.com/",
+        "search": "https://www.amazon.in/s/field-keywords={0}",
+        "param": ""
     },
     "flipkart": {
-        "default" : "https://www.flipkart.com/",
-        "search" : "https://www.flipkart.com/search?q={0}",
+        "default": "https://www.flipkart.com/",
+        "search": "https://www.flipkart.com/search?q={0}",
+        "param": "LED TV"
     },
     "fli": {
-        "default" : "https://www.flipkart.com/",
-        "search" : "https://www.flipkart.com/search?q={0}",
+        "default": "https://www.flipkart.com/",
+        "search": "https://www.flipkart.com/search?q={0}",
+        "param": "Mobile"
     },
     "speed": {
-        "default" : "https://www.speedtest.net/"
+        "default": "https://www.speedtest.net/",
+        "param": ""
     },
     "ip": {
-        "default" : "https://ipinfo.io/"
+        "default": "https://ipinfo.io/",
+        "param": ""
     },
     "weather": {
-        "default" : "https://weather.com/en-IN/weather/today/"
+        "default": "https://weather.com/en-IN/weather/today/",
+        "param": ""
     },
     "weat": {
-        "default" : "https://weather.com/en-IN/weather/today/"
+        "default": "https://weather.com/en-IN/weather/today/",
+        "param": ""
     },
     "twitter": {
-        "default" : "https://twitter.com/",
-        "search" : "https://twitter.com/search?q={0}"
+        "default": "https://twitter.com/",
+        "search": "https://twitter.com/search?q={0}",
+        "param": "Grynn"
     },
     "twit": {
-        "default" : "https://twitter.com/",
-        "search" : "https://twitter.com/search?q={0}"
+        "default": "https://twitter.com/",
+        "search": "https://twitter.com/search?q={0}",
+        "param": ""
     },
     "zomato": {
-        "default" : "https://www.zomato.com/",
-        "search" : "https://www.zomato.com/restaurants?q={0}"
+        "default": "https://www.zomato.com/",
+        "search": "https://www.zomato.com/restaurants?q={0}",
+        "param": ""
     },
     "zoma": {
-        "default" : "https://www.zomato.com/",
-        "search" : "https://www.zomato.com/restaurants?q={0}"
+        "default": "https://www.zomato.com/",
+        "search": "https://www.zomato.com/restaurants?q={0}",
+        "param": ""
     },
-    "tax" : {
-        "default" : "https://www.incometaxindiaefiling.gov.in/"
+    "tax": {
+        "default": "https://www.incometaxindiaefiling.gov.in/",
+        "param": ""
     },
-    "linkedin" : {
-        "default" : "https://www.linkedin.com/"
+    "linkedin": {
+        "default": "https://www.linkedin.com/",
+        "search": "https://www.linkedin.com/search/results/all/?keywords={0}",
+        "param": "arfat"
     },
-    "link" : {
-        "default" : "https://www.linkedin.com/"
+    "link": {
+        "default": "https://www.linkedin.com/",
+        "search": "https://www.linkedin.com/search/results/all/?keywords={0}",
+        "param": "Bonzai"
     },
-    "quora" : {
-        "default" : "https://www.quora.com/",
-        "search" : "https://www.quora.com/search?q={0}"
+    "quora": {
+        "default": "https://www.quora.com/",
+        "search": "https://www.quora.com/search?q={0}",
+        "param": ""
     },
-    "q" : {
-        "default" : "https://www.quora.com/",
-        "search" : "https://www.quora.com/search?q={0}"
+    "q": {
+        "default": "https://www.quora.com/",
+        "search": "https://www.quora.com/search?q={0}",
+        "param": ""
     },
-    "reditt" : {
-        "default" : "https://www.reddit.com/",
-        "search" : "https://www.reddit.com/search?q={0}"
+    "reditt": {
+        "default": "https://www.reddit.com/",
+        "search": "https://www.reddit.com/search?q={0}",
+        "param": ""
     },
-    "r" : {
-        "default" : "https://www.reddit.com/",
-        "search" : "https://www.reddit.com/search?q={0}"
+    "r": {
+        "default": "https://www.reddit.com/",
+        "search": "https://www.reddit.com/search?q={0}",
+        "param": ""
     },
-    "medium" : {
-        "default" : "https://medium.com/",
-        "search" : "https://medium.com/search?q={0}"
+    "medium": {
+        "default": "https://medium.com/",
+        "search": "https://medium.com/search?q={0}",
+        "param": ""
     },
-    "m" : {
-        "default" : "https://medium.com/",
-        "search" : "https://medium.com/search?q={0}"
+    "m": {
+        "default": "https://medium.com/",
+        "search": "https://medium.com/search?q={0}",
+        "param": ""
     },
-    "options" : {
-        "default" : "options.html"
+    "font": {
+        "default": "https://fonts.google.com/",
+        "search": "https://fonts.google.com/?query={0}",
+        "param": "Roboto"
     },
-    "help" : {
-        "default" : "options.html"
+    "gfont": {
+        "default": "https://fonts.google.com/",
+        "search": "https://fonts.google.com/?query={0}",
+        "param": ""
     },
-    "ext" : {
-        "default" : "chrome://extensions/"
+    "trello": {
+        "default": "https://trello.com/",
+        "search": "https://trello.com/search?q={0}",
+        "param": "Design"
+    },
+    "t": {
+        "default": "https://trello.com/",
+        "search": "https://trello.com/search?q={0}",
+        "param": "Mayank"
+    },
+    "pinterest": {
+        "default": "https://www.pinterest.com/",
+        "search": "https://pinterest.com/search/pins/?q={0}",
+        "param": "doodle"
+    },
+    "pin": {
+        "default": "https://www.pinterest.com/",
+        "search": "https://pinterest.com/search/pins/?q={0}",
+        "param": "infographics"
+    },
+    "pint": {
+        "default": "https://www.pinterest.com/",
+        "search": "https://pinterest.com/search/pins/?q={0}",
+        "param": "DIY"
+    },
+    "wa": {
+        "default": "https://web.whatsapp.com/",
+        "param": ""
+    },
+    "whatsapp": {
+        "default": "https://web.whatsapp.com/",
+        "param": ""
+    },
+    "caniuse": {
+        "default": "https://caniuse.com/",
+        "search": "https://caniuse.com/#search={0}",
+        "param": "autoplay"
+    },
+    "cani": {
+        "default": "https://caniuse.com/",
+        "search": "https://caniuse.com/#search={0}",
+        "param": "grid"
+    },
+    "wiki": {
+        "default": "https://en.wikipedia.org/wiki/Main_Page",
+        "search": "https://en.wikipedia.org/wiki/{0}",
+        "param": "Mumbai"
+    },
+    "wikipedia": {
+        "default": "https://en.wikipedia.org/wiki/Main_Page",
+        "search": "https://en.wikipedia.org/wiki/{0}",
+        "param": "Jules Verne"
+    },
+    "codepen": {
+        "default": "https://codepen.io/",
+        "search": "https://codepen.io/search/pens?q={0}",
+        "param": ""
+    },
+    "code": {
+        "default": "https://codepen.io/",
+        "search": "https://codepen.io/search/pens?q={0}",
+        "param": ""
+    },
+    "so": {
+        "default": "https://stackoverflow.com/",
+        "search": "https://stackoverflow.com/search?q={0}",
+        "param": "moghya"
+    },
+    "stack": {
+        "default": "https://stackoverflow.com/",
+        "search": "https://stackoverflow.com/search?q={0}",
+        "param": "HTML5"
+    },
+    "stackoverflow": {
+        "default": "https://stackoverflow.com/",
+        "search": "https://stackoverflow.com/search?q={0}",
+        "param": ""
+    },
+    "bitly": {
+        "default": "https://bitly.com/",
+        "param": ""
+    },
+    "color": {
+        "default": "https://picular.co/",
+        "search": "https://picular.co/{0}",
+        "param": "india"
+    },
+    "giphy": {
+        "default": "https://giphy.com/",
+        "search": "https://giphy.com/search/{0}",
+        "param": "lol"
+    },
+    "unsplash": {
+        "default": "https://unsplash.com/",
+        "search": "https://unsplash.com/search/photos/{0}",
+        "param": "nature"
+    },
+    "unsp": {
+        "default": "https://unsplash.com/",
+        "search": "https://unsplash.com/search/photos/{0}",
+        "param": "birds"
+    },
+    "us": {
+        "default": "https://unsplash.com/",
+        "search": "https://unsplash.com/search/photos/{0}",
+        "param": ""
+    },
+    "fontawesome": {
+        "default": "https://fontawesome.com/",
+        "search": "https://fontawesome.com/icons?d=gallery&q={0}",
+        "param": ""
+    },
+    "fa": {
+        "default": "https://fontawesome.com/",
+        "search": "https://fontawesome.com/icons?d=gallery&q={0}",
+        "param": "menu"
+    },
+    "webmakerapp": {
+        "default": "https://webmakerapp.com/app/",
+        "param": ""
+    },
+    "wma": {
+        "default": "https://webmakerapp.com/app/",
+        "param": ""
+    },
+    "wm": {
+        "default": "https://webmakerapp.com/app/",
+        "param": ""
+    },
+    "jsfiddle": {
+        "default": "https://jsfiddle.net/",
+        "param": ""
+    },
+    "jf": {
+        "default": "https://jsfiddle.net/",
+        "param": ""
+    },
+    "photopea": {
+        "default": "https://www.photopea.com/",
+        "param": ""
+    },
+    "psd": {
+        "default": "https://www.photopea.com/",
+        "param": ""
+    },
+    "hist": {
+        "default": "chrome://history/",
+        "search": "chrome://history/?q={0}",
+        "param": ""
+    },
+    "history": {
+        "default": "chrome://history/",
+        "search": "chrome://history/?q={0}",
+        "param": ""
+    },
+    "dino": {
+        "default": "chrome://dino/",
+        "param": ""
+    },
+    "options": {
+        "default": "options.html",
+        "param": ""
+    },
+    "help": {
+        "default": "options.html",
+        "param": ""
+    },
+    "ext": {
+        "default": "chrome://extensions/",
+        "param": ""
+    },
+    "papa": {
+        "default": "https://chrome.google.com/webstore/developer/dashboard",
+        "param": ""
+    },
+    "me": {
+        "default": "http://tusharv.in/contact.html",
+        "param": ""
+    },
+    "about": {
+        "default": "http://tusharv.in/contact.html",
+        "param": ""
     },
 }

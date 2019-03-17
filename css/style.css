@@ -3,23 +3,33 @@
     src: url('../font/Overpass-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Share Tech Mono';
+    src: url('../font/ShareTechMono-Regular.ttf');
+}
+
 body {
-    font-family: 'Overpass', sans-serif;
+    font-family: 'Share Tech Mono', sans-serif;
+    background-size: cover;
+    background-position: center center;
+    color: #FFFFFF;
+    background-color: #c6c6c6;
 }
 
 div {
-    color: #cccccc;
+    color: #FFFFFF;
     vertical-align: 50%;
     text-align: center;
     font-size: 300%;
 }
 
 table {
+    width: 50%;
+    margin: 0 auto;
     font-family: 'Overpass', sans-serif;
     border-collapse: collapse;
     border-radius: 10px;
-    width: 50%;
-    margin: 0 auto;
+    color: #000000;
 }
 
 td,
@@ -34,13 +44,57 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+#message {
+    min-height: 122px;
+    text-shadow: 2px 2px 40px #000000;
+}
+
+.date {
+    position: absolute;
+    top: 10;
+    right: 10;
+    font-size: 25px;
+}
+
+.time {
+    /* position: absolute;
+    top: 45;
+    left: 10; */
+    font-size: 60px;
+}
+
+.logo {
+    position: absolute;
+    top: 10;
+    left: 10;
+}
+
+.time, .date {
+    display: inline-block;
+    padding: 5px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.bg {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
 .footer {
     position: fixed;
+    width: 45%;
     bottom: 10px;
     right: 10px;
-    height: 20px;
     font-size: 10px;
+    text-align: right;
     line-height: 20px;
+    text-transform: capitalize;
+}
+
+.left {
+    left: 10px;
+    right: unset;
+    text-align: left;
 }
 
 .safron {
@@ -51,6 +105,23 @@ tr:nth-child(even) {
     color: #FFFFFF;
 }
 
+.black {
+    color: #000000;
+}
+
 .green {
     color: #138808;
+}
+
+a:hover, a:visited, a:link {
+    color: #FFFFFF;
+}
+
+.options a:hover, .options a:visited, .options a:link {
+    color: #000000;
+}
+
+.options {
+    color: #000000;
+    background-color: #FFFFFF;
 }
