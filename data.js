@@ -64,17 +64,17 @@ var config = {
     "amazon": {
         "default": "https://www.amazon.com/",
         "search": "https://www.amazon.in/s/field-keywords={0}",
-        "param": "OnePlus 7"
+        "param": ""
     },
     "ama": {
         "default": "https://www.amazon.com/",
         "search": "https://www.amazon.in/s/field-keywords={0}",
-        "param": ""
+        "param": "OnePlus 7"
     },
     "flipkart": {
         "default": "https://www.flipkart.com/",
         "search": "https://www.flipkart.com/search?q={0}",
-        "param": "LED TV"
+        "param": "xbox one"
     },
     "fli": {
         "default": "https://www.flipkart.com/",
@@ -100,12 +100,12 @@ var config = {
     "twitter": {
         "default": "https://twitter.com/",
         "search": "https://twitter.com/search?q={0}",
-        "param": "Grynn"
+        "param": ""
     },
     "twit": {
         "default": "https://twitter.com/",
         "search": "https://twitter.com/search?q={0}",
-        "param": ""
+        "param": "Grynn"
     },
     "zomato": {
         "default": "https://www.zomato.com/",
@@ -217,12 +217,12 @@ var config = {
     "wiki": {
         "default": "https://en.wikipedia.org/wiki/Main_Page",
         "search": "https://en.wikipedia.org/wiki/{0}",
-        "param": "Mumbai"
+        "param": "Jules Verne"
     },
     "wikipedia": {
         "default": "https://en.wikipedia.org/wiki/Main_Page",
         "search": "https://en.wikipedia.org/wiki/{0}",
-        "param": "Jules Verne"
+        "param": "Mumbai"
     },
     "codepen": {
         "default": "https://codepen.io/",
@@ -289,15 +289,27 @@ var config = {
         "param": "menu"
     },
     "webmakerapp": {
-        "default": "https://webmakerapp.com/app/",
+        "default": "https://webmaker.app/",
         "param": ""
     },
     "wma": {
-        "default": "https://webmakerapp.com/app/",
+        "default": "https://webmaker.app/",
         "param": ""
     },
     "wm": {
-        "default": "https://webmakerapp.com/app/",
+        "default": "https://webmaker.app/",
+        "param": ""
+    },
+    "geeksforgeeks": {
+        "default": "https://www.geeksforgeeks.org/",
+        "param": ""
+    },
+    "g4g": {
+        "default": "https://www.geeksforgeeks.org/",
+        "param": ""
+    },
+    "geek": {
+        "default": "https://www.geeksforgeeks.org/",
         "param": ""
     },
     "jsfiddle": {
