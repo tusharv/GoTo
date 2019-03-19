@@ -47,6 +47,7 @@ tr:nth-child(even) {
 #message {
     min-height: 122px;
     text-shadow: 2px 2px 40px #000000;
+    user-select: none;
 }
 
 .date {
@@ -73,6 +74,7 @@ tr:nth-child(even) {
     display: inline-block;
     padding: 5px;
     font-family: 'Share Tech Mono', monospace;
+    user-select: none;
 }
 
 .bg {
