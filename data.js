@@ -76,10 +76,25 @@ var config = {
         "search": "https://www.flipkart.com/search?q={0}",
         "param": "xbox one"
     },
-    "fli": {
+    "flip": {
         "default": "https://www.flipkart.com/",
         "search": "https://www.flipkart.com/search?q={0}",
         "param": "Mobile"
+    },
+    "fk": {
+        "default": "https://www.flipkart.com/",
+        "search": "https://www.flipkart.com/search?q={0}",
+        "param": ""
+    },
+    "urbandictionary": {
+        "default": "https://www.urbandictionary.com/",
+        "search" : "https://www.urbandictionary.com/define.php?term={0}",
+        "param": ""
+    },
+    "ud": {
+        "default": "https://www.urbandictionary.com/",
+        "search" : "https://www.urbandictionary.com/define.php?term={0}",
+        "param": ""
     },
     "speed": {
         "default": "https://www.speedtest.net/",
