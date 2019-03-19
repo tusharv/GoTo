@@ -289,15 +289,15 @@ var config = {
         "param": "menu"
     },
     "webmakerapp": {
-        "default": "https://webmaker.app/",
+        "default": "https://webmaker.app/app/",
         "param": ""
     },
     "wma": {
-        "default": "https://webmaker.app/",
+        "default": "https://webmaker.app/app/",
         "param": ""
     },
     "wm": {
-        "default": "https://webmaker.app/",
+        "default": "https://webmaker.app/app/",
         "param": ""
     },
     "geeksforgeeks": {
