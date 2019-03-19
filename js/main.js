@@ -1,11 +1,13 @@
 let dateContainnner, timeContainer;
+let isVisible = true;
+let typed;
+
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thuesday', 'Friday', 'Saturday'];
 
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    console.log("Ramu is ready");
     timeContainer = document.getElementsByClassName('time')[0];
     dateContainnner = document.getElementsByClassName('date')[0];
 
@@ -15,6 +17,8 @@ function init() {
     help();
 
     getBgImage();
+
+    document.addEventListener('visibilitychange', onFocusUpdate);
 }
 
 function help() {
@@ -24,15 +28,34 @@ function help() {
         options.push("goto " + site + " " + config[site].param);
     }
 
-    var typed = new Typed('#message', {
+    typed = new Typed('#message', {
         strings: options,
         shuffle: true,
-        typeSpeed: 300,
-        backDelay: 1000,
-        startDelay: 5000,
+        contentType: "text",
+        typeSpeed: 70,
+        backDelay: 4000,
+        startDelay: 4000,
         showCursor: false,
-        loop: true
+        loop: false
     });
+}
+
+function onFocusUpdate() {
+    switch (document.visibilityState) {
+        case "visible":
+            isVisible = true;
+            updateTime();
+            typed.start();
+            break;
+        case "hidden":
+            isVisible = false;
+            if (!typed.isPaused) {
+                typed.stop();
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 function updateTime() {
@@ -43,7 +66,9 @@ function updateTime() {
         updateDate();
     }
 
-    window.requestAnimationFrame(updateTime);
+    if (isVisible) {
+        window.requestAnimationFrame(updateTime);
+    }
 }
 
 function updateDate() {
@@ -82,7 +107,7 @@ function getBgImage() {
         .then(response => {
             if (response.data) {
                 let data = response.data;
-                
+
                 document.body.style.backgroundImage = 'url(' + data.urls.regular + ')';
                 document.getElementById('description').innerHTML = data.description;
                 document.getElementById('name').innerHTML = data.user.name;
