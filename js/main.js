@@ -1,6 +1,7 @@
 let dateContainnner, timeContainer;
 let isVisible = true;
 let typed;
+const BGIMAGE_DELAY = 300; //60 * 5 secs = 5 Mins
 
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thuesday', 'Friday', 'Saturday'];
@@ -103,22 +104,52 @@ function nth(d) {
 }
 
 function getBgImage() {
+
+    var then = localStorage.getItem("wallpaper");
+    if(then){
+        let now = new Date() / 1000;
+        then = JSON.parse(then);
+        if(now - Number(then.timestamp) < BGIMAGE_DELAY){
+            updateWallpaper(then);
+            return;
+        }
+    }
+    
     axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape')
         .then(response => {
             if (response.data) {
                 let data = response.data;
-
-                document.body.style.backgroundImage = 'url(' + data.urls.regular + ')';
-                document.getElementById('description').innerHTML = data.description;
-                document.getElementById('name').innerHTML = data.user.name;
-                document.getElementById('link').href = data.user.links.html + '?utm_source=GoToExtension&utm_medium=referral';
+                let o = {
+                    image: data.urls.regular,
+                    color: data.color,
+                    description: data.description,
+                    name: data.user.name,
+                    link: data.user.links.html,
+                    timestamp: new Date()/1000
+                };
+                updateWallpaper(o);
+                localStorage.setItem("wallpaper", JSON.stringify(o));
             }
 
         })
         .catch(error => {
-            document.body.style.backgroundImage = 'url(./image/default.jpeg)';
-            document.getElementById('description').innerHTML = '';
-            document.getElementById('name').innerHTML = 'Brandon Griggs';
-            document.getElementById('link').href = 'https://unsplash.com/@paralitik' + '?utm_source=GoToExtension&utm_medium=referral';
+            console.log(error);
+            let o = {
+                image: './image/default.jpeg',
+                color: '#000000',
+                description: '',
+                name: "Brandon Griggs",
+                link: "https://unsplash.com/@paralitik",
+                timestamp: new Date()/1000
+            }
+            updateWallpaper(o);
         })
+}
+
+function updateWallpaper(wallpaper){
+    document.body.style.backgroundImage = 'url(' + wallpaper.image + ')';
+    document.body.style.backgroundColor = (wallpaper.color || '#000000');
+    document.getElementById('description').innerHTML = wallpaper.description;
+    document.getElementById('name').innerHTML = wallpaper.name;
+    document.getElementById('link').href = wallpaper.link + '?utm_source=GoToExtension&utm_medium=referral';
 }
