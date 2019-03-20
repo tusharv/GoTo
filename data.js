@@ -96,6 +96,16 @@ var config = {
         "search" : "https://www.urbandictionary.com/define.php?term={0}",
         "param": ""
     },
+    "producthunt": {
+        "default": "https://www.producthunt.com/",
+        "search": "https://www.producthunt.com/search?q={0}",
+        "param": ""
+    },
+    "ph": {
+        "default": "https://www.producthunt.com/",
+        "search": "https://www.producthunt.com/search?q={0}",
+        "param": ""
+    },
     "speed": {
         "default": "https://www.speedtest.net/",
         "param": ""
@@ -360,6 +370,21 @@ var config = {
     "options": {
         "default": "options.html",
         "param": ""
+    },
+    "l": {
+        "default": "http://localhost/",
+        "search": "http://localhost:{0}",
+        "param": "3000"
+    },
+    "localhost": {
+        "default": "http://localhost/",
+        "search": "http://localhost:{0}",
+        "param": "8080"
+    },
+     "home": {
+        "default": "http://127.0.0.1",
+        "search": "http://127.0.0.1:{0}",
+        "param": "8000"
     },
     "help": {
         "default": "options.html",
