@@ -2,11 +2,11 @@
 
 GoTo and Search popular sites from your NewTab.
 
-GoTo is your digital assistant, it can open and search some popular sites quickly with simple command on Google chrome omnibar. (command is "goto" in lowercase)
+GoTo is your digital assistant, it can open and search popular sites quickly with a simple command on Google chrome omnibar. (command is "goto" in lowercase)
 
-GoTo can open and search YouTube, Git, GMail, Drive, Reddit, Medium, Quora, Zomato, Twitter, Linkedin, Google Fonts, FlipKart, Amazon, Google Map, Bing, IMDB and many more. Goto Options or type "goto help" after install for full list.
+GoTo can open and search: YouTube, Git, GMail, Drive, Reddit, Medium, Quora, Zomato, Twitter, Linkedin, Google Fonts, FlipKart, Amazon, Google Map, Bing, IMDB and many more. Goto Options or type "goto help" after install for full list.
 
-GoTo is not storing or using you data and searching sites publicly or using user login if user is already logged in. 
+GoTo is not storing or using your data. It searches sites publicly or by using your account if already logged in. 
 
 
 [![Install](https://raw.githubusercontent.com/tusharv/QRHost/master/screenshots/store_badge.png)](https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd)
@@ -14,7 +14,7 @@ GoTo is not storing or using you data and searching sites publicly or using user
 
 ## Why?
 
-Searching is two-step process for GMail, Drive, GitHub and many more sites. Using this tool you can reduce 1 step and can search number of sites directly from your Chrome omnibox.
+Traditional searching is a two-step process for GMail, Drive, GitHub and many more sites. Using this tool you can reduce 1 step and search a number of sites directly from your Chrome omnibox.
 
 ## How?
 Keyword | Site | Sample
