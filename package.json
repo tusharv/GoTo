@@ -1,0 +1,25 @@
+{
+  "name": "goto",
+  "version": "0.3.0",
+  "description": "GoTo and Search popular sites from your NewTab",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tusharv/GoTo.git"
+  },
+  "keywords": [
+    "goto",
+    "search",
+    "chrome",
+    "extension"
+  ],
+  "author": "Tushar Vaghela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tusharv/GoTo/issues"
+  },
+  "homepage": "https://github.com/tusharv/GoTo#readme"
+}

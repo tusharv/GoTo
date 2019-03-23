@@ -112,7 +112,7 @@ GoTo is available on [Chrome Web Store](https://chrome.google.com/webstore/detai
 1. Clone this repo
 ```git clone https://github.com/tusharv/GoTo```
 
-2. Add `secret.js` in your root
+2. Add `secret.js` in your `src/js`
 
 ```
 var secret = {
@@ -127,16 +127,16 @@ var secret = {
 4. To test, go to: chrome://extensions, enable Developer mode and load src as an unpacked extension.
 
 ## Credits
-Icon Made From [Icon Fonts](https://www.onlinewebfonts.com/icon/) Is Licensed By CC BY 3.0 
+- Icon Made From [Icon Fonts](https://www.onlinewebfonts.com/icon/) Is Licensed By CC BY 3.0 
+- Beautiful background image from [Unsplash](https://unsplash.com/?utm_source=GoToExtension&utm_medium=referral)
+- Fonts from [Google Fonts](https://fonts.google.com/)
 
-Beautiful background image from [Unsplash](https://unsplash.com/?utm_source=GoToExtension&utm_medium=referral)
 
-
-### Issues
+## Issues
 
 Feel free to submit issues and feature requests.
 
-### License
+## License
 
 Copyright (c) 2019 Tushar Vaghela
 Licensed under the [GNU General Public License v3.0](https://github.com/tusharv/GoTo/blob/master/LICENSE).
