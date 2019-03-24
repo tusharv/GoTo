@@ -9,6 +9,7 @@ GoTo can open and search: YouTube, Git, GMail, Drive, Reddit, Medium, Quora, Zom
 GoTo is not storing or using your data. It searches sites publicly or by using your account if already logged in. 
 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f866b2dd8f4b6eb67ac15328843981)](https://app.codacy.com/app/tusharv/GoTo?utm_source=github.com&utm_medium=referral&utm_content=tusharv/GoTo&utm_campaign=Badge_Grade_Dashboard)
 [![Install](https://raw.githubusercontent.com/tusharv/QRHost/master/screenshots/store_badge.png)](https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd)
 
 
