@@ -26,10 +26,10 @@ function getService(options){
 	let params = options.toLowerCase().split(' ');
 	let keyAction = params[0];
     
-	if(params.length == 1 && config.hasOwnProperty(keyAction)){
+	if(params.length === 1 && config.hasOwnProperty(keyAction)){
 		//Single Param 
 		return config[keyAction].default;
-	}else if(params.length == 2 && config.hasOwnProperty(keyAction)){
+	}else if(params.length === 2 && config.hasOwnProperty(keyAction)){
 		//Two Params
 		return (config[keyAction].search).replace('{0}',params[1]);
 	}else if(params.length >= 2 && config.hasOwnProperty(keyAction)){

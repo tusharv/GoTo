@@ -302,7 +302,7 @@ var config = {
 	'color': {
 		'default': 'https://picular.co/',
 		'search': 'https://picular.co/{0}',
-		'param': 'india'
+		'param': 'gold'
 	},
 	'giphy': {
 		'default': 'https://giphy.com/',
