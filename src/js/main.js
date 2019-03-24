@@ -137,7 +137,7 @@ function getBgImage() {
 		// eslint-disable-next-line no-unused-vars
 		.catch(error => {
 			let o = {
-				image: './image/default.jpeg',
+				image: '../image/default.jpeg',
 				color: '#000000',
 				description: '',
 				name: 'Brandon Griggs',
