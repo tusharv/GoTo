@@ -21,10 +21,5 @@
   "bugs": {
     "url": "https://github.com/tusharv/GoTo/issues"
   },
-  "remarkConfig": {
-    "settings": {
-      "paddedTable": false
-    }
-  },
   "homepage": "https://github.com/tusharv/GoTo#readme"
 }
