@@ -1,5 +1,7 @@
 # GoTo
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://www.codacy.com/app/tusharv/GoTo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tusharv/GoTo&amp;utm_campaign=Badge_Grade)
+
 GoTo and Search popular sites from your NewTab.
 
 GoTo is your digital assistant, it can open and search popular sites quickly with a simple command on Google chrome omnibar. (command is "goto" in lowercase)
