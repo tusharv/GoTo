@@ -117,24 +117,20 @@ GoTo is available on [Chrome Web Store](https://chrome.google.com/webstore/detai
 ```git clone https://github.com/tusharv/GoTo```
 
 2. Add `secret.js` in your `src/js`
-
-```
+```JavaScript
 var secret = {
     "unsplash" : {
         "API_KEY" : "Your Unsplash API Key"
     }
 }
 ```
-
 3. Make your changes.
-
 4. To test, go to: chrome://extensions, enable Developer mode and load src as an unpacked extension.
 
 ## Credits
 - Icon Made From [Icon Fonts](https://www.onlinewebfonts.com/icon/) Is Licensed By CC BY 3.0 
 - Beautiful background image from [Unsplash](https://unsplash.com/?utm_source=GoToExtension&utm_medium=referral)
 - Fonts from [Google Fonts](https://fonts.google.com/)
-
 
 ## Issues
 
