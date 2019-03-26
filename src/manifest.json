@@ -2,7 +2,7 @@
   "name": "GoTo",
   "short_name" : "GoTo",
   "description": "GoTo and Search popular sites from your NewTab",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "background": {
     "scripts": ["js/secret.js","js/data.js", "js/background.js"],
     "persistent": false

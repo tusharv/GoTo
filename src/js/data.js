@@ -389,7 +389,7 @@ var config = {
 		'param': ''
 	},
 	'options': {
-		'default': 'options.html',
+		'default': './page/options.html',
 		'param': ''
 	},
 	'l': {
@@ -408,7 +408,7 @@ var config = {
 		'param': '8000'
 	},
 	'help': {
-		'default': 'options.html',
+		'default': './page/options.html',
 		'param': ''
 	},
 	'ext': {
