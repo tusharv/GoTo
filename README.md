@@ -1,4 +1,5 @@
 # GoTo
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://www.codacy.com/app/tusharv/GoTo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tusharv/GoTo&amp;utm_campaign=Badge_Grade)
 
@@ -140,3 +141,15 @@ Feel free to submit issues and feature requests.
 
 Copyright (c) 2019 Tushar Vaghela
 Licensed under the [GNU General Public License v3.0](https://github.com/tusharv/GoTo/blob/master/LICENSE).
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="http://virajvchavan.github.io"><img src="https://avatars3.githubusercontent.com/u/17914172?v=4" width="100px;" alt="Viraj Chavan"/><br /><sub><b>Viraj Chavan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=virajvchavan" title="Tests">⚠️</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
