@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "virajvchavan",
+      "name": "Viraj Chavan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17914172?v=4",
+      "profile": "http://virajvchavan.github.io",
+      "contributions": [
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "GoTo",
+  "projectOwner": "tusharv",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
