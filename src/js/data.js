@@ -192,7 +192,7 @@ var config = {
 		'search': 'https://www.quora.com/search?q={0}',
 		'param': ''
 	},
-	'reditt': {
+	'reddit': {
 		'default': 'https://www.reddit.com/',
 		'search': 'https://www.reddit.com/search?q={0}',
 		'param': ''
