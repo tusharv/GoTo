@@ -73,7 +73,7 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | q | <https://www.quora.com/> | goto q |
 | quora | <https://www.quora.com/> | goto quora |
 | r | <https://www.reddit.com/> | goto r |
-| reditt | <https://www.reddit.com/> | goto reditt |
+| reddit | <https://www.reddit.com/> | goto reddit |
 | saavn | <https://www.jiosaavn.com/> | goto saavn Emiway |
 | so | <https://stackoverflow.com/> | goto so moghya |
 | speed | <https://www.speedtest.net/> | goto speed |
