@@ -1,5 +1,5 @@
 # GoTo
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://www.codacy.com/app/tusharv/GoTo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tusharv/GoTo&amp;utm_campaign=Badge_Grade)
 
@@ -148,7 +148,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="http://virajvchavan.github.io"><img src="https://avatars3.githubusercontent.com/u/17914172?v=4" width="100px;" alt="Viraj Chavan"/><br /><sub><b>Viraj Chavan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=virajvchavan" title="Tests">⚠️</a></td><td align="center"><a href="https://github.com/crsee"><img src="https://avatars2.githubusercontent.com/u/30675425?v=4" width="100px;" alt="crsee"/><br /><sub><b>crsee</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=crsee" title="Documentation">📖</a></td></tr></table>
+<table>
+  <tr>
+    <td align="center"><a href="http://virajvchavan.github.io"><img src="https://avatars3.githubusercontent.com/u/17914172?v=4" width="100px;" alt="Viraj Chavan"/><br /><sub><b>Viraj Chavan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=virajvchavan" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/crsee"><img src="https://avatars2.githubusercontent.com/u/30675425?v=4" width="100px;" alt="crsee"/><br /><sub><b>crsee</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=crsee" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://vadimdez.github.io"><img src="https://avatars2.githubusercontent.com/u/3748453?v=4" width="100px;" alt="Vadym Yatsyuk"/><br /><sub><b>Vadym Yatsyuk</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=VadimDez" title="Code">💻</a></td>
+  </tr>
+</table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
