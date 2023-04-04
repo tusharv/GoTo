@@ -139,7 +139,7 @@ Feel free to submit issues and feature requests.
 
 ## License
 
-Copyright (c) 2019 Tushar Vaghela
+Copyright © 2023 Tushar Vaghela
 Licensed under the [GNU General Public License v3.0](https://github.com/tusharv/GoTo/blob/master/LICENSE).
 
 ## Contributors
