@@ -114,11 +114,13 @@
 		"param": ""
 	},
 	"weather": {
-		"default": "https://weather.com/en-IN/weather/today/",
+		"default": "https://openweathermap.org/",
+		"search": "https://openweathermap.org/find?q={0}",
 		"param": ""
 	},
 	"weat": {
-		"default": "https://weather.com/en-IN/weather/today/",
+		"default": "https://openweathermap.org/",
+		"search": "https://openweathermap.org/find?q={0}",
 		"param": ""
 	},
 	"gaana": {
@@ -133,27 +135,27 @@
 	},
 	"spot": {
 		"default": "https://open.spotify.com/browse/featured",
-		"search": "https://open.spotify.com/search/results/{0}",
+		"search": "https://open.spotify.com/search/{0}",
 		"param": "Swades"
 	},
 	"spotify": {
 		"default": "https://open.spotify.com/browse/featured",
-		"search": "https://open.spotify.com/search/results/{0}",
+		"search": "https://open.spotify.com/search/{0}",
 		"param": "Gotye"
 	},
 	"twitter": {
-		"default": "https://twitter.com/",
-		"search": "https://twitter.com/search?q={0}",
+		"default": "https://x.com/",
+		"search": "https://x.com/search?q={0}",
 		"param": ""
 	},
 	"twit": {
-		"default": "https://twitter.com/",
-		"search": "https://twitter.com/search?q={0}",
+		"default": "https://x.com/",
+		"search": "https://x.com/search?q={0}",
 		"param": "Grynn"
 	},
-	"t": {
-		"default": "https://twitter.com/",
-		"search": "https://twitter.com/search?q={0}",
+	"x": {
+		"default": "https://x.com/",
+		"search": "https://x.com/search?q={0}",
 		"param": ""
 	},
 	"zomato": {
@@ -417,12 +419,16 @@
 		"default": "https://chrome.google.com/webstore/developer/dashboard",
 		"param": ""
 	},
+	"css": {
+		"default": "https://cssbattle.dev/",
+		"param": ""
+	},
 	"me": {
-		"default": "http://tusharv.in/contact.html",
+		"default": "https://www.linkedin.com/in/tusharvaghela/",
 		"param": ""
 	},
 	"about": {
-		"default": "http://tusharv.in/contact.html",
+		"default": "https://github.com/tusharv/GoTo",
 		"param": ""
 	}
 }

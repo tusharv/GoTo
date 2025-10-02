@@ -1,17 +1,16 @@
 // Config data loaded from centralized JSON file
-let config;
+let config = {};
 
-// Load config from JSON file
-fetch(chrome.runtime.getURL('config.json'))
-	.then(response => response.json())
-	.then(data => {
-		config = data;
-	})
-	.catch(error => {
+// Load config from JSON file immediately when service worker starts
+(async () => {
+	try {
+		const response = await fetch(chrome.runtime.getURL('config.json'));
+		config = await response.json();
+	} catch (error) {
 		console.error('Error loading config:', error);
-		// Fallback config if JSON loading fails
-		config = {};
-	});
+		// Keep empty config as fallback
+	}
+})();
 
 let help = {
 	content : 'help',
@@ -21,38 +20,67 @@ let help = {
 // This event is fired with the user accepts the input in the omnibox.
 chrome.omnibox.onInputEntered.addListener(
 	function (text) {
-		if (config) {
-			let newURL = getService(text);
+		try {
+			if (config) {
+				let newURL = getService(text);
+				chrome.tabs.create({
+					url: newURL
+				});
+			} else {
+				// Fallback to Google search if config not loaded yet
+				chrome.tabs.create({
+					url: 'https://www.google.com/search?q=' + encodeURIComponent(text)
+				});
+			}
+		} catch (error) {
+			console.error('Error in onInputEntered:', error);
+			// Emergency fallback to Google search
 			chrome.tabs.create({
-				url: newURL
-			});
-		} else {
-			// Fallback to Google search if config not loaded yet
-			chrome.tabs.create({
-				url: 'https://www.google.com/search?q=' + encodeURIComponent(text)
+				url: 'https://www.google.com/search?q=' + encodeURIComponent(text || '')
 			});
 		}
 	});
 
 chrome.omnibox.onInputChanged.addListener(
 	function(text, suggest) {
-		if(text.length > 1){
-			if (config) {
-				suggest(updateList(text));
-			} else {
-				// Fallback suggestions if config not loaded yet
-				suggest([{
-					content: text + ' ',
-					description: '"' + text + '" - Config loading, please wait...'
-				}]);
+		try {
+			if(text && text.length > 1){
+				if (config) {
+					suggest(updateList(text));
+				} else {
+					// Fallback suggestions if config not loaded yet
+					suggest([{
+						content: text + ' ',
+						description: '"' + text + '" - Config loading, please wait...'
+					}]);
+				}
 			}
+		} catch (error) {
+			console.error('Error in onInputChanged:', error);
+			// Emergency fallback suggestion
+			suggest([{
+				content: text + ' ',
+				description: 'Error occurred - Config loading, please wait...'
+			}, help]);
 		}
 	});
 
 function getService(options){
-	let params = options.toLowerCase().split(' ');
+	// Handle null, undefined, or empty options
+	if (!options || typeof options !== 'string' || options.trim() === '') {
+		// Return Google search for empty/invalid input
+		return 'https://www.google.com/search?q=';
+	}
+	
+	let params = options.toLowerCase().trim().split(' ');
 	let keyAction = params[0];
     
+	// Ensure config is loaded and keyAction exists
+	if(!config || Object.keys(config).length === 0) {
+		// Config not loaded yet, fallback to Google
+		return 'https://www.google.com/search?q=' + encodeURIComponent(options);
+	}
+	
 	if(params.length === 1 && config.hasOwnProperty(keyAction)){
 		//Single Param 
 		return config[keyAction].default;
@@ -71,7 +99,22 @@ function getService(options){
 
 function updateList(text = ''){
 	let list = [];
-	let params = text.toLowerCase().split(' ');
+	
+	// Handle null, undefined, or empty text
+	if (!text || typeof text !== 'string' || text.trim() === '') {
+		return [help];
+	}
+	
+	// Ensure config is loaded
+	if(!config || Object.keys(config).length === 0) {
+		// Config not loaded yet, return fallback suggestion
+		return [{
+			content: text + ' ',
+			description: '"' + text + '" - Config loading, please wait...'
+		}, help];
+	}
+	
+	let params = text.toLowerCase().trim().split(' ');
 	let keyAction = params[0];
 
 	for(let site in config){

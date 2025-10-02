@@ -4,19 +4,19 @@
 let config = {};
 
 // Load config from JSON file
-fetch(chrome.runtime.getURL('config.json'))
-	.then(response => response.json())
-	.then(data => {
-		config = data;
+(async () => {
+	try {
+		const response = await fetch(chrome.runtime.getURL('config.json'));
+		config = await response.json();
 		// Initialize typed examples after config is loaded
 		if (typeof help === 'function') {
 			help();
 		}
-	})
-	.catch(error => {
+	} catch (error) {
 		console.error('Error loading config:', error);
 		// Keep empty config as fallback
-	});
+	}
+})();
 
 let dateContainnner, timeContainer;
 let isVisible = true;
@@ -24,7 +24,7 @@ let typed;
 const BGIMAGE_DELAY = 300; //60 * 5 secs = 5 Mins
 
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thuesday', 'Friday', 'Saturday'];
+const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -40,8 +40,6 @@ function init() {
 
 	document.addEventListener('visibilitychange', onFocusUpdate);
 	
-	// Initialize footer menu toggle functionality
-	initFooterMenu();
 }
 
 function help() {
@@ -142,7 +140,7 @@ function getBgImage() {
 		}
 	}
     
-	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape&query=nature,landscape,minimalist,abstract,architecture&count=1&order_by=popular')
+	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape&query=nature,animals,landscape,minimalist,abstract,architecture&count=1&order_by=popular')
 		.then(response => {
 			if (response.data && response.data.length > 0) {
 				let data = response.data[0]; // Get first photo from the array
@@ -189,60 +187,3 @@ function updateWallpaper(wallpaper){
 	document.getElementById('link').href = wallpaper.link + '?utm_source=GoToExtension&utm_medium=referral';
 }
 
-// Footer menu functionality
-function initFooterMenu() {
-	// Check if user prefers popup menu (you can add localStorage logic here)
-	const usePopupMenu = false; // Set to true to use popup menu by default
-	
-	if (usePopupMenu) {
-		showPopupMenu();
-	} else {
-		showRegularFooter();
-	}
-}
-
-function toggleFooterMenu() {
-	const popup = document.getElementById('footer-menu-popup');
-	if (popup.classList.contains('show')) {
-		popup.classList.remove('show');
-	} else {
-		popup.classList.add('show');
-	}
-}
-
-function showPopupMenu() {
-	const footerLinks = document.getElementById('footer-links');
-	const menuToggle = document.getElementById('menu-toggle');
-	
-	if (footerLinks && menuToggle) {
-		footerLinks.style.display = 'none';
-		menuToggle.style.display = 'block';
-	}
-}
-
-function showRegularFooter() {
-	const footerLinks = document.getElementById('footer-links');
-	const menuToggle = document.getElementById('menu-toggle');
-	
-	if (footerLinks && menuToggle) {
-		footerLinks.style.display = 'flex';
-		menuToggle.style.display = 'none';
-	}
-}
-
-function hidePopupMenu() {
-	const popup = document.getElementById('footer-menu-popup');
-	if (popup) {
-		popup.classList.remove('show');
-	}
-}
-
-// Close popup when clicking outside
-document.addEventListener('click', function(event) {
-	const menuToggle = document.getElementById('menu-toggle');
-	const popup = document.getElementById('footer-menu-popup');
-	
-	if (menuToggle && popup && !menuToggle.contains(event.target)) {
-		hidePopupMenu();
-	}
-});

@@ -109,7 +109,7 @@ body {
 }
 
 .search-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     opacity: 0.8;
     animation: pulse 2s infinite;
@@ -264,88 +264,7 @@ body {
     text-decoration: underline;
 }
 
-/* Footer popup menu styles */
-.footer-menu-toggle {
-    position: relative;
-    display: none; /* Hidden by default, can be shown via JS */
-}
 
-.menu-button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.menu-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
-}
-
-.menu-icon {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2rem;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.footer-menu-popup {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: 0.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 0.5rem;
-    min-width: 180px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-}
-
-.footer-menu-popup.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.menu-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 400;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    margin-bottom: 0.25rem;
-}
-
-.menu-link:last-child {
-    margin-bottom: 0;
-}
-
-.menu-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #FFFFFF;
-    transform: translateX(2px);
-}
 
 /* Legacy styles for compatibility */
 table {

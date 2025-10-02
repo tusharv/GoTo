@@ -1,20 +1,20 @@
 // Config data loaded from centralized JSON file
 let config = {};
 
-// Load config from JSON file
-fetch(chrome.runtime.getURL('config.json'))
-	.then(response => response.json())
-	.then(data => {
-		config = data;
+// Load config from JSON file and initialize UI
+(async () => {
+	try {
+		const response = await fetch(chrome.runtime.getURL('config.json'));
+		config = await response.json();
 		// Initialize UI after config is loaded
 		if (typeof init === 'function') {
 			init();
 		}
-	})
-	.catch(error => {
+	} catch (error) {
 		console.error('Error loading config:', error);
 		// Keep empty config as fallback
-	});
+	}
+})();
 
 let tableContainner;
 let popularKeywordsContainer;
