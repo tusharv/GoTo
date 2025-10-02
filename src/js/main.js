@@ -1,4 +1,22 @@
-/*global config Typed axios secret*/
+/*global Typed axios secret*/
+
+// Config data loaded from centralized JSON file
+let config = {};
+
+// Load config from JSON file
+(async () => {
+	try {
+		const response = await fetch(chrome.runtime.getURL('config.json'));
+		config = await response.json();
+		// Initialize typed examples after config is loaded
+		if (typeof help === 'function') {
+			help();
+		}
+	} catch (error) {
+		console.error('Error loading config:', error);
+		// Keep empty config as fallback
+	}
+})();
 
 let dateContainnner, timeContainer;
 let isVisible = true;
@@ -6,7 +24,7 @@ let typed;
 const BGIMAGE_DELAY = 300; //60 * 5 secs = 5 Mins
 
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thuesday', 'Friday', 'Saturday'];
+const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -17,11 +35,11 @@ function init() {
 	updateDate();
 	window.requestAnimationFrame(updateTime);
 
-	help();
-
+	// help() will be called after config is loaded
 	getBgImage();
 
 	document.addEventListener('visibilitychange', onFocusUpdate);
+	
 }
 
 function help() {
@@ -76,7 +94,12 @@ function updateTime() {
 
 function updateDate() {
 	var now = new Date();
-	dateContainnner.innerHTML = day[now.getDay()] + ' ' + padNum(now.getDate()) + nth(now.getDate()) + ' ' + month[now.getMonth()] + ', ' + now.getFullYear();
+	var dayName = day[now.getDay()];
+	var dayNumber = now.getDate();
+	var monthName = month[now.getMonth()];
+	var year = now.getFullYear();
+	
+	dateContainnner.innerHTML = dayName + ', ' + dayNumber + nth(dayNumber) + ' ' + monthName + ' ' + year;
 }
 
 function padNum(num) {
@@ -117,14 +140,16 @@ function getBgImage() {
 		}
 	}
     
-	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape')
+	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape&query=nature,animals,landscape,minimalist,abstract,architecture&count=1&order_by=popular')
 		.then(response => {
-			if (response.data) {
-				let data = response.data;
+			if (response.data && response.data.length > 0) {
+				let data = response.data[0]; // Get first photo from the array
+				// Handle cases where description might be null or empty
+				let description = data.description || data.alt_description || 'Beautiful landscape photo';
 				let o = {
 					image: data.urls.regular,
 					color: data.color,
-					description: data.description,
+					description: description,
 					name: data.user.name,
 					link: data.user.links.html,
 					timestamp: new Date()/1000
@@ -139,7 +164,7 @@ function getBgImage() {
 			let o = {
 				image: '../image/default.jpeg',
 				color: '#000000',
-				description: '',
+				description: 'Default background image',
 				name: 'Brandon Griggs',
 				link: 'https://unsplash.com/@paralitik',
 				timestamp: new Date()/1000
@@ -151,7 +176,14 @@ function getBgImage() {
 function updateWallpaper(wallpaper){
 	document.body.style.backgroundImage = 'url(' + wallpaper.image + ')';
 	document.body.style.backgroundColor = (wallpaper.color || '#000000');
-	document.getElementById('description').innerHTML = wallpaper.description;
+	
+	// Ensure description element exists and has content
+	const descriptionElement = document.getElementById('description');
+	if (descriptionElement) {
+		descriptionElement.innerHTML = wallpaper.description || 'Beautiful photo';
+	}
+	
 	document.getElementById('name').innerHTML = wallpaper.name;
 	document.getElementById('link').href = wallpaper.link + '?utm_source=GoToExtension&utm_medium=referral';
 }
+

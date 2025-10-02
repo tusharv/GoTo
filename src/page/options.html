@@ -1,34 +1,185 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>goto - Option and Help</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoTo - Help & Settings</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/data.js"></script>
     <script src="../js/options.js"></script>
 </head>
 
 <body class="options">
-    <div id="container">
-        <img src="../image/icon128.png" width="64" height="">
-        <hr>
-        <div id="message">Options Page</div>
-        <hr>
-        <div>
-            <table>
-                <tr>
-                    <th>Keyword</th>
-                    <th>Site</th>
-                    <th>Sample</th>
-                </tr>
-                <tbody id="list">
-                </tbody>
-            </table>
+    <!-- Header Section -->
+    <header class="options-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../image/icon128.png" alt="GoTo Logo" class="options-logo">
+                <div class="title-section">
+                    <h1>GoTo Extension</h1>
+                    <p>Quick Search & Navigation Tool</p>
+                </div>
+            </div>
+            <a href="new.html" class="back-button">
+                <span class="back-icon">←</span>
+                Back to Search
+            </a>
         </div>
-        <div class="footer black">
-            <span>Icon made from <a href="http://www.onlinewebfonts.com/icon" target="_blank">Icon Fonts</a> is
-                licensed by CC BY 3.0</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="options-main">
+        <!-- Usage Guide Section -->
+        <section class="guide-section">
+            <h2>🚀 How to Use GoTo</h2>
+            <div class="guide-content">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Open the Extension</h3>
+                        <p>Click on the GoTo extension icon in your browser toolbar or open a new tab to access the search interface.</p>
+                    </div>
+                </div>
+                
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Type Your Command</h3>
+                        <p>Type <code>goto</code> followed by a keyword and your search term. For example:</p>
+                        <div class="example-box">
+                            <code>goto git react hooks</code>
+                            <span class="example-result">→ Opens GitHub search for "react hooks"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Press Enter</h3>
+                        <p>Press Enter to execute your search and navigate to the desired website with your search query.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>✨ Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Quick Search</h3>
+                    <p>Search across multiple platforms with simple keywords</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Navigation</h3>
+                    <p>Jump to any website instantly without typing full URLs</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Interface</h3>
+                    <p>Enjoy a modern, clean interface with beautiful backgrounds</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Works perfectly on all screen sizes and devices</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Keywords Section -->
+        <section class="keywords-section">
+            <h2>🔥 Popular Keywords</h2>
+            <div class="keywords-grid" id="popular-keywords">
+                <!-- Popular keywords will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- All Keywords Table -->
+        <section class="table-section">
+            <h2>📋 All Available Keywords</h2>
+            <div class="table-container">
+                <div class="search-box">
+                    <input type="text" id="keyword-search" placeholder="Search keywords..." class="search-input">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="keywords-table">
+                        <thead>
+                            <tr>
+                                <th>Keyword</th>
+                                <th>Website</th>
+                                <th>Example Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I add custom keywords?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, GoTo comes with pre-configured keywords. Custom keyword support is planned for future updates.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I use GoTo on mobile devices?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! GoTo is fully responsive and works great on mobile devices and tablets.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What if a keyword doesn't work?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Make sure you're typing the keyword correctly. Check the table above for all available keywords and their usage examples.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I report a bug or suggest a feature?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can send feedback by clicking the "Feedback" link in the main interface or email us directly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="options-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:tusharvaghela@gmail.com" class="footer-link">💬 Send Feedback</a>
+                <a href="http://www.onlinewebfonts.com/icon" target="_blank" class="footer-link">🎨 Icons by OnlineWebFonts</a>
+                <a href="new.html" class="footer-link">🏠 Back to Search</a>
+            </div>
+            <p class="footer-text">GoTo Extension - Making web navigation faster and easier</p>
         </div>
-    </div>
+    </footer>
 </body>
 
 </html>
