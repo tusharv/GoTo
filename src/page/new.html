@@ -1,38 +1,71 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Type goto and search</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoTo - Quick Search & Navigation</title>
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/axios.js"></script>
   <script src="../js/secret.js"></script>
-  <script src="../js/data.js"></script>
   <script src="../js/typed.js"></script>
   <script src="../js/main.js"></script>
 </head>
 
 <body>
+  <!-- Background overlay for better readability -->
+  <div class="background-overlay"></div>
+  
+  <!-- Main container with modern layout -->
   <div id="container">
-    <div class="gra top"></div>
-    <div style="height:25%"></div>
-    <img src="../image/icon128w.png" width="64" height="" class="logo">
-    <div class="date bg">00:00</div>
-    <div class="time bg">00:00</div>
-    <hr>
-    <div id="message">Type goto and search</div>
-    <hr>
-    <div class="footer">
-      <span>Icon made from <a href="http://www.onlinewebfonts.com/icon" target="_blank">Icon Fonts</a> is licensed by CC
-        BY 3.0</span>
-      <span> | </span>
-      <span>Click here for <a href="options.html">Help</a></span>
-      <span> | </span>
-      <span><a href="mailto:tusharvaghela@gmail.com">Feedback</a></span>
-    </div>
-    <div class="footer left">
-      <span id="description"></span> by <a href="#" id="link" target="_blank"><span id="name"></span></a> on <a
-        href="https://unsplash.com/?utm_source=GoToExtension&utm_medium=referral" target="_blank">Unsplash</a></span>
-    </div>
-    <div class="gra bottom"></div>
+    <!-- Header section with logo and time -->
+    <header class="header">
+      <div class="logo-container">
+        <img src="../image/icon128w.png" alt="GoTo Logo" class="logo">
+        <span class="app-name">GoTo</span>
+      </div>
+      <div class="time-container">
+        <div class="date bg">00:00</div>
+        <div class="time bg">00:00</div>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="main-content">
+      <div class="search-section">
+        <!-- <div class="search-icon">🔍</div> -->
+        <div id="message" class="search-message">Type goto and search</div>
+        <div class="search-hint">Try: git, youtube, gmail, drive, map, amazon...</div>
+      </div>
+    </main>
+
+    <!-- Footer with single line layout -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="options.html" class="footer-link">
+            <span class="link-icon">⚙️</span>
+            Options
+          </a>
+          <a href="mailto:tusharvaghela@gmail.com" class="footer-link">
+            <span class="link-icon">💬</span>
+            Feedback
+          </a>
+        </div>
+        
+        <div class="photo-credit">
+          <span id="description"></span>
+          <span class="credit-text">by</span>
+          <a href="#" id="link" target="_blank" class="photographer-link">
+            <span id="name"></span>
+          </a>
+          <span class="credit-text">on</span>
+          <a href="https://unsplash.com/?utm_source=GoToExtension&utm_medium=referral" target="_blank" class="unsplash-link">
+            Unsplash
+          </a>
+        </div>
+      </div>
+    </footer>
   </div>
 </body>
 

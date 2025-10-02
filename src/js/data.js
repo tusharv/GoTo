@@ -63,13 +63,13 @@ var config = {
 		'param': 'Goa'
 	},
 	'amazon': {
-		'default': 'https://www.amazon.com/',
-		'search': 'https://www.amazon.in/s/field-keywords={0}',
+		'default': 'https://www.amazon.in/',
+		'search': 'https://www.amazon.in/s?k={0}',
 		'param': ''
 	},
 	'ama': {
-		'default': 'https://www.amazon.com/',
-		'search': 'https://www.amazon.in/s/field-keywords={0}',
+		'default': 'https://www.amazon.in/',
+		'search': 'https://www.amazon.in/s?k={0}',
 		'param': 'OnePlus 7'
 	},
 	'flipkart': {
