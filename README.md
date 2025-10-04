@@ -7,7 +7,7 @@ GoTo and Search popular sites from your NewTab.
 
 GoTo is your digital assistant, it can open and search popular sites quickly with a simple command on Google chrome omnibar. (command is "goto" in lowercase)
 
-GoTo can open and search: YouTube, Git, GMail, Drive, Reddit, Medium, Quora, Zomato, Twitter, Linkedin, Google Fonts, FlipKart, Amazon, Google Map, Bing, IMDB and many more. Goto Options or type "goto help" after install for full list.
+GoTo can open and search YouTube, Git, GMail, Drive, Reddit and many more. Goto Options or type "goto help" after install for full list.
 
 GoTo is not storing or using your data. It searches sites publicly or by using your account if already logged in. 
 

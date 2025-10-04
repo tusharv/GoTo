@@ -311,17 +311,17 @@
 	},
 	"unsplash": {
 		"default": "https://unsplash.com/",
-		"search": "https://unsplash.com/search/photos/{0}",
+		"search": "https://unsplash.com/s/photos/{0}",
 		"param": "nature"
 	},
 	"unsp": {
 		"default": "https://unsplash.com/",
-		"search": "https://unsplash.com/search/photos/{0}",
+		"search": "https://unsplash.com/s/photos/{0}",
 		"param": "birds"
 	},
 	"us": {
 		"default": "https://unsplash.com/",
-		"search": "https://unsplash.com/search/photos/{0}",
+		"search": "https://unsplash.com/s/photos/{0}",
 		"param": ""
 	},
 	"fontawesome": {

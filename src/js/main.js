@@ -21,7 +21,7 @@ let config = {};
 let dateContainnner, timeContainer;
 let isVisible = true;
 let typed;
-const BGIMAGE_DELAY = 300; //60 * 5 secs = 5 Mins
+const BGIMAGE_DELAY = 300; // 60 second * 5 mins = 300
 
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -39,6 +39,27 @@ function init() {
 	getBgImage();
 
 	document.addEventListener('visibilitychange', onFocusUpdate);
+	
+	// Listen for wallpaper reset events from options page
+	window.addEventListener('wallpaperReset', (event) => {
+		console.log('Wallpaper reset event received:', event.detail);
+		// Only force new image if this is an explicit reset event
+		if (event.detail && event.detail.forceReset) {
+			forceNewBgImage();
+		} else {
+			getBgImage();
+		}
+	});
+	
+	// Add keyboard shortcut for manual refresh (Ctrl+R or Cmd+R)
+	document.addEventListener('keydown', (e) => {
+		if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+			e.preventDefault();
+			// Clear cache and get new image
+			localStorage.removeItem('wallpaper');
+			forceNewBgImage();
+		}
+	});
 	
 }
 
@@ -128,19 +149,54 @@ function nth(d) {
 	return '<sup>' + result + '</sup>';
 }
 
-function getBgImage() {
+function forceNewBgImage() {
+	// Clear any existing wallpaper cache
+	console.log('Force refreshing wallpaper - clearing cache');
+	localStorage.removeItem('wallpaper');
+	fetchNewWallpaper();
+}
 
+function getBgImage() {
 	var then = localStorage.getItem('wallpaper');
 	if(then){
 		let now = new Date() / 1000;
 		then = JSON.parse(then);
-		if(now - Number(then.timestamp) < BGIMAGE_DELAY){
+		let timeDiff = now - Number(then.timestamp);
+		console.log('Cache check - Time diff:', timeDiff, 'BGIMAGE_DELAY:', BGIMAGE_DELAY);
+		if(timeDiff < BGIMAGE_DELAY){
+			console.log('Using cached wallpaper');
 			updateWallpaper(then);
 			return;
 		}
+		console.log('Cache expired, fetching new wallpaper');
 	}
+	console.log('No cache found, fetching new wallpaper');
+	fetchNewWallpaper();
+}
+
+function fetchNewWallpaper() {
     
-	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape&query=nature,animals,landscape,minimalist,abstract,architecture&count=1&order_by=popular')
+	// Load user-selected queries from localStorage (set by options page), fallback to default if not set
+	let defaultQueries = ['nature', 'animals', 'landscape', 'minimalist', 'abstract', 'architecture'];
+	let userQueries = [];
+	try {
+		const stored = localStorage.getItem('unsplashQueries');
+		if (stored) {
+			const parsed = JSON.parse(stored);
+			if (Array.isArray(parsed) && parsed.length > 0) {
+				userQueries = parsed;
+			}
+		}
+	} catch (e) {
+		// fallback to default
+	}
+	// Randomly select one query to increase variety
+	const availableQueries = userQueries.length > 0 ? userQueries : defaultQueries;
+	const randomQuery = availableQueries[Math.floor(Math.random() * availableQueries.length)];
+	
+	// Add cache busting parameter to ensure different images
+	const cacheBuster = Date.now();
+	axios.get('https://api.unsplash.com/photos/random?client_id=' + secret.unsplash.API_KEY + '&orientation=landscape&query=' + encodeURIComponent(randomQuery) + '&count=1&' + cacheBuster)
 		.then(response => {
 			if (response.data && response.data.length > 0) {
 				let data = response.data[0]; // Get first photo from the array
