@@ -24,6 +24,7 @@
                     <a href="#guide" class="nav-link">Guide</a>
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#keywords" class="nav-link">Keywords</a>
+                    <a href="#custom-keywords" class="nav-link">Custom</a>
                     <a href="#all-keywords" class="nav-link">All Keywords</a>
                     <a href="#backgrounds" class="nav-link">Backgrounds</a>
                     <a href="#faq" class="nav-link">FAQ</a>
@@ -102,6 +103,37 @@
             </div>
         </section>
 
+        <!-- Custom Keywords Management Section -->
+        <section id="custom-keywords" class="custom-keywords-section">
+            <h2>⚙️ Custom Keywords</h2>
+            <p class="section-description">Add, edit, and manage your own custom keywords for quick navigation to your favorite websites.</p>
+            
+            <div class="custom-keywords-controls">
+                <div class="add-keyword-form">
+                    <div class="form-row">
+                        <input type="text" id="new-keyword-input" placeholder="Keyword (e.g., myblog)" class="keyword-input" maxlength="20">
+                        <input type="url" id="new-url-input" placeholder="Website URL (e.g., https://myblog.com)" class="url-input">
+                        <input type="text" id="new-search-param-input" placeholder="Search parameter (optional: {0})" class="param-input">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="new-description-input" placeholder="Description (e.g., My personal blog)" class="description-input">
+                        <button id="add-keyword-btn" class="add-keyword-btn">Add Keyword</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-keywords-list" id="custom-keywords-list">
+                <!-- Custom keywords will be populated by JavaScript -->
+            </div>
+            
+            <div class="keyword-reset-section">
+                <div class="reset-buttons">
+                    <button id="reset-custom-keywords-btn" class="reset-btn">Clear All Custom Keywords</button>
+                </div>
+                <p class="reset-note">Clear All Custom Keywords: This will remove all your custom keywords and restore only the default keywords.</p>
+            </div>
+        </section>
+
         <!-- All Keywords Table -->
         <section id="all-keywords" class="table-section">
             <h2>📋 All Available Keywords</h2>
@@ -117,6 +149,7 @@
                                 <th>Keyword</th>
                                 <th>Website</th>
                                 <th>Example Usage</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody id="list">
@@ -161,7 +194,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Currently, GoTo comes with pre-configured keywords. Custom keyword support is planned for future updates.</p>
+                        <p>You can now add custom keywords! Go to the "Custom Keywords" section above and enter your keyword, website URL, optional search parameter, and description. Your custom keywords will work just like the built-in ones.</p>
                     </div>
                 </div>
                 

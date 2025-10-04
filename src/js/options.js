@@ -25,6 +25,15 @@ let addQueryBtn;
 let resetDefaultsBtn;
 let resetCurrentWallpaperBtn;
 
+// Custom keywords elements
+let customKeywordsList;
+let newKeywordInput;
+let newUrlInput;
+let newSearchParamInput;
+let newDescriptionInput;
+let addCustomKeywordBtn;
+let resetCustomKeywordsBtn;
+
 // Popular keywords for quick access
 const popularKeywords = [
 	{ name: 'git', desc: 'GitHub search' },
@@ -54,11 +63,23 @@ function init(){
 	resetDefaultsBtn = document.getElementById('reset-defaults-btn');
 	resetCurrentWallpaperBtn = document.getElementById('reset-current-wallpaper-btn');
 
+	// Custom keywords elements
+	customKeywordsList = document.getElementById('custom-keywords-list');
+	newKeywordInput = document.getElementById('new-keyword-input');
+	newUrlInput = document.getElementById('new-url-input');
+	newSearchParamInput = document.getElementById('new-search-param-input');
+	newDescriptionInput = document.getElementById('new-description-input');
+	addCustomKeywordBtn = document.getElementById('add-keyword-btn');
+	resetCustomKeywordsBtn = document.getElementById('reset-custom-keywords-btn');
+
 	// Populate popular keywords
 	populatePopularKeywords();
 	
 	// Populate main table
 	populateKeywordsTable();
+	
+	// Initialize custom keywords management
+	initCustomKeywords();
 	
 	// Initialize Unsplash queries management
 	initUnsplashQueries();
@@ -80,12 +101,34 @@ function populatePopularKeywords() {
 	
 	popularKeywordsContainer.innerHTML = '';
 	
+	// Add default popular keywords
 	popularKeywords.forEach(keyword => {
 		const keywordCard = document.createElement('div');
 		keywordCard.className = 'keyword-card';
 		keywordCard.innerHTML = `
 			<div class="keyword-name">${keyword.name}</div>
 			<div class="keyword-desc">${keyword.desc}</div>
+		`;
+		
+		// Add click functionality to copy to clipboard
+		keywordCard.addEventListener('click', () => {
+			copyToClipboard(`goto ${keyword.name} `);
+			showCopyFeedback(keywordCard);
+		});
+		
+		popularKeywordsContainer.appendChild(keywordCard);
+	});
+	
+	// Add custom keywords to popular section (limit to first 5)
+	const customKeywords = getCustomKeywords();
+	const customKeywordsToShow = customKeywords.slice(0, 5);
+	
+	customKeywordsToShow.forEach(keyword => {
+		const keywordCard = document.createElement('div');
+		keywordCard.className = 'keyword-card custom-keyword-card';
+		keywordCard.innerHTML = `
+			<div class="keyword-name">${keyword.name}</div>
+			<div class="keyword-desc">${keyword.description || 'Custom keyword'}</div>
 		`;
 		
 		// Add click functionality to copy to clipboard
@@ -103,12 +146,24 @@ function populateKeywordsTable() {
 	
 	tableContainner.innerHTML = '';
 	
+	// Add default keywords
 	for(let site in config){
-		let htmlString = '<tr><td><strong>{0}</strong></td><td>{1}</td><td><code>{2}</code></td></tr>';
+		let htmlString = '<tr><td><strong>{0}</strong></td><td>{1}</td><td><code>{2}</code></td><td><span class="keyword-type default">Default</span></td></tr>';
 		let example = config[site].param ? `goto ${site} ${config[site].param}` : `goto ${site}`;
 		tableContainner.innerHTML += htmlString
 			.replace('{0}', site)
 			.replace('{1}', config[site].default)
+			.replace('{2}', example);
+	}
+	
+	// Add custom keywords
+	const customKeywords = getCustomKeywords();
+	for(let keyword of customKeywords){
+		let htmlString = '<tr><td><strong>{0}</strong></td><td>{1}</td><td><code>{2}</code></td><td><span class="keyword-type custom">Custom</span></td></tr>';
+		let example = keyword.searchParam ? `goto ${keyword.name} search term` : `goto ${keyword.name}`;
+		tableContainner.innerHTML += htmlString
+			.replace('{0}', keyword.name)
+			.replace('{1}', keyword.url)
 			.replace('{2}', example);
 	}
 }
@@ -122,9 +177,10 @@ function filterKeywords() {
 	rows.forEach(row => {
 		const keyword = row.querySelector('td:first-child').textContent.toLowerCase();
 		const website = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-		const example = row.querySelector('td:last-child').textContent.toLowerCase();
+		const example = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+		const type = row.querySelector('td:last-child').textContent.toLowerCase();
 		
-		if (keyword.includes(searchTerm) || website.includes(searchTerm) || example.includes(searchTerm)) {
+		if (keyword.includes(searchTerm) || website.includes(searchTerm) || example.includes(searchTerm) || type.includes(searchTerm)) {
 			row.style.display = '';
 		} else {
 			row.style.display = 'none';
@@ -528,3 +584,239 @@ function highlightActiveSection() {
 		});
 	}
 }
+
+// Custom Keywords Management Functions
+function initCustomKeywords() {
+	if (!customKeywordsList || !newKeywordInput || !newUrlInput || !addCustomKeywordBtn || !resetCustomKeywordsBtn) return;
+	
+	// Load and display current custom keywords
+	loadAndDisplayCustomKeywords();
+	
+	// Add event listeners
+	addCustomKeywordBtn.addEventListener('click', addNewCustomKeyword);
+	resetCustomKeywordsBtn.addEventListener('click', resetCustomKeywords);
+	
+	// Add enter key support for form inputs
+	[newKeywordInput, newUrlInput, newSearchParamInput, newDescriptionInput].forEach(input => {
+		if (input) {
+			input.addEventListener('keypress', (e) => {
+				if (e.key === 'Enter') {
+					addNewCustomKeyword();
+				}
+			});
+		}
+	});
+}
+
+function loadAndDisplayCustomKeywords() {
+	const customKeywords = getCustomKeywords();
+	displayCustomKeywords(customKeywords);
+}
+
+function displayCustomKeywords(customKeywords) {
+	if (!customKeywordsList) return;
+	
+	customKeywordsList.innerHTML = '';
+	
+	if (customKeywords.length === 0) {
+		customKeywordsList.innerHTML = '<div class="no-custom-keywords">No custom keywords found. Add some to get started!</div>';
+		return;
+	}
+	
+	customKeywords.forEach((keyword, index) => {
+		const keywordItem = document.createElement('div');
+		keywordItem.className = 'custom-keyword-item';
+		keywordItem.innerHTML = `
+			<div class="custom-keyword-header">
+				<div class="custom-keyword-info">
+					<div class="custom-keyword-name">${keyword.name}</div>
+					<div class="custom-keyword-url">${keyword.url}</div>
+					<div class="custom-keyword-description">${keyword.description || 'No description'}</div>
+				</div>
+				<div class="custom-keyword-actions">
+					<button class="custom-keyword-edit-btn" data-index="${index}" title="Edit">✏️ Edit</button>
+					<button class="custom-keyword-delete-btn" data-index="${index}" title="Delete">🗑️ Delete</button>
+				</div>
+			</div>
+			<div class="custom-keyword-params">
+				<strong>Search Parameter:</strong> 
+				<code>${keyword.searchParam || 'None'}</code>
+			</div>
+		`;
+		
+		// Add event listeners for edit and delete buttons
+		const editBtn = keywordItem.querySelector('.custom-keyword-edit-btn');
+		const deleteBtn = keywordItem.querySelector('.custom-keyword-delete-btn');
+		
+		editBtn.addEventListener('click', () => editCustomKeyword(index));
+		deleteBtn.addEventListener('click', () => deleteCustomKeyword(index));
+		
+		customKeywordsList.appendChild(keywordItem);
+	});
+}
+
+async function addNewCustomKeyword() {
+	if (!newKeywordInput || !newUrlInput) return;
+	
+	const keyword = newKeywordInput.value.trim().toLowerCase();
+	const url = newUrlInput.value.trim();
+	const searchParam = newSearchParamInput.value.trim() || '';
+	const description = newDescriptionInput.value.trim() || '';
+	
+	// Validation
+	if (!keyword) {
+		showNotification('Please enter a keyword', 'error');
+		return;
+	}
+	
+	if (!url) {
+		showNotification('Please enter a URL', 'error');
+		return;
+	}
+	
+	// Check if URL is valid
+	try {
+		new URL(url);
+	} catch {
+		showNotification('Please enter a valid URL', 'error');
+		return;
+	}
+	
+	// Check if keyword already exists (in default config or custom keywords)
+	if (config[keyword]) {
+		showNotification('This keyword already exists in default keywords', 'error');
+		return;
+	}
+	
+	const customKeywords = getCustomKeywords();
+	if (customKeywords.find(k => k.name === keyword)) {
+		showNotification('This custom keyword already exists', 'error');
+		return;
+	}
+	
+	// Add new custom keyword
+	const newKeyword = {
+		name: keyword,
+		url: url,
+		searchParam: searchParam,
+		description: description,
+		timestamp: Date.now()
+	};
+	
+	customKeywords.push(newKeyword);
+	await saveCustomKeywords(customKeywords);
+	displayCustomKeywords(customKeywords);
+	
+	// Clear form
+	newKeywordInput.value = '';
+	newUrlInput.value = '';
+	newSearchParamInput.value = '';
+	newDescriptionInput.value = '';
+	
+	// Update main keywords table and popular keywords
+	populateKeywordsTable();
+	populatePopularKeywords();
+	
+	showNotification('Custom keyword added successfully!', 'success');
+}
+
+async function editCustomKeyword(index) {
+	const customKeywords = getCustomKeywords();
+	const keyword = customKeywords[index];
+	
+	if (!keyword) return;
+	
+	// Fill form with existing values
+	newKeywordInput.value = keyword.name;
+	newUrlInput.value = keyword.url;
+	newSearchParamInput.value = keyword.searchParam || '';
+	newDescriptionInput.value = keyword.description || '';
+	
+	// Remove the keyword being edited
+	customKeywords.splice(index, 1);
+	await saveCustomKeywords(customKeywords);
+	displayCustomKeywords(customKeywords);
+	
+	// Update main keywords table and popular keywords
+	populateKeywordsTable();
+	populatePopularKeywords();
+	
+	showNotification('Keyword loaded for editing. Make changes and click Add Keyword.', 'info');
+}
+
+async function deleteCustomKeyword(index) {
+	if (confirm('Are you sure you want to delete this custom keyword?')) {
+		const customKeywords = getCustomKeywords();
+		if (index >= 0 && index < customKeywords.length) {
+			customKeywords.splice(index, 1);
+			await saveCustomKeywords(customKeywords);
+			displayCustomKeywords(customKeywords);
+			
+			// Update main keywords table and popular keywords
+			populateKeywordsTable();
+			populatePopularKeywords();
+			
+			showNotification('Custom keyword deleted successfully!', 'success');
+		}
+	}
+}
+
+async function resetCustomKeywords() {
+	if (confirm('Are you sure you want to clear all custom keywords? This action cannot be undone.')) {
+		await saveCustomKeywords([]);
+		displayCustomKeywords([]);
+		
+		// Update main keywords table and popular keywords
+		populateKeywordsTable();
+		populatePopularKeywords();
+		
+		showNotification('All custom keywords cleared successfully!', 'success');
+	}
+}
+
+function getCustomKeywords() {
+	let customKeywords = [];
+	try {
+		const stored = localStorage.getItem('customKeywords');
+		if (stored) {
+			const parsed = JSON.parse(stored);
+			if (Array.isArray(parsed)) {
+				customKeywords = parsed;
+			}
+		}
+	} catch (e) {
+		console.error('Error loading custom keywords:', e);
+	}
+	return customKeywords;
+}
+
+async function saveCustomKeywords(customKeywords) {
+	try {
+		// Save to localStorage for immediate UI updates
+		localStorage.setItem('customKeywords', JSON.stringify(customKeywords));
+		
+		// Also save to Chrome storage for background script access (if available)
+		if (chrome && chrome.storage && chrome.storage.local) {
+			await chrome.storage.local.set({ customKeywords: customKeywords });
+		}
+		
+		// Trigger background script refresh (if available)
+		if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
+			chrome.runtime.sendMessage({ action: 'refreshConfig' });
+		}
+	} catch (e) {
+		console.error('Error saving custom keywords:', e);
+		showNotification('Error saving custom keywords', 'error');
+	}
+}
+
+// Listen for messages from background script
+if (chrome && chrome.runtime && chrome.runtime.onMessage) {
+	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+		if (request.action === 'getCustomKeywords') {
+			const customKeywords = getCustomKeywords();
+			sendResponse({ customKeywords: customKeywords });
+		}
+	});
+}
+
