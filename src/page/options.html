@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoTo - Help & Settings</title>
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/options.js"></script>
@@ -20,17 +19,27 @@
                     <p>Quick Search & Navigation Tool</p>
                 </div>
             </div>
-            <a href="new.html" class="back-button">
-                <span class="back-icon">←</span>
-                Back to Search
-            </a>
+            <div class="header-actions">
+                <nav class="page-navigation">
+                    <a href="#guide" class="nav-link">Guide</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#keywords" class="nav-link">Keywords</a>
+                    <a href="#all-keywords" class="nav-link">All Keywords</a>
+                    <a href="#backgrounds" class="nav-link">Backgrounds</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </nav>
+                <a href="new.html" class="back-button">
+                    <span class="back-icon">←</span>
+                    Back to Search
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="options-main">
         <!-- Usage Guide Section -->
-        <section class="guide-section">
+        <section id="guide" class="guide-section">
             <h2>🚀 How to Use GoTo</h2>
             <div class="guide-content">
                 <div class="guide-step">
@@ -64,7 +73,7 @@
         </section>
 
         <!-- Features Section -->
-        <section class="features-section">
+        <section id="features" class="features-section">
             <h2>✨ Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
@@ -82,16 +91,11 @@
                     <h3>Beautiful Interface</h3>
                     <p>Enjoy a modern, clean interface with beautiful backgrounds</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Responsive Design</h3>
-                    <p>Works perfectly on all screen sizes and devices</p>
-                </div>
             </div>
         </section>
 
         <!-- Popular Keywords Section -->
-        <section class="keywords-section">
+        <section id="keywords" class="keywords-section">
             <h2>🔥 Popular Keywords</h2>
             <div class="keywords-grid" id="popular-keywords">
                 <!-- Popular keywords will be populated by JavaScript -->
@@ -99,7 +103,7 @@
         </section>
 
         <!-- All Keywords Table -->
-        <section class="table-section">
+        <section id="all-keywords" class="table-section">
             <h2>📋 All Available Keywords</h2>
             <div class="table-container">
                 <div class="search-box">
@@ -122,8 +126,33 @@
             </div>
         </section>
 
+        <!-- Unsplash Queries Management Section -->
+        <section id="backgrounds" class="unsplash-section">
+            <h2>🖼️ Background Image Preferences</h2>
+            <p class="section-description">Customize the types of images used for your background by managing Unsplash search queries.</p>
+            
+            <div class="unsplash-controls">
+                <div class="add-query-form">
+                    <input type="text" id="new-query-input" placeholder="Enter a search term (e.g., nature, architecture, minimal)" class="query-input">
+                    <button id="add-query-btn" class="add-btn">Add Query</button>
+                </div>
+            </div>
+            
+            <div class="queries-list" id="queries-list">
+                <!-- Queries will be populated by JavaScript -->
+            </div>
+            
+            <div class="reset-section">
+                <div class="reset-buttons">
+                    <button id="reset-current-wallpaper-btn" class="reset-btn">Reset Current Wallpaper</button>
+                    <button id="reset-defaults-btn" class="reset-btn">Reset to Defaults</button>
+                </div>
+                <p class="reset-note">Reset Current Wallpaper: Forces a new background image immediately. Reset to Defaults: Restores the default search queries: nature, animals, landscape, minimalist, abstract, architecture</p>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
-        <section class="faq-section">
+        <section id="faq" class="faq-section">
             <h2>❓ Frequently Asked Questions</h2>
             <div class="faq-list">
                 <div class="faq-item">
@@ -136,15 +165,6 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Can I use GoTo on mobile devices?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! GoTo is fully responsive and works great on mobile devices and tablets.</p>
-                    </div>
-                </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
@@ -153,6 +173,16 @@
                     </div>
                     <div class="faq-answer">
                         <p>Make sure you're typing the keyword correctly. Check the table above for all available keywords and their usage examples.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I customize background images?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use the "Background Image Preferences" section above to add, edit, or remove Unsplash search queries. These queries determine what types of images are used for your background. You can add terms like "architecture", "minimalist", "ocean", etc.</p>
                     </div>
                 </div>
                 
