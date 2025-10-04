@@ -2,7 +2,7 @@
   "name": "GoTo",
   "short_name" : "GoTo",
   "description": "GoTo and Search popular sites from your NewTab",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "background": {
     "service_worker": "js/background.js"
   },
@@ -12,6 +12,9 @@
     "newtab": "page/new.html"
   },
   "options_page": "page/options.html",
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_icon": {
       "16": "image/icon16.png",
