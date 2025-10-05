@@ -201,6 +201,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     gap: 1rem;
+    min-height: 2rem;
 }
 
 .footer-links {
@@ -246,6 +247,16 @@ body {
     gap: 0.25rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
+    max-width: 60%;
+    overflow: hidden;
+}
+
+.photo-credit #description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+    display: inline-block;
 }
 
 .credit-text {
@@ -323,12 +334,12 @@ a:hover, a:visited, a:link {
 
 /* Focus states for accessibility */
 .footer-link:focus {
-    outline: 2px solid #FFFFFF;
+    outline: 0px solid #FFFFFF;
     outline-offset: 2px;
 }
 
 .photographer-link:focus, .unsplash-link:focus {
-    outline: 1px solid #FFFFFF;
+    outline: 0px solid #FFFFFF;
     outline-offset: 1px;
 }
 
