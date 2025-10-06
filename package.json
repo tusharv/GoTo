@@ -1,8 +1,8 @@
 {
   "name": "goto",
-  "version": "0.3.0",
+  "version": "1.0.2",
   "description": "GoTo and Search popular sites from your NewTab",
-  "main": "background.js",
+  "main": "src/js/background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +17,7 @@
     "extension"
   ],
   "author": "Tushar Vaghela",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/tusharv/GoTo/issues"
   },

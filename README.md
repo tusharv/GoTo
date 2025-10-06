@@ -20,8 +20,8 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 ## How?
 | Keyword | Site | Sample |
 |---|---|---|
-| ama | <https://www.amazon.com/> | goto ama OnePlus 7 |
-| amazon | <https://www.amazon.com/> | goto amazon |
+| ama | <https://www.amazon.in/> | goto ama OnePlus 7 |
+| amazon | <https://www.amazon.in/> | goto amazon |
 | bing | <https://www.bing.com/> | goto bing |
 | bitly | <https://bitly.com/> | goto bitly |
 | cani | <https://caniuse.com/> | goto cani grid |
@@ -81,19 +81,19 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | spotify | <https://open.spotify.com/browse/featured> | goto spotify Gotye |
 | stack | <https://stackoverflow.com/> | goto stack HTML5 |
 | stackoverflow | <https://stackoverflow.com/> | goto stackoverflow |
-| t | <https://twitter.com/> | goto t |
 | tax | <https://www.incometaxindiaefiling.gov.in/> | goto tax |
 | trello | <https://trello.com/> | goto trello Anirudh |
-| twit | <https://twitter.com/> | goto twit Grynn |
-| twitter | <https://twitter.com/> | goto twitter |
+| twit | <https://x.com/> | goto twit Grynn |
+| twitter | <https://x.com/> | goto twitter |
+| x | <https://x.com/> | goto x |
 | ud | <https://www.urbandictionary.com/> | goto ud |
 | unsp | <https://unsplash.com/> | goto unsp birds |
 | unsplash | <https://unsplash.com/> | goto unsplash nature |
 | urbandictionary | <https://www.urbandictionary.com/> | goto urbandictionary |
 | us | <https://unsplash.com/> | goto us |
 | wa | <https://web.whatsapp.com/> | goto wa |
-| weat | <https://weather.com/en-IN/weather/today/> | goto weat |
-| weather | <https://weather.com/en-IN/weather/today/> | goto weather |
+| weat | <https://openweathermap.org/> | goto weat |
+| weather | <https://openweathermap.org/> | goto weather |
 | webmakerapp | <https://webmaker.app/app/> | goto webmakerapp |
 | whatsapp | <https://web.whatsapp.com/> | goto whatsapp |
 | wiki | <https://en.wikipedia.org/wiki/Main_Page> | goto wiki Jules Verne |
@@ -105,8 +105,8 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | zoma | <https://www.zomato.com/> | goto zoma |
 | zomato | <https://www.zomato.com/> | goto zomato |
 | ext | chrome://extensions/ | goto ext |
-| me | <http://tusharv.in/contact.html> | goto me |
-| about | <http://tusharv.in/contact.html> | goto about |
+| me | <https://www.linkedin.com/in/tusharvaghela/> | goto me |
+| about | <https://github.com/tusharv/GoTo> | goto about |
 
 ## Installation
 
@@ -127,6 +127,15 @@ var secret = {
 ```
 3. Make your changes.
 4. To test, go to: chrome://extensions, enable Developer mode and load src as an unpacked extension.
+
+## Contributing
+
+Please read the full guidelines in [`CONTRIBUTING.md`](CONTRIBUTING.md) for:
+- Installing and exploring the extension
+- Local development setup
+- Getting an Unsplash API key and configuring `src/js/secret.js`
+- Opening issues and submitting pull requests
+- Release expectations and timelines
 
 ## Credits
 - Icon Made From [Icon Fonts](https://www.onlinewebfonts.com/icon/) Is Licensed By CC BY 3.0 
