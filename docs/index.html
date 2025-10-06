@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoTo Extension - Quick Search & Navigation Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #2C3E50;
+            --accent-color: #E74C3C;
+            --bg-color: #F8FAFC;
+            --text-color: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #4A90E2 0%, #2C3E50 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Visual Enhancements */
+        .store-badge { height: 58px; width: auto; }
+        .store-badge-link { display: inline-block; transition: transform 0.2s; }
+        .store-badge-link:hover { transform: translateY(-2px); }
+        @media (max-width: 480px) { .store-badge { height: 46px; } }
+
+        /* Visual Enhancements */
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #E0F2FE, #FDE68A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 12px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            color: #FFD166;
+        }
+        .icon path {
+            fill: currentColor;
+        }
+
+        .hero-decor .blob {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(40px);
+            opacity: 0.35;
+            animation: float 12s ease-in-out infinite;
+        }
+        .hero-decor .b1 { width: 240px; height: 240px; left: -60px; top: -60px; background: #60A5FA; }
+        .hero-decor .b2 { width: 320px; height: 320px; right: -80px; top: 20px; background: #F59E0B; animation-delay: 2s; }
+        .hero-decor .b3 { width: 200px; height: 200px; left: 20%; bottom: -60px; background: #10B981; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border-radius: 16px;
+            background: linear-gradient(#ffffff, #ffffff) padding-box,
+                        linear-gradient(135deg, rgba(74,144,226,0.4), rgba(231,76,60,0.4)) border-box;
+            border: 1px solid transparent;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon { font-size: 36px; margin-bottom: 16px; }
+
+        /* How to Use Section */
+        .how-to-use {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: bold;
+        }
+
+        /* Keywords Section */
+        .keywords {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .keyword-card {
+            padding: 18px;
+            background: linear-gradient(#F8FAFC, #F8FAFC) padding-box,
+                        linear-gradient(135deg, rgba(16,185,129,0.35), rgba(99,102,241,0.35)) border-box;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .keyword-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .keyword-icon {
+            width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #60A5FA, #34D399); color: white; margin-bottom: 8px;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.25);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .code-example {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="./images/logo.png" alt="GoTo Logo">
+                <div class="logo-text">
+                    <h1>GoTo</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-decor">
+            <div class="blob b1"></div>
+            <div class="blob b2"></div>
+            <div class="blob b3"></div>
+        </div>
+        <div class="container">
+            <h1 class="gradient-text">Navigate the Web, Faster Than Ever</h1>
+            <p>GoTo transforms your new tab into a powerful command center that saves you precious time. No more typing long URLs or switching between tabs - just type and go!</p>
+            <a href="https://chromewebstore.google.com/detail/goto/iabecofjidglogmhkccmgihafpoaccmd" class="store-badge-link" target="_blank" rel="noopener" style="display:inline-block; background:rgba(255,255,255,0.80); border-radius:12px; padding:8px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+                <img class="store-badge" src="./images/store_badge.png" alt="Available in the Chrome Web Store" style="display:block; background:transparent;">
+            </a>
+            <div style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+                <span class="badge">⭐ 4.3/5 rating</span>
+                <span class="badge" style="margin-left:10px;">👥 50+ users</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast Access</h3>
+                    <p>Save hours of your time with instant access to any website. What used to take 30 seconds now takes just 3!</p>
+                    <div class="time-saved" style="margin-top: 15px; background: #f0f9ff; padding: 10px; border-radius: 6px;">
+                        <strong>Time Saved:</strong> Instead of:
+                        <ol style="margin: 10px 0; padding-left: 20px;">
+                            <li>Opening a new tab</li>
+                            <li>Typing www.github.com</li>
+                            <li>Clicking search</li>
+                            <li>Typing your query</li>
+                        </ol>
+                        Just type: <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">goto git your-search</code>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Backgrounds</h3>
+                    <p>Personalize your new tab experience with stunning wallpapers that automatically refresh every 5 minutes. Choose your preferred background style or keep it dynamic!</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                        <li>✓ Auto-refreshing wallpapers</li>
+                        <li>✓ Custom background preferences</li>
+                        <li>✓ Beautiful gradients option</li>
+                        <li>✓ Powered by Unsplash</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Custom Keywords</h3>
+                    <p>Make GoTo truly yours by creating custom keywords for your favorite websites. Perfect for internal tools and frequently visited pages.</p>
+                    <div style="margin-top: 15px; background: #f0f9ff; padding: 10px; border-radius: 6px;">
+                        <strong>Example:</strong><br>
+                        Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">jira</code> to open your company's JIRA<br>
+                        Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">wiki</code> for your team's documentation<br>
+                        Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">dev</code> for your development environment
+                    </div>
+                </div>
+            </div>
+
+            <div class="privacy-banner" style="margin-top: 60px; background: #f8f9fa; border-radius: 12px; padding: 20px; text-align: center;">
+                <div class="feature-icon" style="font-size: 24px;">🛡️</div>
+                <h3 style="margin: 10px 0;">100% Private & Local</h3>
+                <p style="max-width: 600px; margin: 0 auto;">
+                    GoTo runs entirely on your machine. We don't collect, store, or track any of your data - not even for analytics. 
+                    Your custom keywords, preferences, and searches stay on your device.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-to-use">
+        <div class="container">
+            <h2 class="section-title">How to Use GoTo</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Open New Tab</h3>
+                    <p>Simply open a new tab in your browser to access GoTo's interface.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Type Your Command</h3>
+                    <p>Enter a keyword followed by your search term</p>
+                    <div class="code-example">
+                        goto git react hooks
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Press Enter</h3>
+                    <p>Hit enter and you'll be instantly taken to your destination with your search query ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="keywords">
+        <div class="container">
+            <h2 class="section-title">Popular Keywords</h2>
+            <div class="keywords-grid">
+                <div class="keyword-card">
+                    <div class="keyword-icon">🐙</div>
+                    <h4>git</h4>
+                    <p>Search GitHub</p>
+                </div>
+                <div class="keyword-card">
+                    <div class="keyword-icon" style="background: linear-gradient(135deg, #FF512F, #DD2476);">▶️</div>
+                    <h4>yt</h4>
+                    <p>Search YouTube</p>
+                </div>
+                <div class="keyword-card">
+                    <div class="keyword-icon" style="background: linear-gradient(135deg, #8E2DE2, #4A00E0);">📦</div>
+                    <h4>npm</h4>
+                    <p>Search NPM packages</p>
+                </div>
+                <div class="keyword-card">
+                    <div class="keyword-icon" style="background: linear-gradient(135deg, #06B6D4, #3B82F6);">🧠</div>
+                    <h4>so</h4>
+                    <p>Search Stack Overflow</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="updates" style="padding: 80px 0; background-color: var(--bg-color);">
+        <div class="container">
+            <h2 class="section-title">Latest Updates</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="feature-card" style="margin-bottom: 20px;">
+                    <h3>Version 1.0.2 - Latest Release</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✨ Support for custom keywords</li>
+                        <li>🎨 New Tab background configuration</li>
+                        <li>🔄 Updated Option Page</li>
+                        <li>🐛 Fixed dead links</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="privacy" style="padding: 80px 0; background-color: white;">
+        <div class="container">
+            <h2 class="section-title">Privacy First</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Your Data Stays Private</h3>
+                    <p>GoTo respects your privacy. We do not collect or use your personal data. Your searches are performed directly on the respective websites, either publicly or using your existing login sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>GoTo Extension - Make your browsing faster and more efficient</p>
+            <p style="margin-top: 10px; font-size: 14px;">
+                <a href="https://github.com/tusharv/GoTo" style="color: white; text-decoration: underline;">View on GitHub</a>
+                <span style="margin: 0 10px; opacity: 0.7;">|</span>
+                <a href="./privacy-policy.html" style="color: white; text-decoration: underline;">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
