@@ -81,6 +81,9 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | spotify | <https://open.spotify.com/browse/featured> | goto spotify Gotye |
 | stack | <https://stackoverflow.com/> | goto stack HTML5 |
 | stackoverflow | <https://stackoverflow.com/> | goto stackoverflow |
+|leet | <https://leetcode.com/> | goto leetcode |
+|cal | <https://calendar.google.com/> | goto calendar |
+|calendar | <https://calendar.google.com/> | goto calendar |
 | tax | <https://www.incometaxindiaefiling.gov.in/> | goto tax |
 | trello | <https://trello.com/> | goto trello Anirudh |
 | twit | <https://x.com/> | goto twit Grynn |
