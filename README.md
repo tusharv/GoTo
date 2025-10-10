@@ -159,15 +159,22 @@ Licensed under the [GNU General Public License v3.0](https://github.com/tusharv/
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="http://virajvchavan.github.io"><img src="https://avatars3.githubusercontent.com/u/17914172?v=4" width="100px;" alt="Viraj Chavan"/><br /><sub><b>Viraj Chavan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=virajvchavan" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/crsee"><img src="https://avatars2.githubusercontent.com/u/30675425?v=4" width="100px;" alt="crsee"/><br /><sub><b>crsee</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=crsee" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://vadimdez.github.io"><img src="https://avatars2.githubusercontent.com/u/3748453?v=4" width="100px;" alt="Vadym Yatsyuk"/><br /><sub><b>Vadym Yatsyuk</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=VadimDez" title="Code">💻</a></td>
-    <td align="center"><a href="http://dps910.xyz"><img src="https://avatars0.githubusercontent.com/u/42849369?v=4" width="100px;" alt="dps"/><br /><sub><b>dps</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=dps910" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://virajvchavan.github.io"><img src="https://avatars3.githubusercontent.com/u/17914172?v=4?s=100" width="100px;" alt="Viraj Chavan"/><br /><sub><b>Viraj Chavan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=virajvchavan" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/crsee"><img src="https://avatars2.githubusercontent.com/u/30675425?v=4?s=100" width="100px;" alt="crsee"/><br /><sub><b>crsee</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=crsee" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://vadimdez.github.io"><img src="https://avatars2.githubusercontent.com/u/3748453?v=4?s=100" width="100px;" alt="Vadym Yatsyuk"/><br /><sub><b>Vadym Yatsyuk</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=VadimDez" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://dps910.xyz"><img src="https://avatars0.githubusercontent.com/u/42849369?v=4?s=100" width="100px;" alt="dps"/><br /><sub><b>dps</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=dps910" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://amenya.is-a.dev"><img src="https://avatars.githubusercontent.com/u/133534815?v=4?s=100" width="100px;" alt="Amenya"/><br /><sub><b>Amenya</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=aspects19" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
