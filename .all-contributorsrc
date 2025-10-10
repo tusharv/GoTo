@@ -40,11 +40,22 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "aspects19",
+      "name": "Amenya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/133534815?v=4",
+      "profile": "http://amenya.is-a.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "GoTo",
   "projectOwner": "tusharv",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
