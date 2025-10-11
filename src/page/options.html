@@ -9,7 +9,6 @@
 </head>
 
 <body class="options">
-    <!-- Header Section -->
     <header class="options-header">
         <div class="header-content">
             <div class="logo-section">
@@ -22,6 +21,7 @@
             <div class="header-actions">
                 <nav class="page-navigation">
                     <a href="#guide" class="nav-link">Guide</a>
+                    <a href="#settings" class="nav-link">Settings</a>
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#keywords" class="nav-link">Keywords</a>
                     <a href="#custom-keywords" class="nav-link">Custom</a>
@@ -37,9 +37,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="options-main">
-        <!-- Usage Guide Section -->
         <section id="guide" class="guide-section">
             <h2>🚀 How to Use GoTo</h2>
             <div class="guide-content">
@@ -73,7 +71,21 @@
             </div>
         </section>
 
-        <!-- Features Section -->
+        <section id="settings" class="settings-section">
+            <h2>⚙️ General Settings</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h3>Enable Custom New Tab Page</h3>
+                    <p>When enabled, GoTo will open as your new tab. Disable this to see Chrome's default new tab page.</p>
+                </div>
+                <div class="setting-control">
+                    <label class="switch">
+                        <input type="checkbox" id="newTabToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
         <section id="features" class="features-section">
             <h2>✨ Features</h2>
             <div class="features-grid">
@@ -95,15 +107,12 @@
             </div>
         </section>
 
-        <!-- Popular Keywords Section -->
         <section id="keywords" class="keywords-section">
             <h2>🔥 Popular Keywords</h2>
             <div class="keywords-grid" id="popular-keywords">
-                <!-- Popular keywords will be populated by JavaScript -->
-            </div>
+                </div>
         </section>
 
-        <!-- Custom Keywords Management Section -->
         <section id="custom-keywords" class="custom-keywords-section">
             <h2>⚙️ Custom Keywords</h2>
             <p class="section-description">Add, edit, and manage your own custom keywords for quick navigation to your favorite websites.</p>
@@ -123,8 +132,7 @@
             </div>
             
             <div class="custom-keywords-list" id="custom-keywords-list">
-                <!-- Custom keywords will be populated by JavaScript -->
-            </div>
+                </div>
             
             <div class="keyword-reset-section">
                 <div class="reset-buttons">
@@ -134,7 +142,6 @@
             </div>
         </section>
 
-        <!-- All Keywords Table -->
         <section id="all-keywords" class="table-section">
             <h2>📋 All Available Keywords</h2>
             <div class="table-container">
@@ -159,7 +166,6 @@
             </div>
         </section>
 
-        <!-- Unsplash Queries Management Section -->
         <section id="backgrounds" class="unsplash-section">
             <h2>🖼️ Background Image Preferences</h2>
             <p class="section-description">Customize the types of images used for your background by managing Unsplash search queries.</p>
@@ -172,8 +178,7 @@
             </div>
             
             <div class="queries-list" id="queries-list">
-                <!-- Queries will be populated by JavaScript -->
-            </div>
+                </div>
             
             <div class="reset-section">
                 <div class="reset-buttons">
@@ -184,7 +189,6 @@
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section id="faq" class="faq-section">
             <h2>❓ Frequently Asked Questions</h2>
             <div class="faq-list">
@@ -232,7 +236,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="options-footer">
         <div class="footer-content">
             <div class="footer-links">

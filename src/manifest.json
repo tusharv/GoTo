@@ -8,12 +8,10 @@
   },
   "omnibox": { "keyword" : "goto" },
   "incognito": "split",
-  "chrome_url_overrides": {
-    "newtab": "page/new.html"
-  },
   "options_page": "page/options.html",
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
   "action": {
     "default_icon": {
