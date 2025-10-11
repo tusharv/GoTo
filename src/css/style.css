@@ -860,6 +860,14 @@ section h2 {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.unsplash-description {
+  max-width: 500px;             /* restrict width */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;             /* hide overflow */
+  text-overflow: ellipsis;
+  line-height: 1.4em;
+}
 .unsplash-section h2 {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
@@ -880,6 +888,7 @@ section h2 {
 .unsplash-controls {
     margin-bottom: 2rem;
 }
+
 
 .add-query-form {
     display: flex;
