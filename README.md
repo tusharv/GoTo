@@ -169,6 +169,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://vadimdez.github.io"><img src="https://avatars2.githubusercontent.com/u/3748453?v=4?s=100" width="100px;" alt="Vadym Yatsyuk"/><br /><sub><b>Vadym Yatsyuk</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=VadimDez" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://dps910.xyz"><img src="https://avatars0.githubusercontent.com/u/42849369?v=4?s=100" width="100px;" alt="dps"/><br /><sub><b>dps</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=dps910" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://amenya.is-a.dev"><img src="https://avatars.githubusercontent.com/u/133534815?v=4?s=100" width="100px;" alt="Amenya"/><br /><sub><b>Amenya</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=aspects19" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/kiran-satdive-974559211"><img src="https://avatars.githubusercontent.com/u/98806225?v=4?s=100" width="100px;" alt="KIRAN SATDIVE"/><br /><sub><b>KIRAN SATDIVE</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
