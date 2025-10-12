@@ -247,7 +247,6 @@ body {
     gap: 0.25rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
-    max-width: 60%;
     overflow: hidden;
 }
 
@@ -872,7 +871,6 @@ section h2 {
 }
 
 .unsplash-description {
-  max-width: 500px;             /* restrict width */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;             /* hide overflow */
