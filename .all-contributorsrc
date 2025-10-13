@@ -59,6 +59,19 @@
         "code",
         "bug",
         "test"
+        "code"
+      ]
+    },
+    {
+      "login": "tusharv",
+      "name": "Tushar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/358703?v=4",
+      "profile": "https://github.com/tusharv",
+      "contributions": [
+        "infra",
+        "test",
+        "bug",
+        "code"
       ]
     }
   ],
