@@ -201,12 +201,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     gap: 1rem;
-}
-
-.footer-links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    min-height: 2rem;
 }
 
 .footer-link {
@@ -242,10 +237,19 @@ body {
     font-size: 0.7rem;
     opacity: 0.8;
     display: flex;
+    justify-content: end;
     align-items: center;
     gap: 0.25rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
+    overflow: hidden;
+}
+
+.photo-credit #description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .credit-text {
@@ -323,12 +327,12 @@ a:hover, a:visited, a:link {
 
 /* Focus states for accessibility */
 .footer-link:focus {
-    outline: 2px solid #FFFFFF;
+    outline: 0px solid #FFFFFF;
     outline-offset: 2px;
 }
 
 .photographer-link:focus, .unsplash-link:focus {
-    outline: 1px solid #FFFFFF;
+    outline: 0px solid #FFFFFF;
     outline-offset: 1px;
 }
 
@@ -820,7 +824,6 @@ section h2 {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    flex-wrap: wrap;
 }
 
 .options-footer .footer-link {
@@ -861,7 +864,6 @@ section h2 {
 }
 
 .unsplash-description {
-  max-width: 500px;             /* restrict width */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;             /* hide overflow */
@@ -1316,6 +1318,3 @@ section h2 {
     border-color: #a855f7;
     box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
 }
-
-
-

@@ -208,6 +208,7 @@ function fetchNewWallpaper() {
 					description: description,
 					name: data.user.name,
 					link: data.user.links.html,
+					photo_link: data.links.html,
 					timestamp: new Date()/1000
 				};
 				updateWallpaper(o);
@@ -241,5 +242,6 @@ function updateWallpaper(wallpaper){
 	
 	document.getElementById('name').innerHTML = wallpaper.name;
 	document.getElementById('link').href = wallpaper.link + '?utm_source=GoToExtension&utm_medium=referral';
+	document.getElementById('photo_link').href = wallpaper.photo_link + '?utm_source=GoToExtension&utm_medium=referral';
 }
 
