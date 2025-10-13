@@ -73,6 +73,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "v-aibha-v-jain",
+      "name": "Vaibhav Jain",
+      "avatar_url": "https://avatars.githubusercontent.com/u/120400981?v=4",
+      "profile": "https://vaibhav-jain.me",
+      "contributions": [
+        "research"
+      ]
     }
   ],
   "contributorsPerLine": 7,
