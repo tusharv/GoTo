@@ -295,6 +295,21 @@
 		"search": "https://stackoverflow.com/search?q={0}",
 		"param": ""
 	},
+	"cal": {
+		"default": "https://calendar.google.com/",
+		"search": "https://calendar.google.com/calendar/u/0/r/search?q={0}",
+		"param": "meeting"
+	},
+	"calendar": {
+		"default": "https://calendar.google.com/",
+		"search": "https://calendar.google.com/calendar/u/0/r/search?q={0}",
+		"param": "meeting"
+	},
+	"leet": {
+		"default": "https://leetcode.com/",
+		"search": "https://leetcode.com/problemset/all/?search={0}",
+		"param": "two sum"
+	},
 	"bitly": {
 		"default": "https://bitly.com/",
 		"param": ""
