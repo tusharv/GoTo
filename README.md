@@ -174,6 +174,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://vaibhav-jain.me"><img src="https://avatars.githubusercontent.com/u/120400981?v=4?s=100" width="100px;" alt="Vaibhav Jain"/><br /><sub><b>Vaibhav Jain</b></sub></a><br /><a href="#research-v-aibha-v-jain" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/iqra-codes"><img src="https://avatars.githubusercontent.com/u/220503709?v=4?s=100" width="100px;" alt="Iqra Khan"/><br /><sub><b>Iqra Khan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=iqra-codes" title="Code">💻</a> <a href="#research-iqra-codes" title="Research">🔬</a></td>
     </tr>
   </tbody>
 </table>
