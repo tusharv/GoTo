@@ -1318,3 +1318,196 @@ section h2 {
     border-color: #a855f7;
     box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
 }
+
+/* --- NEW FEATURE: TOGGLE SWITCH STYLES START --- */
+.settings-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-info h3 {
+    margin: 0 0 0.25rem 0;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.setting-info p {
+    margin: 0;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.setting-control {
+    flex-shrink: 0;
+    margin-left: 1.5rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #667eea;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #667eea;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+/* --- NEW FEATURE: TOGGLE SWITCH STYLES END --- */
+/* --- NEW FEATURE STYLES (Settings, Toggle, and Banner) --- */
+
+/* Settings Section */
+.settings-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+.setting-item:last-child { 
+    border-bottom: none; 
+}
+.setting-info h3 { 
+    margin: 0 0 0.25rem 0; 
+    color: #2d3748; 
+    font-size: 1.1rem; 
+}
+.setting-info p { 
+    margin: 0; 
+    color: #718096; 
+    font-size: 0.9rem; 
+}
+.setting-control { 
+    flex-shrink: 0; 
+    margin-left: 1.5rem; 
+}
+
+/* Toggle Switch */
+.switch { 
+    position: relative; 
+    display: inline-block; 
+    width: 60px; 
+    height: 34px; 
+}
+.switch input { 
+    opacity: 0; 
+    width: 0; 
+    height: 0; 
+}
+.slider { 
+    position: absolute; 
+    cursor: pointer; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: #ccc; 
+    transition: .4s; 
+}
+.slider:before { 
+    position: absolute; 
+    content: ""; 
+    height: 26px; 
+    width: 26px; 
+    left: 4px; 
+    bottom: 4px; 
+    background-color: white; 
+    transition: .4s; 
+}
+input:checked + .slider { 
+    background-color: #667eea; 
+}
+input:focus + .slider { 
+    box-shadow: 0 0 1px #667eea; 
+}
+input:checked + .slider:before { 
+    transform: translateX(26px); 
+}
+.slider.round { 
+    border-radius: 34px; 
+}
+.slider.round:before { 
+    border-radius: 50%; 
+}
+
+/* Disabled New Tab Banner */
+#disabled-banner {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 500;
+    max-width: 1200px;
+    margin: 0 auto;
+}
