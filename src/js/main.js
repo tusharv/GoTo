@@ -37,6 +37,9 @@ function init() {
 
 	// help() will be called after config is loaded
 	getBgImage();
+	
+	// Initialize notes functionality
+	initNotesWidget();
 
 	document.addEventListener('visibilitychange', onFocusUpdate);
 	
@@ -245,3 +248,268 @@ function updateWallpaper(wallpaper){
 	document.getElementById('photo_link').href = wallpaper.photo_link + '?utm_source=GoToExtension&utm_medium=referral';
 }
 
+// Notes Widget functionality
+let notesData = [];
+const MAX_NOTES = 50;
+const MAX_NOTE_LENGTH = 150;
+
+function initNotesWidget() {
+	const addNoteBtn = document.getElementById('addNoteBtn');
+	
+	if (!addNoteBtn) {
+		return; // Elements not found, skip initialization
+	}
+	
+	// Load saved notes on initialization
+	loadAllNotes();
+	
+	// Add event listeners
+	addNoteBtn.addEventListener('click', addNewNote);
+	
+	// Initial render
+	renderNotesList();
+}
+
+
+
+function addNewNote() {
+	if (notesData.length >= MAX_NOTES) {
+		alert(`Maximum ${MAX_NOTES} notes allowed.`);
+		return;
+	}
+	
+	const newNote = {
+		id: generateNoteId(),
+		content: '',
+		timestamp: new Date().getTime(),
+		isEditing: true
+	};
+	
+	notesData.unshift(newNote); // Add to beginning
+	renderNotesList();
+	saveAllNotes();
+	
+	// Focus on the new note
+	setTimeout(() => {
+		const newNoteTextarea = document.querySelector(`[data-note-id="${newNote.id}"] textarea`);
+		if (newNoteTextarea) {
+			newNoteTextarea.focus();
+		}
+	}, 100);
+}
+
+function generateNoteId() {
+	return 'note_' + new Date().getTime() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+function renderNotesList() {
+	const notesList = document.getElementById('notesList');
+	if (!notesList) return;
+	
+	if (notesData.length === 0) {
+		notesList.innerHTML = '<div class="notes-empty">No notes yet. Click "Add Note" to get started!</div>';
+		return;
+	}
+	
+	notesList.innerHTML = notesData.map(note => `
+		<div class="note-item" data-note-id="${note.id}">
+			${note.isEditing ? `
+				<textarea 
+					class="note-textarea" 
+					placeholder="What's on your mind?"
+					maxlength="${MAX_NOTE_LENGTH}"
+				>${note.content}</textarea>
+				<div class="note-char-count">
+					<span class="char-count">${note.content.length}/${MAX_NOTE_LENGTH}</span>
+				</div>
+			` : `
+				<div class="note-content">${note.content || 'Empty note'}</div>
+				<div class="note-timestamp">${formatNoteDate(note.timestamp)}</div>
+			`}
+			<button class="note-delete-btn" title="Delete note">×</button>
+		</div>
+	`).join('');
+	
+	// Add event listeners after rendering
+	addNoteEventListeners();
+	// Update character counts for editing notes
+	updateCharCounts();
+}
+
+function addNoteEventListeners() {
+	// Add event listeners for note content and delete buttons
+	document.querySelectorAll('.note-content').forEach(contentDiv => {
+		contentDiv.addEventListener('click', () => {
+			const noteId = contentDiv.closest('.note-item').dataset.noteId;
+			editNote(noteId);
+		});
+	});
+	
+	document.querySelectorAll('.note-delete-btn').forEach(deleteBtn => {
+		deleteBtn.addEventListener('click', () => {
+			const noteId = deleteBtn.closest('.note-item').dataset.noteId;
+			deleteNote(noteId);
+		});
+	});
+	
+	document.querySelectorAll('.note-textarea').forEach(textarea => {
+		const noteId = textarea.closest('.note-item').dataset.noteId;
+		
+		textarea.addEventListener('blur', () => {
+			saveNote(noteId, textarea.value);
+		});
+		
+		textarea.addEventListener('keydown', (event) => {
+			handleNoteKeydown(event, noteId);
+		});
+	});
+}
+
+function handleNoteKeydown(event, noteId) {
+	if (event.key === 'Enter' && !event.shiftKey) {
+		event.preventDefault();
+		saveNote(noteId, event.target.value);
+	}
+	if (event.key === 'Escape') {
+		cancelNoteEdit(noteId);
+	}
+	
+	// Update character count in real-time
+	setTimeout(() => updateCharCount(noteId, event.target.value.length), 0);
+}
+
+function updateCharCount(noteId, length) {
+	const noteItem = document.querySelector(`[data-note-id="${noteId}"]`);
+	const charCountSpan = noteItem?.querySelector('.char-count');
+	if (charCountSpan) {
+		charCountSpan.textContent = `${length}/${MAX_NOTE_LENGTH}`;
+		charCountSpan.className = 'char-count';
+		if (length >= MAX_NOTE_LENGTH * 0.9) charCountSpan.classList.add('char-count-warning');
+		if (length >= MAX_NOTE_LENGTH) charCountSpan.classList.add('char-count-limit');
+	}
+}
+
+function updateCharCounts() {
+	document.querySelectorAll('.note-textarea').forEach(textarea => {
+		const noteId = textarea.closest('.note-item').dataset.noteId;
+		updateCharCount(noteId, textarea.value.length);
+		
+		textarea.addEventListener('input', () => {
+			updateCharCount(noteId, textarea.value.length);
+		});
+	});
+}
+
+function editNote(noteId) {
+	const note = notesData.find(n => n.id === noteId);
+	if (!note) return;
+	
+	note.isEditing = true;
+	renderNotesList();
+	
+	setTimeout(() => {
+		const textarea = document.querySelector(`[data-note-id="${noteId}"] textarea`);
+		if (textarea) {
+			textarea.focus();
+			textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+		}
+	}, 50);
+}
+
+function saveNote(noteId, content) {
+	const note = notesData.find(n => n.id === noteId);
+	if (!note) return;
+	
+	content = content.trim();
+	
+	if (content === '') {
+		deleteNote(noteId);
+		return;
+	}
+	
+	note.content = content;
+	note.isEditing = false;
+	note.timestamp = new Date().getTime();
+	
+	renderNotesList();
+	saveAllNotes();
+}
+
+function cancelNoteEdit(noteId) {
+	const note = notesData.find(n => n.id === noteId);
+	if (!note) return;
+	
+	if (note.content === '') {
+		deleteNote(noteId);
+		return;
+	}
+	
+	note.isEditing = false;
+	renderNotesList();
+}
+
+function deleteNote(noteId) {
+	const noteIndex = notesData.findIndex(n => n.id === noteId);
+	if (noteIndex === -1) return;
+	
+	const note = notesData[noteIndex];
+	if (note.content && !confirm('Are you sure you want to delete this note?')) {
+		return;
+	}
+	
+	notesData.splice(noteIndex, 1);
+	renderNotesList();
+	saveAllNotes();
+}
+
+
+
+function formatNoteDate(timestamp) {
+	const now = new Date();
+	const noteDate = new Date(timestamp);
+	const diffTime = now - noteDate;
+	const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+	
+	if (diffDays === 0) {
+		return noteDate.toLocaleTimeString('en-US', { 
+			hour: '2-digit', 
+			minute: '2-digit',
+			hour12: false 
+		});
+	} else if (diffDays === 1) {
+		return 'Yesterday';
+	} else if (diffDays < 7) {
+		return `${diffDays}d ago`;
+	} else {
+		return noteDate.toLocaleDateString('en-US', { 
+			month: 'short', 
+			day: 'numeric' 
+		});
+	}
+}
+
+function saveAllNotes() {
+	try {
+		localStorage.setItem('goToNotesWidget', JSON.stringify(notesData));
+		console.log('Notes saved successfully');
+	} catch (error) {
+		console.error('Error saving notes:', error);
+	}
+}
+
+function loadAllNotes() {
+	try {
+		const savedNotes = localStorage.getItem('goToNotesWidget');
+		if (savedNotes) {
+			notesData = JSON.parse(savedNotes);
+			// Ensure no notes are in editing mode after load
+			notesData.forEach(note => note.isEditing = false);
+			console.log('Notes loaded successfully');
+		}
+	} catch (error) {
+		console.error('Error loading notes:', error);
+		// Clear corrupted data
+		localStorage.removeItem('goToNotesWidget');
+		notesData = [];
+	}
+}
