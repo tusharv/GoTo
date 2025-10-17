@@ -252,11 +252,18 @@ function updateWallpaper(wallpaper){
 let notesData = [];
 const MAX_NOTES = 50;
 const MAX_NOTE_LENGTH = 150;
+const NOTES_WIDGET_STORAGE_KEY = 'goToNotesWidgetState';
+let notesToggleIgnoreClickUntil = 0; // suppress toggle click immediately after a drag
 
 function initNotesWidget() {
 	const addNoteBtn = document.getElementById('addNoteBtn');
+	const notesWidget = document.getElementById('notesWidget');
+	const notesPanel = document.getElementById('notesPanel');
+	const notesToggle = document.getElementById('notesToggle');
+	const notesCollapseBtn = document.getElementById('notesCollapseBtn');
+	const notesDragHandle = document.querySelector('.notes-drag-handle');
 	
-	if (!addNoteBtn) {
+	if (!addNoteBtn || !notesWidget || !notesPanel || !notesToggle || !notesCollapseBtn) {
 		return; // Elements not found, skip initialization
 	}
 	
@@ -265,6 +272,26 @@ function initNotesWidget() {
 	
 	// Add event listeners
 	addNoteBtn.addEventListener('click', addNewNote);
+
+	// Initialize draggable & collapsed state
+	applySavedNotesWidgetState();
+	initNotesDrag(notesWidget, notesDragHandle, notesToggle);
+	// Ensure within viewport after layout
+	requestAnimationFrame(() => clampNotesWithinViewport(true));
+	window.addEventListener('resize', () => clampNotesWithinViewport(true));
+	window.addEventListener('orientationchange', () => clampNotesWithinViewport(true));
+
+    // Collapse/expand events
+    notesCollapseBtn.addEventListener('click', () => { setNotesCollapsed(true); clampNotesWithinViewport(true); });
+    notesToggle.addEventListener('click', (e) => {
+        if (Date.now() < notesToggleIgnoreClickUntil) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        setNotesCollapsed(false);
+        clampNotesWithinViewport(true);
+    });
 	
 	// Initial render
 	renderNotesList();
@@ -282,7 +309,8 @@ function addNewNote() {
 		id: generateNoteId(),
 		content: '',
 		timestamp: new Date().getTime(),
-		isEditing: true
+		isEditing: true,
+		completed: false
 	};
 	
 	notesData.unshift(newNote); // Add to beginning
@@ -313,20 +341,26 @@ function renderNotesList() {
 	
 	notesList.innerHTML = notesData.map(note => `
 		<div class="note-item" data-note-id="${note.id}">
+			<div class="note-row">
+				<input type="checkbox" class="note-checkbox" ${note.completed ? 'checked' : ''} aria-label="Mark complete">
+				${note.isEditing ? `
+					<textarea 
+						class="note-textarea" 
+						placeholder="What's on your mind?"
+						maxlength="${MAX_NOTE_LENGTH}"
+					>${note.content}</textarea>
+				` : `
+					<div class="note-content${note.completed ? ' note-completed' : ''}">${note.content || 'Empty note'}</div>
+				`}
+				<button class="note-delete-btn" title="Delete note">×</button>
+			</div>
 			${note.isEditing ? `
-				<textarea 
-					class="note-textarea" 
-					placeholder="What's on your mind?"
-					maxlength="${MAX_NOTE_LENGTH}"
-				>${note.content}</textarea>
 				<div class="note-char-count">
 					<span class="char-count">${note.content.length}/${MAX_NOTE_LENGTH}</span>
 				</div>
 			` : `
-				<div class="note-content">${note.content || 'Empty note'}</div>
 				<div class="note-timestamp">${formatNoteDate(note.timestamp)}</div>
 			`}
-			<button class="note-delete-btn" title="Delete note">×</button>
 		</div>
 	`).join('');
 	
@@ -334,6 +368,158 @@ function renderNotesList() {
 	addNoteEventListeners();
 	// Update character counts for editing notes
 	updateCharCounts();
+}
+
+// Notes widget: collapsed state persistence
+function setNotesCollapsed(collapsed) {
+	const notesWidget = document.getElementById('notesWidget');
+	if (!notesWidget) return;
+	if (collapsed) {
+		notesWidget.classList.add('collapsed');
+	} else {
+		notesWidget.classList.remove('collapsed');
+	}
+	saveNotesWidgetState({ collapsed });
+}
+
+function applySavedNotesWidgetState() {
+	const notesWidget = document.getElementById('notesWidget');
+	if (!notesWidget) return;
+	let saved = {};
+	try {
+		const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
+		if (raw) saved = JSON.parse(raw) || {};
+	} catch (e) {
+		// ignore
+	}
+	if (saved.collapsed) notesWidget.classList.add('collapsed');
+	if (typeof saved.left === 'number' && typeof saved.top === 'number') {
+		// Switch to absolute position when a custom position exists
+		notesWidget.style.left = saved.left + 'px';
+		notesWidget.style.top = saved.top + 'px';
+		notesWidget.style.right = 'auto';
+		notesWidget.style.bottom = 'auto';
+	}
+	// Clamp to viewport after applying saved state
+	clampNotesWithinViewport(true);
+}
+
+function saveNotesWidgetState(partial) {
+	let prev = {};
+	try {
+		const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
+		if (raw) prev = JSON.parse(raw) || {};
+	} catch (e) {
+		// ignore
+	}
+	const next = { ...prev, ...partial };
+	try { localStorage.setItem(NOTES_WIDGET_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+}
+
+// Notes widget: drag support (mouse + touch)
+function initNotesDrag(notesWidget, dragHandle, toggleButton) {
+	if (!notesWidget || !dragHandle) return;
+
+	let isDragging = false;
+	let offsetX = 0;
+	let offsetY = 0;
+    let moved = false;
+
+	function getPointerPosition(evt) {
+		if (evt.touches && evt.touches.length) {
+			return { x: evt.touches[0].clientX, y: evt.touches[0].clientY };
+		}
+		return { x: evt.clientX, y: evt.clientY };
+	}
+
+	function onPointerDown(evt) {
+		const { x, y } = getPointerPosition(evt);
+		const rect = notesWidget.getBoundingClientRect();
+		isDragging = true;
+        moved = false;
+		offsetX = x - rect.left;
+		offsetY = y - rect.top;
+		notesWidget.style.transition = 'none';
+		notesWidget.style.left = rect.left + 'px';
+		notesWidget.style.top = rect.top + 'px';
+		notesWidget.style.right = 'auto';
+		notesWidget.style.bottom = 'auto';
+		document.addEventListener('mousemove', onPointerMove);
+		document.addEventListener('mouseup', onPointerUp);
+		document.addEventListener('touchmove', onPointerMove, { passive: false });
+		document.addEventListener('touchend', onPointerUp);
+		if (evt.cancelable) evt.preventDefault();
+	}
+
+	function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+
+	function onPointerMove(evt) {
+		if (!isDragging) return;
+		if (evt.cancelable) evt.preventDefault();
+		const { x, y } = getPointerPosition(evt);
+		const newLeft = x - offsetX;
+		const newTop = y - offsetY;
+		const maxLeft = window.innerWidth - notesWidget.offsetWidth;
+		const maxTop = window.innerHeight - notesWidget.offsetHeight;
+		notesWidget.style.left = clamp(newLeft, 0, Math.max(0, maxLeft)) + 'px';
+		notesWidget.style.top = clamp(newTop, 0, Math.max(0, maxTop)) + 'px';
+        moved = true;
+	}
+
+	function onPointerUp() {
+		if (!isDragging) return;
+		isDragging = false;
+		document.removeEventListener('mousemove', onPointerMove);
+		document.removeEventListener('mouseup', onPointerUp);
+		document.removeEventListener('touchmove', onPointerMove);
+		document.removeEventListener('touchend', onPointerUp);
+		// Clamp and persist final position
+		clampNotesWithinViewport(true);
+        if (moved) {
+            // Suppress click on toggle for a short time after drag end
+            notesToggleIgnoreClickUntil = Date.now() + 250;
+        }
+	}
+
+	dragHandle.addEventListener('mousedown', onPointerDown);
+	dragHandle.addEventListener('touchstart', onPointerDown, { passive: false });
+
+	// Allow dragging from the round toggle when collapsed
+	if (toggleButton) {
+		toggleButton.addEventListener('mousedown', onPointerDown);
+		toggleButton.addEventListener('touchstart', onPointerDown, { passive: false });
+	}
+}
+
+// Ensure the widget stays within viewport bounds
+function clampNotesWithinViewport(persist = true) {
+	const notesWidget = document.getElementById('notesWidget');
+	if (!notesWidget) return;
+	const computed = getComputedStyle(notesWidget);
+	if (computed.position !== 'fixed') return; // respect mobile relative layout
+
+	const widgetRect = notesWidget.getBoundingClientRect();
+	let left = widgetRect.left;
+	let top = widgetRect.top;
+
+	// If left/top styles exist, prefer them
+	if (notesWidget.style.left) left = parseInt(notesWidget.style.left, 10) || left;
+	if (notesWidget.style.top) top = parseInt(notesWidget.style.top, 10) || top;
+
+	const maxLeft = Math.max(0, window.innerWidth - notesWidget.offsetWidth);
+	const maxTop = Math.max(0, window.innerHeight - notesWidget.offsetHeight);
+
+	const clampedLeft = Math.min(Math.max(0, left), maxLeft);
+	const clampedTop = Math.min(Math.max(0, top), maxTop);
+
+	// Apply if changed or if right/bottom were being used
+	if (notesWidget.style.right !== 'auto' || notesWidget.style.bottom !== 'auto' || clampedLeft !== left || clampedTop !== top) {
+		notesWidget.style.left = clampedLeft + 'px';
+		notesWidget.style.top = clampedTop + 'px';
+		notesWidget.style.right = 'auto';
+		notesWidget.style.bottom = 'auto';
+		if (persist) saveNotesWidgetState({ left: clampedLeft, top: clampedTop });
+	}
 }
 
 function addNoteEventListeners() {
@@ -352,6 +538,14 @@ function addNoteEventListeners() {
 		});
 	});
 	
+	// Checkbox toggle
+	document.querySelectorAll('.note-checkbox').forEach(checkbox => {
+		checkbox.addEventListener('change', (e) => {
+			const noteId = checkbox.closest('.note-item').dataset.noteId;
+			setNoteCompleted(noteId, e.target.checked);
+		});
+	});
+
 	document.querySelectorAll('.note-textarea').forEach(textarea => {
 		const noteId = textarea.closest('.note-item').dataset.noteId;
 		
@@ -432,6 +626,17 @@ function saveNote(noteId, content) {
 	note.timestamp = new Date().getTime();
 	
 	renderNotesList();
+	saveAllNotes();
+}
+
+function setNoteCompleted(noteId, completed) {
+	const note = notesData.find(n => n.id === noteId);
+	if (!note) return;
+	note.completed = !!completed;
+	// Only re-render display if not editing; editing uses textarea
+	if (!note.isEditing) {
+		renderNotesList();
+	}
 	saveAllNotes();
 }
 
