@@ -30,9 +30,13 @@
       </div>
     </header>
 
-    <!-- Notes Section - Top Right -->
-    <div class="notes-widget">
-      <div class="notes-panel">
+    <!-- Notes Section - Draggable/Collapsible -->
+    <div class="notes-widget" id="notesWidget">
+      <div class="notes-panel" id="notesPanel">
+        <div class="notes-header">
+          <div class="notes-drag-handle" title="Drag notes">Notes</div>
+          <button class="notes-collapse-btn" id="notesCollapseBtn" title="Collapse">▾</button>
+        </div>
         <div class="notes-list" id="notesList">
           <!-- Notes will be dynamically added here -->
         </div>
@@ -42,6 +46,7 @@
           <span class="add-note-text">Add Note</span>
         </button>
       </div>
+      <button class="notes-toggle" id="notesToggle" title="Notes">📝</button>
     </div>
 
     <!-- Main content area -->
