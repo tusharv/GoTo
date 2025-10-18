@@ -63,7 +63,9 @@ function init() {
 			forceNewBgImage();
 		}
 	});
-	
+
+	// Initialize conflicts popup on new tab
+	initConflictsPopup();
 }
 
 function help() {
@@ -83,6 +85,77 @@ function help() {
 		showCursor: false,
 		loop: false
 	});
+}
+
+// Conflicts Popup on New Tab
+function initConflictsPopup(){
+	// Render immediately
+	renderConflictsPopup();
+	// Update on storage changes
+	if (chrome && chrome.storage && chrome.storage.onChanged){
+		chrome.storage.onChanged.addListener((changes, namespace) => {
+			if (namespace === 'local' && changes.keywordConflicts){
+				renderConflictsPopup();
+			}
+		});
+	}
+}
+
+async function getKeywordConflicts(){
+	try{
+		if (!chrome || !chrome.storage || !chrome.storage.local) return [];
+		const { keywordConflicts } = await chrome.storage.local.get(['keywordConflicts']);
+		return Array.isArray(keywordConflicts) ? keywordConflicts : [];
+	}catch(e){
+		return [];
+	}
+}
+
+async function renderConflictsPopup(){
+	const conflicts = await getKeywordConflicts();
+	let popup = document.getElementById('conflictsPopup');
+	if (!conflicts || conflicts.length === 0){
+		if (popup && popup.parentNode) popup.parentNode.removeChild(popup);
+		return;
+	}
+	if (!popup){
+		popup = document.createElement('div');
+		popup.id = 'conflictsPopup';
+		popup.className = 'conflicts-popup';
+		popup.innerHTML = `
+			<div class="conflicts-popup-header">Keyword conflicts detected</div>
+			<div class="conflicts-popup-body">
+				<p>Some of your custom keywords conflict with new defaults. Defaults are used. You can edit or remove your custom items in Options.</p>
+				<ul class="conflicts-popup-list"></ul>
+			</div>
+			<div class="conflicts-popup-actions">
+				<a href="./options.html#custom-keywords" class="conflicts-popup-link">Open Options</a>
+				<button class="conflicts-popup-close" aria-label="Close">Dismiss</button>
+			</div>
+		`;
+		document.body.appendChild(popup);
+		// Close handler
+		popup.querySelector('.conflicts-popup-close').addEventListener('click', () => {
+			if (popup && popup.parentNode) popup.parentNode.removeChild(popup);
+		});
+		// Clicking the link keeps it open by default; no extra handler needed
+	}
+	const list = popup.querySelector('.conflicts-popup-list');
+	if (list){
+		list.innerHTML = conflicts.map(c => `
+			<li>
+				<code>${(c && c.name) ? c.name : ''}</code>
+				<div class="diff-row">
+					<span class="diff-badge default">Default</span>
+					<a class="diff-link" target="_blank" rel="noopener" href="${c && c.defaultUrl ? c.defaultUrl : '#'}">${c && c.defaultUrl ? c.defaultUrl : ''}</a>
+				</div>
+				<div class="diff-row">
+					<span class="diff-badge custom">Custom</span>
+					<a class="diff-link" target="_blank" rel="noopener" href="${c && c.customUrl ? c.customUrl : '#'}">${c && c.customUrl ? c.customUrl : ''}</a>
+				</div>
+			</li>
+		`).join('');
+	}
 }
 
 function onFocusUpdate() {

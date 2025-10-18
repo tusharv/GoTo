@@ -11,13 +11,17 @@ let customKeywords = {};
 		// Load custom keywords
 		const loadedCustomKeywords = await loadCustomKeywords();
 		
-		// Merge configs properly
-		config = { ...baseConfig, ...loadedCustomKeywords };
-		customKeywords = loadedCustomKeywords;
+		// Resolve conflicts so that defaults take precedence
+		const { filteredCustom, conflicts } = await resolveAndStoreConflicts(baseConfig, loadedCustomKeywords);
+		
+		// Merge configs with conflicts removed from custom set
+		config = { ...baseConfig, ...filteredCustom };
+		customKeywords = filteredCustom;
 		
 		// Debug: Log final config
 		console.log('Base config loaded with keys:', Object.keys(baseConfig));
 		console.log('Custom keywords loaded:', Object.keys(loadedCustomKeywords));
+		console.log('Conflicting keywords:', conflicts.map(c => c.name));
 		console.log('Final config loaded with keys:', Object.keys(config));
 	} catch (error) {
 		console.error('Error loading config:', error);
@@ -100,13 +104,17 @@ async function refreshConfig() {
 		// Load custom keywords again
 		const loadedCustomKeywords = await loadCustomKeywords();
 		
+		// Resolve conflicts so that defaults take precedence
+		const { filteredCustom, conflicts } = await resolveAndStoreConflicts(baseConfig, loadedCustomKeywords);
+		
 		// Re-merge with base config
-		config = { ...baseConfig, ...loadedCustomKeywords };
-		customKeywords = loadedCustomKeywords;
+		config = { ...baseConfig, ...filteredCustom };
+		customKeywords = filteredCustom;
 		
 		console.log('Config refreshed with custom keywords');
 		console.log('Final config keys:', Object.keys(config));
 		console.log('Custom keywords merged:', Object.keys(customKeywords));
+		console.log('Conflicting keywords:', conflicts.map(c => c.name));
 	} catch (error) {
 		console.error('Error refreshing config:', error);
 	}
@@ -235,6 +243,34 @@ function updateList(text = ''){
 	}
 
 	return list;
+}
+
+// Compute conflicts between base config and custom keywords, store them,
+// and return the filtered custom keywords (conflicts removed)
+async function resolveAndStoreConflicts(baseConfig, loadedCustomKeywords) {
+	try {
+		const conflicts = [];
+		const filteredCustom = { ...loadedCustomKeywords };
+		for (const name of Object.keys(loadedCustomKeywords)) {
+			if (baseConfig.hasOwnProperty(name)) {
+				conflicts.push({
+					name,
+					defaultUrl: baseConfig[name] && baseConfig[name].default ? baseConfig[name].default : '',
+					customUrl: loadedCustomKeywords[name] && loadedCustomKeywords[name].default ? loadedCustomKeywords[name].default : ''
+				});
+				// Remove conflict from custom so default wins
+				delete filteredCustom[name];
+			}
+		}
+		// Store conflicts for options page to display
+		if (chrome && chrome.storage && chrome.storage.local) {
+			await chrome.storage.local.set({ keywordConflicts: conflicts });
+		}
+		return { filteredCustom, conflicts };
+	} catch (e) {
+		console.error('Error resolving conflicts:', e);
+		return { filteredCustom: loadedCustomKeywords, conflicts: [] };
+	}
 }
 
 // Listen for storage changes to reload custom keywords

@@ -1032,6 +1032,77 @@ section h2 {
     border: 1px solid #e2e8f0;
 }
 
+/* Conflict banner */
+.conflict-banner {
+    margin: 12px 0 16px 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: #742a2a;
+    border: 1px solid #fed7d7;
+}
+.conflict-list {
+    margin: 8px 0 0 0;
+    padding: 0 0 0 16px;
+}
+.conflict-item {
+    margin: 6px 0;
+}
+.conflict-detail {
+    margin-left: 8px;
+    opacity: 0.9;
+}
+.conflict-actions {
+    margin-top: 6px;
+}
+.conflict-actions .conflict-edit,
+.conflict-actions .conflict-remove {
+    margin-right: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+}
+.conflict-actions .conflict-edit {
+    background: #ebf8ff;
+    color: #2b6cb0;
+}
+.conflict-actions .conflict-remove {
+    background: #fff5f5;
+    color: #c53030;
+}
+
+/* Diff presentation and link colors */
+.conflict-diff .diff-row,
+.conflicts-popup .diff-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 4px 0;
+    min-width: 0; /* allow children to shrink for ellipsis */
+}
+.diff-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.diff-badge.default { background: #e6fffa; color: #2c7a7b; }
+.diff-badge.custom { background: #faf5ff; color: #6b46c1; }
+.diff-link { color: #2b6cb0 !important; text-decoration: underline; }
+.diff-link:hover { color: #2c5282 !important; }
+
+/* Prevent long URLs from overflowing the popup */
+.conflicts-popup .diff-link {
+    flex: 1;
+    min-width: 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .custom-keywords-controls {
     margin-bottom: 2rem;
 }
@@ -1814,3 +1885,64 @@ section h2 {
 
 .notes-footer-btn svg { width: 12px; height: 12px; display: block; }
 .notes-footer-btn svg path { fill: #ffffff; }
+
+/* New Tab Conflicts Popup */
+.conflicts-popup {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    z-index: 300;
+    width: 320px;
+    background: #ffffff;
+    color: #1a202c;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+.conflicts-popup-header {
+    background: #fff5f5;
+    color: #9b2c2c;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    border-bottom: 1px solid #fed7d7;
+}
+.conflicts-popup-body {
+    padding: 0.75rem 1rem;
+}
+.conflicts-popup-body p {
+    margin: 0 0 0.5rem 0;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+.conflicts-popup-list {
+    margin: 0.25rem 0 0 1rem;
+}
+.conflicts-popup-list li {
+    margin: 0.25rem 0;
+    color: #2d3748;
+}
+.conflicts-popup-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e2e8f0;
+    background: #f7fafc;
+}
+.conflicts-popup-link {
+    text-decoration: none;
+    background: #667eea;
+    color: #fff !important;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.conflicts-popup-close {
+    background: transparent;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+    padding: 0.4rem 0.65rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
