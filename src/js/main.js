@@ -262,6 +262,7 @@ function initNotesWidget() {
 	const notesToggle = document.getElementById('notesToggle');
 	const notesCollapseBtn = document.getElementById('notesCollapseBtn');
 	const notesDragHandle = document.querySelector('.notes-drag-handle');
+	const notesFooterBtn = document.getElementById('notesFooterBtn');
 	
 	if (!addNoteBtn || !notesWidget || !notesPanel || !notesToggle || !notesCollapseBtn) {
 		return; // Elements not found, skip initialization
@@ -282,8 +283,13 @@ function initNotesWidget() {
 	window.addEventListener('orientationchange', () => clampNotesWithinViewport(true));
 
     // Collapse/expand events
-    notesCollapseBtn.addEventListener('click', () => { setNotesCollapsed(true); clampNotesWithinViewport(true); });
+    notesCollapseBtn.addEventListener('click', () => { setNotesCollapsed(true); /* do not persist/clamp while collapsed */ });
     notesToggle.addEventListener('click', (e) => {
+        // If visible (expanded state uses toggle for dragging), allow expand
+        if (document.getElementById('notesWidget')?.classList.contains('collapsed')) {
+            // ignore clicks when collapsed; footer button controls expand
+            return;
+        }
         if (Date.now() < notesToggleIgnoreClickUntil) {
             e.preventDefault();
             e.stopPropagation();
@@ -292,6 +298,19 @@ function initNotesWidget() {
         setNotesCollapsed(false);
         clampNotesWithinViewport(true);
     });
+
+	if (notesFooterBtn) {
+		notesFooterBtn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const isCollapsed = document.getElementById('notesWidget')?.classList.contains('collapsed');
+			if (isCollapsed) {
+				setNotesCollapsed(false);
+				clampNotesWithinViewport(true);
+			} else {
+				setNotesCollapsed(true);
+			}
+		});
+	}
 	
 	// Initial render
 	renderNotesList();
@@ -352,7 +371,15 @@ function renderNotesList() {
 				` : `
 					<div class="note-content${note.completed ? ' note-completed' : ''}">${note.content || 'Empty note'}</div>
 				`}
-				<button class="note-delete-btn" title="Delete note">×</button>
+				<button class="note-delete-btn" title="Delete note" aria-label="Delete note">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+						<polyline points="3 6 5 6 21 6"></polyline>
+						<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+						<path d="M10 11v6"></path>
+						<path d="M14 11v6"></path>
+						<path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+					</svg>
+				</button>
 			</div>
 			${note.isEditing ? `
 				<div class="note-char-count">
@@ -375,11 +402,37 @@ function setNotesCollapsed(collapsed) {
 	const notesWidget = document.getElementById('notesWidget');
 	if (!notesWidget) return;
 	if (collapsed) {
+		// Save current expanded position
+		let left = parseInt(notesWidget.style.left || '0', 10) || 0;
+		let top = parseInt(notesWidget.style.top || '0', 10) || 0;
+		if (!left && !top) {
+			const rect = notesWidget.getBoundingClientRect();
+			left = rect.left;
+			top = rect.top;
+		}
+		saveNotesWidgetState({ left, top, collapsed: true });
+		// Move to footer area near Options/Feedback (left side)
 		notesWidget.classList.add('collapsed');
+		notesWidget.style.right = 'auto';
+		notesWidget.style.top = 'auto';
+		notesWidget.style.left = '2rem';
+		notesWidget.style.bottom = '0.9rem';
 	} else {
 		notesWidget.classList.remove('collapsed');
+		// Restore last saved expanded position
+		let saved = {};
+		try {
+			const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
+			if (raw) saved = JSON.parse(raw) || {};
+		} catch (e) {}
+		if (typeof saved.left === 'number' && typeof saved.top === 'number') {
+			notesWidget.style.left = saved.left + 'px';
+			notesWidget.style.top = saved.top + 'px';
+			notesWidget.style.right = 'auto';
+			notesWidget.style.bottom = 'auto';
+		}
+		saveNotesWidgetState({ collapsed: false });
 	}
-	saveNotesWidgetState({ collapsed });
 }
 
 function applySavedNotesWidgetState() {
@@ -392,15 +445,24 @@ function applySavedNotesWidgetState() {
 	} catch (e) {
 		// ignore
 	}
-	if (saved.collapsed) notesWidget.classList.add('collapsed');
-	if (typeof saved.left === 'number' && typeof saved.top === 'number') {
-		// Switch to absolute position when a custom position exists
-		notesWidget.style.left = saved.left + 'px';
-		notesWidget.style.top = saved.top + 'px';
+	if (saved.collapsed) {
+		notesWidget.classList.add('collapsed');
+		// Anchor to footer near Options/Feedback on load
 		notesWidget.style.right = 'auto';
-		notesWidget.style.bottom = 'auto';
+		notesWidget.style.top = 'auto';
+		notesWidget.style.left = '2rem';
+		notesWidget.style.bottom = '0.9rem';
+	} else {
+		notesWidget.classList.remove('collapsed');
+		if (typeof saved.left === 'number' && typeof saved.top === 'number') {
+			// Switch to absolute position when a custom position exists
+			notesWidget.style.left = saved.left + 'px';
+			notesWidget.style.top = saved.top + 'px';
+			notesWidget.style.right = 'auto';
+			notesWidget.style.bottom = 'auto';
+		}
 	}
-	// Clamp to viewport after applying saved state
+	// Clamp to viewport after applying saved state (only meaningful when expanded)
 	clampNotesWithinViewport(true);
 }
 
@@ -479,6 +541,10 @@ function initNotesDrag(notesWidget, dragHandle, toggleButton) {
             // Suppress click on toggle for a short time after drag end
             notesToggleIgnoreClickUntil = Date.now() + 250;
         }
+        // Persist explicitly in case clamp didn't change anything
+        const left = parseInt(notesWidget.style.left || '0', 10) || 0;
+        const top = parseInt(notesWidget.style.top || '0', 10) || 0;
+        saveNotesWidgetState({ left, top });
 	}
 
 	dragHandle.addEventListener('mousedown', onPointerDown);
@@ -495,6 +561,7 @@ function initNotesDrag(notesWidget, dragHandle, toggleButton) {
 function clampNotesWithinViewport(persist = true) {
 	const notesWidget = document.getElementById('notesWidget');
 	if (!notesWidget) return;
+    if (notesWidget.classList.contains('collapsed')) return; // don't modify or persist positions while collapsed
 	const computed = getComputedStyle(notesWidget);
 	if (computed.position !== 'fixed') return; // respect mobile relative layout
 
@@ -518,8 +585,9 @@ function clampNotesWithinViewport(persist = true) {
 		notesWidget.style.top = clampedTop + 'px';
 		notesWidget.style.right = 'auto';
 		notesWidget.style.bottom = 'auto';
-		if (persist) saveNotesWidgetState({ left: clampedLeft, top: clampedTop });
 	}
+	// Always persist current position when requested
+	if (persist) saveNotesWidgetState({ left: clampedLeft, top: clampedTop });
 }
 
 function addNoteEventListeners() {
