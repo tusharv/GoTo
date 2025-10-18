@@ -17,7 +17,6 @@ let config = {};
 })();
 
 let tableContainner;
-let popularKeywordsContainer;
 let searchInput;
 let queriesListContainer;
 let newQueryInput;
@@ -34,19 +33,7 @@ let newDescriptionInput;
 let addCustomKeywordBtn;
 let resetCustomKeywordsBtn;
 
-// Popular keywords for quick access
-const popularKeywords = [
-	{ name: 'git', desc: 'GitHub search' },
-	{ name: 'youtube', desc: 'YouTube videos' },
-	{ name: 'gmail', desc: 'Gmail search' },
-	{ name: 'drive', desc: 'Google Drive' },
-	{ name: 'map', desc: 'Google Maps' },
-	{ name: 'amazon', desc: 'Amazon shopping' },
-	{ name: 'flipkart', desc: 'Flipkart shopping' },
-	{ name: 'imdb', desc: 'IMDb movies' },
-	{ name: 'bing', desc: 'Bing search' },
-	{ name: 'ud', desc: 'Urban Dictionary' }
-];
+// Popular keywords UI removed
 
 // Default Unsplash queries
 const DEFAULT_UNSPLASH_QUERIES = ['nature', 'animals', 'landscape', 'minimalist', 'abstract', 'architecture'];
@@ -55,7 +42,7 @@ const DEFAULT_UNSPLASH_QUERIES = ['nature', 'animals', 'landscape', 'minimalist'
 
 function init(){
 	tableContainner = document.getElementById('list');
-	popularKeywordsContainer = document.getElementById('popular-keywords');
+	// removed: popularKeywordsContainer
 	searchInput = document.getElementById('keyword-search');
 	queriesListContainer = document.getElementById('queries-list');
 	newQueryInput = document.getElementById('new-query-input');
@@ -72,8 +59,7 @@ function init(){
 	addCustomKeywordBtn = document.getElementById('add-keyword-btn');
 	resetCustomKeywordsBtn = document.getElementById('reset-custom-keywords-btn');
 
-	// Populate popular keywords
-	populatePopularKeywords();
+	// Removed: populatePopularKeywords()
 	
 	// Populate main table
 	populateKeywordsTable();
@@ -96,50 +82,7 @@ function init(){
 	initNavigation();
 }
 
-function populatePopularKeywords() {
-	if (!popularKeywordsContainer) return;
-	
-	popularKeywordsContainer.innerHTML = '';
-	
-	// Add default popular keywords
-	popularKeywords.forEach(keyword => {
-		const keywordCard = document.createElement('div');
-		keywordCard.className = 'keyword-card';
-		keywordCard.innerHTML = `
-			<div class="keyword-name">${keyword.name}</div>
-			<div class="keyword-desc">${keyword.desc}</div>
-		`;
-		
-		// Add click functionality to copy to clipboard
-		keywordCard.addEventListener('click', () => {
-			copyToClipboard(`goto ${keyword.name} `);
-			showCopyFeedback(keywordCard);
-		});
-		
-		popularKeywordsContainer.appendChild(keywordCard);
-	});
-	
-	// Add custom keywords to popular section (limit to first 5)
-	const customKeywords = getCustomKeywords();
-	const customKeywordsToShow = customKeywords.slice(0, 5);
-	
-	customKeywordsToShow.forEach(keyword => {
-		const keywordCard = document.createElement('div');
-		keywordCard.className = 'keyword-card custom-keyword-card';
-		keywordCard.innerHTML = `
-			<div class="keyword-name">${keyword.name}</div>
-			<div class="keyword-desc">${keyword.description || 'Custom keyword'}</div>
-		`;
-		
-		// Add click functionality to copy to clipboard
-		keywordCard.addEventListener('click', () => {
-			copyToClipboard(`goto ${keyword.name} `);
-			showCopyFeedback(keywordCard);
-		});
-		
-		popularKeywordsContainer.appendChild(keywordCard);
-	});
-}
+// Removed: populatePopularKeywords()
 
 function populateKeywordsTable() {
 	if (!tableContainner) return;
@@ -713,10 +656,8 @@ async function addNewCustomKeyword() {
 	newSearchParamInput.value = '';
 	newDescriptionInput.value = '';
 	
-	// Update main keywords table and popular keywords
+	// Update main keywords table
 	populateKeywordsTable();
-	populatePopularKeywords();
-	
 	showNotification('Custom keyword added successfully!', 'success');
 }
 
@@ -739,7 +680,6 @@ async function editCustomKeyword(index) {
 	
 	// Update main keywords table and popular keywords
 	populateKeywordsTable();
-	populatePopularKeywords();
 	
 	showNotification('Keyword loaded for editing. Make changes and click Add Keyword.', 'info');
 }
@@ -753,8 +693,7 @@ async function deleteCustomKeyword(index) {
 			displayCustomKeywords(customKeywords);
 			
 			// Update main keywords table and popular keywords
-			populateKeywordsTable();
-			populatePopularKeywords();
+	populateKeywordsTable();
 			
 			showNotification('Custom keyword deleted successfully!', 'success');
 		}
@@ -765,10 +704,8 @@ async function resetCustomKeywords() {
 	if (confirm('Are you sure you want to clear all custom keywords? This action cannot be undone.')) {
 		await saveCustomKeywords([]);
 		displayCustomKeywords([]);
-		
-		// Update main keywords table and popular keywords
+		// Update main keywords table
 		populateKeywordsTable();
-		populatePopularKeywords();
 		
 		showNotification('All custom keywords cleared successfully!', 'success');
 	}
