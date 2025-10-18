@@ -126,6 +126,32 @@ GoTo is available on [Chrome Web Store](https://chrome.google.com/webstore/detai
 1. Clone this repo
 ```git clone https://github.com/tusharv/GoTo```
 
+## Testing (E2E)
+
+This repo includes Playwright end-to-end tests that load the extension and verify key flows.
+
+Prereqs: Node 18+ (or 20+) installed.
+
+Install and run:
+
+```bash
+npm install
+npm run test:install
+npm test
+```
+
+Useful variants:
+
+```bash
+# Headed (visible browser)
+npm run test:headed
+
+# Playwright UI mode
+npm run test:ui
+```
+
+CI runs these in GitHub Actions via `xvfb-run` to support headed Chromium.
+
 2. Add `secret.js` in your `src/js`
 ```JavaScript
 var secret = {

@@ -4,7 +4,10 @@
   "description": "GoTo and Search popular sites from your NewTab",
   "main": "src/js/background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:install": "playwright install chromium"
   },
   "repository": {
     "type": "git",
@@ -21,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/tusharv/GoTo/issues"
   },
-  "homepage": "https://github.com/tusharv/GoTo#readme"
+  "homepage": "https://github.com/tusharv/GoTo#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.47.2"
+  }
 }
