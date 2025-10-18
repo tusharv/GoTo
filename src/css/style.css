@@ -838,7 +838,7 @@ section h2 {
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .options-footer .footer-link {
@@ -1356,7 +1356,7 @@ section h2 {
 
 .notes-panel {
     width: 240px;
-    max-height: 320px;
+    max-height: 65vh;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -1366,6 +1366,9 @@ section h2 {
     padding: 0.5rem;
     opacity: 1;
     visibility: visible;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* Collapsed/expanded control */
@@ -1373,27 +1376,59 @@ section h2 {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     color: #FFFFFF;
     cursor: pointer;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    font-size: 14px;
     line-height: 1;
     user-select: none;
 }
 
+.notes-widget .notes-toggle svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+.notes-widget .notes-toggle svg path { fill: #ffffff; }
+
+.notes-widget .notes-toggle:hover { background: rgba(255, 255, 255, 0.24); }
+
+/* Remove any leftover pseudo-element icon */
+.notes-widget .notes-toggle::before { content: none; }
+
+/* Remove quick-add styles; single icon only */
+.notes-quick-add { display: none !important; }
+
 .notes-widget.collapsed { width: 240px; height: 36px; position: fixed; }
 .notes-widget.collapsed .notes-panel { display: none; }
-.notes-widget.collapsed .notes-toggle { display: inline-flex; }
+.notes-widget.collapsed .notes-toggle { display: none; }
+
+/* Anchor collapsed widget near footer (left side near Options/Feedback) */
+.notes-widget.collapsed {
+    left: 2rem;
+    right: auto;
+    bottom: 0.9rem;
+}
+
+/* Ensure collapsed widget does not block footer links */
+.notes-widget.collapsed {
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Subtle divider between notes */
+.notes-list .note-item + .note-item { box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.08) inset; }
 
 .notes-header {
     display: flex;
@@ -1419,12 +1454,24 @@ section h2 {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.notes-drag-handle::before {
+    content: '\2261';
+    margin-right: 0.5rem;
+    opacity: 0.6;
+    font-size: 0.95rem;
+}
+
+.notes-drag-handle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
 .notes-collapse-btn {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     color: #FFFFFF;
     cursor: pointer;
     display: inline-flex;
@@ -1433,7 +1480,12 @@ section h2 {
     font-size: 14px;
     line-height: 1;
     user-select: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
+
+.notes-collapse-btn:hover { background: rgba(255, 255, 255, 0.24); border-color: rgba(255, 255, 255, 0.35); }
 
 .notes-collapse-btn:hover {
     background: rgba(255, 255, 255, 0.15);
@@ -1444,13 +1496,19 @@ section h2 {
     outline: none;
 }
 
+.notes-toggle:focus-visible,
+.notes-collapse-btn:focus-visible,
+.add-note-btn:focus-visible {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
 .add-note-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06));
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 20px;
     padding: 0.5rem;
@@ -1481,7 +1539,8 @@ section h2 {
 }
 
 .notes-list {
-    max-height: 240px;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
     padding: 0;
 }
@@ -1515,26 +1574,58 @@ section h2 {
     position: relative;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 0.6rem;
-    margin-bottom: 0.6rem;
+    border-radius: 16px;
+    padding: 0.5rem 0.55rem;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
-    min-height: 44px;
+    min-height: 40px;
     display: flex;
     flex-direction: column;
 }
 
 .note-row {
     display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.45rem;
 }
 
 .note-checkbox {
-    margin-top: 0.2rem;
-    width: 16px;
-    height: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
     cursor: pointer;
+    position: relative;
+    display: inline-block;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-checkbox:checked {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.55), rgba(102, 126, 234, 0.35));
+    border-color: rgba(102, 126, 234, 0.9);
+}
+
+.note-checkbox:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.note-checkbox:focus-visible {
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.6);
+}
+
+.note-checkbox:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .note-item:hover {
@@ -1573,7 +1664,7 @@ section h2 {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     min-height: 1.2rem;
     flex-grow: 1;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0;
 }
 
 .note-completed {
@@ -1586,6 +1677,7 @@ section h2 {
 }
 
 .note-timestamp {
+    display: none;
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.4);
     font-family: 'Share Tech Mono', monospace;
@@ -1616,14 +1708,14 @@ section h2 {
 
 .note-delete-btn {
     position: absolute;
-    top: 0.6rem;
+    top: 0.5rem;
     right: 0.6rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    color: rgba(255, 255, 255, 0.6);
+    width: 28px;
+    height: 28px;
+    color: #FFFFFF;
     cursor: pointer;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -1631,7 +1723,7 @@ section h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 400;
     opacity: 0;
 }
@@ -1641,12 +1733,14 @@ section h2 {
 }
 
 .note-delete-btn:hover {
-    background: rgba(239, 68, 68, 0.3);
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #ef4444;
+    background: rgba(239, 68, 68, 0.6);
+    border-color: rgba(239, 68, 68, 0.8);
+    color: #FFFFFF;
     transform: scale(1.05);
 }
 
+.note-delete-btn svg { width: 14px; height: 14px; display: block; }
+.note-delete-btn:focus-visible { box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.65); }
 
 
 /* Mobile Responsive Design */
@@ -1687,6 +1781,7 @@ section h2 {
 
     .notes-widget.collapsed { width: auto; height: auto; }
     .notes-toggle { position: static; width: fit-content; height: auto; }
+    .notes-quick-add { position: static; width: fit-content; height: auto; }
 
     /* Always show delete button on mobile since there's no hover */
     .note-delete-btn {
@@ -1780,3 +1875,14 @@ section h2 {
     outline: 1px solid rgba(255, 255, 255, 0.3);
     outline-offset: 1px;
 }
+
+/* Make the Notes footer button behave like a link button */
+.notes-footer-btn {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.notes-footer-btn svg { width: 12px; height: 12px; display: block; }
+.notes-footer-btn svg path { fill: #ffffff; }
