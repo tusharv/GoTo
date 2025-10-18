@@ -32,6 +32,7 @@ let newSearchParamInput;
 let newDescriptionInput;
 let addCustomKeywordBtn;
 let resetCustomKeywordsBtn;
+let conflictBannerContainer;
 
 // Popular keywords UI removed
 
@@ -58,6 +59,7 @@ function init(){
 	newDescriptionInput = document.getElementById('new-description-input');
 	addCustomKeywordBtn = document.getElementById('add-keyword-btn');
 	resetCustomKeywordsBtn = document.getElementById('reset-custom-keywords-btn');
+	conflictBannerContainer = document.getElementById('conflict-banner-container');
 
 	// Removed: populatePopularKeywords()
 	
@@ -66,6 +68,9 @@ function init(){
 	
 	// Initialize custom keywords management
 	initCustomKeywords();
+	
+	// Initialize conflict banner
+	initConflictBanner();
 	
 	// Initialize Unsplash queries management
 	initUnsplashQueries();
@@ -549,6 +554,123 @@ function initCustomKeywords() {
 			});
 		}
 	});
+}
+
+// Conflicts UI
+function initConflictBanner(){
+	if (!conflictBannerContainer) return;
+	// initial render
+	renderConflictBanner();
+	// listen to storage changes to update
+	if (chrome && chrome.storage && chrome.storage.onChanged) {
+		chrome.storage.onChanged.addListener((changes, namespace) => {
+			if (namespace === 'local' && changes.keywordConflicts) {
+				renderConflictBanner();
+			}
+		});
+	}
+}
+
+async function getStoredConflicts(){
+	try{
+		if (!chrome || !chrome.storage || !chrome.storage.local) return [];
+		const { keywordConflicts } = await chrome.storage.local.get(['keywordConflicts']);
+		return Array.isArray(keywordConflicts) ? keywordConflicts : [];
+	}catch(e){
+		console.error('Error getting conflicts:', e);
+		return [];
+	}
+}
+
+async function renderConflictBanner(){
+	const conflicts = await getStoredConflicts();
+	if (!conflictBannerContainer) return;
+	if (!conflicts || conflicts.length === 0){
+		conflictBannerContainer.innerHTML = '';
+		return;
+	}
+	const items = conflicts.map(c => `
+		<li class="conflict-item">
+			<span class="conflict-name"><code>${c.name}</code></span>
+			<div class="conflict-diff">
+				<div class="diff-row"><span class="diff-badge default">Default</span><a class="diff-link" href="${c.defaultUrl}" target="_blank" rel="noopener">${c.defaultUrl}</a></div>
+				<div class="diff-row"><span class="diff-badge custom">Custom</span><a class="diff-link" href="${c.customUrl}" target="_blank" rel="noopener">${c.customUrl}</a></div>
+			</div>
+			<div class="conflict-actions">
+				<button class="conflict-edit" data-name="${c.name}">Edit Custom</button>
+				<button class="conflict-remove" data-name="${c.name}">Remove Custom</button>
+			</div>
+		</li>
+	`).join('');
+	conflictBannerContainer.innerHTML = `
+		<div class="conflict-banner">
+			<strong>Keyword conflict detected:</strong> Some custom keywords conflict with new defaults. Defaults are active; you can edit or remove your custom items below.
+			<ul class="conflict-list">${items}</ul>
+		</div>
+	`;
+	bindConflictActionHandlers();
+}
+
+function bindConflictActionHandlers(){
+	if (!conflictBannerContainer) return;
+	const editButtons = conflictBannerContainer.querySelectorAll('.conflict-edit');
+	const removeButtons = conflictBannerContainer.querySelectorAll('.conflict-remove');
+	editButtons.forEach(btn => btn.addEventListener('click', () => onEditConflict(btn.dataset.name)));
+	removeButtons.forEach(btn => btn.addEventListener('click', () => onRemoveConflict(btn.dataset.name)));
+}
+
+function onEditConflict(name){
+	// load custom list and find the removed conflict (it was filtered from runtime, but still stored)
+	const custom = getCustomKeywords();
+	const item = custom.find(k => k.name === name);
+	if (!item){
+		showNotification('Custom keyword not found. It may have been removed.', 'error');
+		return;
+	}
+	newKeywordInput.value = item.name;
+	newUrlInput.value = item.url;
+	newSearchParamInput.value = item.searchParam || '';
+	newDescriptionInput.value = item.description || '';
+	showNotification('Loaded conflicting keyword for editing. Update the name to resolve.', 'info');
+}
+
+async function onRemoveConflict(name){
+	const list = getCustomKeywords();
+	const idx = list.findIndex(k => k.name === name);
+	if (idx === -1){
+		showNotification('Custom keyword not found. It may have been removed.', 'error');
+		return;
+	}
+	list.splice(idx,1);
+	await saveCustomKeywords(list);
+	await clearSingleConflict(name);
+	// Update UI sections
+	displayCustomKeywords(list);
+	populateKeywordsTable();
+	await requestRefresh();
+	await renderConflictBanner();
+	showNotification('Removed custom keyword that conflicted with default.', 'success');
+}
+
+async function clearSingleConflict(name){
+	try{
+		if (!chrome || !chrome.storage || !chrome.storage.local) return;
+		const { keywordConflicts } = await chrome.storage.local.get(['keywordConflicts']);
+		const updated = (keywordConflicts || []).filter(c => c.name !== name);
+		await chrome.storage.local.set({ keywordConflicts: updated });
+	}catch(e){
+		console.error('Error clearing conflict:', e);
+	}
+}
+
+async function requestRefresh(){
+	try{
+		if (chrome && chrome.runtime && chrome.runtime.sendMessage){
+			await chrome.runtime.sendMessage({ action: 'refreshConfig' });
+		}
+	}catch(e){
+		// ignore
+	}
 }
 
 function loadAndDisplayCustomKeywords() {
