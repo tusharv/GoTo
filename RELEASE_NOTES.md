@@ -1,5 +1,48 @@
 # GoTo Extension - Release Notes
 
+## Version 1.0.3 - Version Bump & Contributors Update
+
+**Release Date:** October 2025
+
+### ✨ What's New
+
+- **Notes**: A lightweight Notes widget on the New Tab page
+  - Add, edit, complete, and delete notes
+  - Draggable panel with snap-back and viewport clamping
+  - Collapsible with persistent state; quick toggle via footer button
+  - Local-only storage (no sync/server), supports up to 50 notes
+  - Character counter with soft/limit thresholds
+- **Calendar Shortcut**: Added `cal` keyword to open Google Calendar; supports searching via `goto cal {query}`
+
+### 🧾 Documentation & Metadata
+
+- **Version Update**: Bumped extension version to `1.0.3` in `src/manifest.json`
+- **Package Metadata**: Updated `package.json` version to `1.0.3`
+- **Contributors (README.md)**:
+  - Added `Iqra Khan` with Code and Research contributions
+  - Added Code contribution link for `Vaibhav Jain`
+  - Fixed duplicate contribution entry for `KIRAN SATDIVE`
+- **all-contributors**: Synced `.all-contributorsrc` to reflect the above changes
+
+### 🎯 Impact
+
+- Minor feature additions and UI/UX improvements
+- Backward compatible; no migrations required
+
+### 🎨 UI & UX
+
+- Refined Options and New Tab layouts, spacing, and affordances
+- Improved wallpaper refresh behavior and helpful console messages
+- Better empty states and focus management in Notes
+
+### ✅ Changes since f9bc0207fb97fee224c03ebb8b4c5c4d277ef3b1
+
+- Added Notes widget with drag/collapse, local storage, and completion support
+- Introduced `cal` keyword for Google Calendar (with query support)
+- UI fixes: responsive footer link, text overlap/outline corrections, duplicate class cleanup
+
+---
+
 ## Version 1.0.1 - Code Cleanup & Debug Removal
 
 **Release Date:** December 2024

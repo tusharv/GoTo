@@ -602,79 +602,7 @@ section h2 {
     font-size: 0.9rem;
 }
 
-/* Features section */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.feature-card {
-    background: #f7fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.feature-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #2d3748;
-}
-
-.feature-card p {
-    margin: 0;
-    color: #4a5568;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-/* Keywords section */
-.keywords-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.keyword-card {
-    background: #f7fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.keyword-card:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-2px);
-}
-
-.keyword-name {
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.keyword-desc {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
+/* Features and Keywords sections removed */
 
 /* Table section */
 .table-container {
@@ -838,7 +766,7 @@ section h2 {
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .options-footer .footer-link {
@@ -1349,23 +1277,157 @@ section h2 {
 /* Notes Widget Styles */
 .notes-widget {
     position: fixed;
-    top: 2rem;
-    right: 2rem;
+    bottom: 5rem;
+    right: 1.5rem;
     z-index: 200;
 }
 
 .notes-panel {
-    width: 280px;
-    max-height: 450px;
+    width: 240px;
+    max-height: 65vh;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    padding: 0.75rem;
+    padding: 0.5rem;
     opacity: 1;
     visibility: visible;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Collapsed/expanded control */
+.notes-widget .notes-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #FFFFFF;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    line-height: 1;
+    user-select: none;
+}
+
+.notes-widget .notes-toggle svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+.notes-widget .notes-toggle svg path { fill: #ffffff; }
+
+.notes-widget .notes-toggle:hover { background: rgba(255, 255, 255, 0.24); }
+
+/* Remove any leftover pseudo-element icon */
+.notes-widget .notes-toggle::before { content: none; }
+
+/* Remove quick-add styles; single icon only */
+.notes-quick-add { display: none !important; }
+
+.notes-widget.collapsed { width: 240px; height: 36px; position: fixed; }
+.notes-widget.collapsed .notes-panel { display: none; }
+.notes-widget.collapsed .notes-toggle { display: none; }
+
+/* Anchor collapsed widget near footer (left side near Options/Feedback) */
+.notes-widget.collapsed {
+    left: 2rem;
+    right: auto;
+    bottom: 0.9rem;
+}
+
+/* Ensure collapsed widget does not block footer links */
+.notes-widget.collapsed {
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Subtle divider between notes */
+.notes-list .note-item + .note-item { box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.08) inset; }
+
+.notes-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.notes-drag-handle {
+    flex: 1;
+    height: 36px;
+    margin-right: 0.25rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    cursor: move;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.notes-drag-handle::before {
+    content: '\2261';
+    margin-right: 0.5rem;
+    opacity: 0.6;
+    font-size: 0.95rem;
+}
+
+.notes-drag-handle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.notes-collapse-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    user-select: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.notes-collapse-btn:hover { background: rgba(255, 255, 255, 0.24); border-color: rgba(255, 255, 255, 0.35); }
+
+.notes-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.notes-toggle:focus,
+.notes-collapse-btn:focus {
+    outline: none;
+}
+
+.notes-toggle:focus-visible,
+.notes-collapse-btn:focus-visible,
+.add-note-btn:focus-visible {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
 }
 
 .add-note-btn {
@@ -1374,16 +1436,16 @@ section h2 {
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06));
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 25px;
-    padding: 0.75rem;
+    border-radius: 20px;
+    padding: 0.5rem;
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
     margin-top: 0.5rem;
 }
@@ -1405,7 +1467,8 @@ section h2 {
 }
 
 .notes-list {
-    max-height: 350px;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
     padding: 0;
 }
@@ -1439,13 +1502,58 @@ section h2 {
     position: relative;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 0.85rem;
-    margin-bottom: 0.6rem;
+    border-radius: 16px;
+    padding: 0.5rem 0.55rem;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
-    min-height: 60px;
+    min-height: 40px;
     display: flex;
     flex-direction: column;
+}
+
+.note-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.note-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-checkbox:checked {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.55), rgba(102, 126, 234, 0.35));
+    border-color: rgba(102, 126, 234, 0.9);
+}
+
+.note-checkbox:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.note-checkbox:focus-visible {
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.6);
+}
+
+.note-checkbox:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .note-item:hover {
@@ -1467,6 +1575,7 @@ section h2 {
     resize: none;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     flex-grow: 1;
+    padding: 0.5rem 0.6rem;
 }
 
 .note-textarea::placeholder {
@@ -1476,14 +1585,19 @@ section h2 {
 
 .note-content {
     color: #FFFFFF;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     line-height: 1.4;
     cursor: pointer;
     word-wrap: break-word;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     min-height: 1.2rem;
     flex-grow: 1;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0;
+}
+
+.note-completed {
+    text-decoration: line-through;
+    opacity: 0.7;
 }
 
 .note-content:hover {
@@ -1491,6 +1605,7 @@ section h2 {
 }
 
 .note-timestamp {
+    display: none;
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.4);
     font-family: 'Share Tech Mono', monospace;
@@ -1521,14 +1636,14 @@ section h2 {
 
 .note-delete-btn {
     position: absolute;
-    top: 0.6rem;
+    top: 0.5rem;
     right: 0.6rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    color: rgba(255, 255, 255, 0.6);
+    width: 28px;
+    height: 28px;
+    color: #FFFFFF;
     cursor: pointer;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -1536,7 +1651,7 @@ section h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 400;
     opacity: 0;
 }
@@ -1546,25 +1661,27 @@ section h2 {
 }
 
 .note-delete-btn:hover {
-    background: rgba(239, 68, 68, 0.3);
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #ef4444;
+    background: rgba(239, 68, 68, 0.6);
+    border-color: rgba(239, 68, 68, 0.8);
+    color: #FFFFFF;
     transform: scale(1.05);
 }
 
+.note-delete-btn svg { width: 14px; height: 14px; display: block; }
+.note-delete-btn:focus-visible { box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.65); }
 
 
 /* Mobile Responsive Design */
 @media (max-width: 1200px) {
     .notes-widget {
-        top: 12rem;
+        bottom: 6rem;
         right: 1.5rem;
     }
 }
 
 @media (max-width: 900px) {
     .notes-widget {
-        top: 14rem;
+        bottom: 6rem;
         right: 1.5rem;
     }
 }
@@ -1590,9 +1707,9 @@ section h2 {
         margin-top: 0.5rem;
     }
 
-    .notes-toggle {
-        width: fit-content;
-    }
+    .notes-widget.collapsed { width: auto; height: auto; }
+    .notes-toggle { position: static; width: fit-content; height: auto; }
+    .notes-quick-add { position: static; width: fit-content; height: auto; }
 
     /* Always show delete button on mobile since there's no hover */
     .note-delete-btn {
@@ -1686,3 +1803,14 @@ section h2 {
     outline: 1px solid rgba(255, 255, 255, 0.3);
     outline-offset: 1px;
 }
+
+/* Make the Notes footer button behave like a link button */
+.notes-footer-btn {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.notes-footer-btn svg { width: 12px; height: 12px; display: block; }
+.notes-footer-btn svg path { fill: #ffffff; }

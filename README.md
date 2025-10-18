@@ -13,6 +13,12 @@ GoTo is not storing or using your data. It searches sites publicly or by using y
 
 [![Install](https://raw.githubusercontent.com/tusharv/QRHost/master/screenshots/store_badge.png)](https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd)
 
+## New in v1.0.3
+
+- Notes widget on New Tab: add/edit/delete, complete, drag, and collapse
+- `cal` shortcut for Google Calendar with query support (e.g., `goto cal meeting`)
+- UI and UX refinements across Options and New Tab
+
 ## Why?
 
 Traditional searching is a two-step process for GMail, Drive, GitHub and many more sites. Using this tool you can reduce 1 step and search a number of sites directly from your Chrome omnibox.
@@ -82,7 +88,7 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | stack | <https://stackoverflow.com/> | goto stack HTML5 |
 | stackoverflow | <https://stackoverflow.com/> | goto stackoverflow |
 |leet | <https://leetcode.com/> | goto leetcode |
-|cal | <https://calendar.google.com/> | goto calendar |
+|cal | <https://calendar.google.com/> | goto cal meeting |
 |calendar | <https://calendar.google.com/> | goto calendar |
 | tax | <https://www.incometaxindiaefiling.gov.in/> | goto tax |
 | trello | <https://trello.com/> | goto trello Anirudh |
@@ -169,7 +175,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://vadimdez.github.io"><img src="https://avatars2.githubusercontent.com/u/3748453?v=4?s=100" width="100px;" alt="Vadym Yatsyuk"/><br /><sub><b>Vadym Yatsyuk</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=VadimDez" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://dps910.xyz"><img src="https://avatars0.githubusercontent.com/u/42849369?v=4?s=100" width="100px;" alt="dps"/><br /><sub><b>dps</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=dps910" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://amenya.is-a.dev"><img src="https://avatars.githubusercontent.com/u/133534815?v=4?s=100" width="100px;" alt="Amenya"/><br /><sub><b>Amenya</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=aspects19" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/kiran-satdive-974559211"><img src="https://avatars.githubusercontent.com/u/98806225?v=4?s=100" width="100px;" alt="KIRAN SATDIVE"/><br /><sub><b>KIRAN SATDIVE</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Code">💻</a> <a href="https://github.com/tusharv/GoTo/issues?q=author%3Akiransatdive" title="Bug reports">🐛</a> <a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Tests">⚠️</a> <a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/kiran-satdive-974559211"><img src="https://avatars.githubusercontent.com/u/98806225?v=4?s=100" width="100px;" alt="KIRAN SATDIVE"/><br /><sub><b>KIRAN SATDIVE</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/issues?q=author%3Akiransatdive" title="Bug reports">🐛</a> <a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Tests">⚠️</a> <a href="https://github.com/tusharv/GoTo/commits?author=kiransatdive" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tusharv"><img src="https://avatars.githubusercontent.com/u/358703?v=4?s=100" width="100px;" alt="Tushar"/><br /><sub><b>Tushar</b></sub></a><br /><a href="#infra-tusharv" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/tusharv/GoTo/commits?author=tusharv" title="Tests">⚠️</a> <a href="https://github.com/tusharv/GoTo/issues?q=author%3Atusharv" title="Bug reports">🐛</a> <a href="https://github.com/tusharv/GoTo/commits?author=tusharv" title="Code">💻</a></td>
     </tr>
     <tr>

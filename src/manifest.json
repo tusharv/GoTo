@@ -2,16 +2,18 @@
   "name": "GoTo",
   "short_name" : "GoTo",
   "description": "GoTo and Search popular sites from your NewTab",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "background": {
     "service_worker": "js/background.js"
   },
   "omnibox": { "keyword" : "goto" },
   "incognito": "split",
+  "chrome_url_overrides": {
+    "newtab": "page/new.html"
+  },
   "options_page": "page/options.html",
   "permissions": [
-    "storage",
-    "tabs"
+    "storage"
   ],
   "action": {
     "default_icon": {

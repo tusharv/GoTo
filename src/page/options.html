@@ -9,6 +9,7 @@
 </head>
 
 <body class="options">
+    <!-- Header Section -->
     <header class="options-header">
         <div class="header-content">
             <div class="logo-section">
@@ -21,9 +22,6 @@
             <div class="header-actions">
                 <nav class="page-navigation">
                     <a href="#guide" class="nav-link">Guide</a>
-                    <a href="#settings" class="nav-link">Settings</a>
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#keywords" class="nav-link">Keywords</a>
                     <a href="#custom-keywords" class="nav-link">Custom</a>
                     <a href="#all-keywords" class="nav-link">All Keywords</a>
                     <a href="#backgrounds" class="nav-link">Backgrounds</a>
@@ -37,33 +35,185 @@
         </div>
     </header>
 
-    <div id="disabled-banner" style="display: none;">
-        <p>The custom new tab page is currently disabled. New tabs will show the browser's default page.</p>
-    </div>
-
+    <!-- Main Content -->
     <main class="options-main">
+        <!-- Usage Guide Section -->
         <section id="guide" class="guide-section">
             <h2>🚀 How to Use GoTo</h2>
-            </section>
-
-        <section id="settings" class="settings-section">
-            <h2>⚙️ General Settings</h2>
-            <div class="setting-item">
-                <div class="setting-info">
-                    <h3>Enable Custom New Tab Page</h3>
-                    <p>When enabled, GoTo will open as your new tab. Disable this to see Chrome's default new tab page.</p>
+            <div class="guide-content">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Open the Extension</h3>
+                        <p>Click on the GoTo extension icon in your browser toolbar or open a new tab to access the search interface.</p>
+                    </div>
                 </div>
-                <div class="setting-control">
-                    <label class="switch">
-                        <input type="checkbox" id="newTabToggle">
-                        <span class="slider round"></span>
-                    </label>
+                
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Type Your Command</h3>
+                        <p>Type <code>goto</code> followed by a keyword and your search term. For example:</p>
+                        <div class="example-box">
+                            <code>goto git react hooks</code>
+                            <span class="example-result">→ Opens GitHub search for "react hooks"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Press Enter</h3>
+                        <p>Press Enter to execute your search and navigate to the desired website with your search query.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        </main>
+        
+        
 
-    </body>
+        <!-- Custom Keywords Management Section -->
+        <section id="custom-keywords" class="custom-keywords-section">
+            <h2>⚙️ Custom Keywords</h2>
+            <p class="section-description">Add, edit, and manage your own custom keywords for quick navigation to your favorite websites.</p>
+            
+            <div class="custom-keywords-controls">
+                <div class="add-keyword-form">
+                    <div class="form-row">
+                        <input type="text" id="new-keyword-input" placeholder="Keyword (e.g., myblog)" class="keyword-input" maxlength="20">
+                        <input type="url" id="new-url-input" placeholder="Website URL (e.g., https://myblog.com)" class="url-input">
+                        <input type="text" id="new-search-param-input" placeholder="Search parameter (optional: {0})" class="param-input">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="new-description-input" placeholder="Description (e.g., My personal blog)" class="description-input">
+                        <button id="add-keyword-btn" class="add-keyword-btn">Add Keyword</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-keywords-list" id="custom-keywords-list">
+                <!-- Custom keywords will be populated by JavaScript -->
+            </div>
+            
+            <div class="keyword-reset-section">
+                <div class="reset-buttons">
+                    <button id="reset-custom-keywords-btn" class="reset-btn">Clear All Custom Keywords</button>
+                </div>
+                <p class="reset-note">Clear All Custom Keywords: This will remove all your custom keywords and restore only the default keywords.</p>
+            </div>
+        </section>
+
+        <!-- All Keywords Table -->
+        <section id="all-keywords" class="table-section">
+            <h2>📋 All Available Keywords</h2>
+            <div class="table-container">
+                <div class="search-box">
+                    <input type="text" id="keyword-search" placeholder="Search keywords..." class="search-input">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="keywords-table">
+                        <thead>
+                            <tr>
+                                <th>Keyword</th>
+                                <th>Website</th>
+                                <th>Example Usage</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unsplash Queries Management Section -->
+        <section id="backgrounds" class="unsplash-section">
+            <h2>🖼️ Background Image Preferences</h2>
+            <p class="section-description">Customize the types of images used for your background by managing Unsplash search queries.</p>
+            
+            <div class="unsplash-controls">
+                <div class="add-query-form">
+                    <input type="text" id="new-query-input" placeholder="Enter a search term (e.g., nature, architecture, minimal)" class="query-input">
+                    <button id="add-query-btn" class="add-btn">Add Query</button>
+                </div>
+            </div>
+            
+            <div class="queries-list" id="queries-list">
+                <!-- Queries will be populated by JavaScript -->
+            </div>
+            
+            <div class="reset-section">
+                <div class="reset-buttons">
+                    <button id="reset-current-wallpaper-btn" class="reset-btn">Reset Current Wallpaper</button>
+                    <button id="reset-defaults-btn" class="reset-btn">Reset to Defaults</button>
+                </div>
+                <p class="reset-note">Reset Current Wallpaper: Forces a new background image immediately. Reset to Defaults: Restores the default search queries: nature, animals, landscape, minimalist, abstract, architecture</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I add custom keywords?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can now add custom keywords! Go to the "Custom Keywords" section above and enter your keyword, website URL, optional search parameter, and description. Your custom keywords will work just like the built-in ones.</p>
+                    </div>
+                </div>
+                
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What if a keyword doesn't work?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Make sure you're typing the keyword correctly. Check the table above for all available keywords and their usage examples.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I customize background images?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use the "Background Image Preferences" section above to add, edit, or remove Unsplash search queries. These queries determine what types of images are used for your background. You can add terms like "architecture", "minimalist", "ocean", etc.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I report a bug or suggest a feature?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can send feedback by clicking the "Feedback" link in the main interface or email us directly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer --> 
+    <footer class="options-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:tusharvaghela@gmail.com" class="footer-link">💬 Send Feedback</a>
+                <a href="http://www.onlinewebfonts.com/icon" target="_blank" class="footer-link">🎨 Icons by OnlineWebFonts</a>
+                <a href="new.html" class="footer-link">🏠 Back to Search</a>
+            </div>
+            <p class="footer-text">GoTo Extension - Making web navigation faster and easier</p>
+        </div>
+    </footer>
+</body>
 
 </html>
