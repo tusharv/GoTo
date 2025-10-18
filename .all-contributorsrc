@@ -56,7 +56,6 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/98806225?v=4",
       "profile": "https://www.linkedin.com/in/kiran-satdive-974559211",
       "contributions": [
-        "code",
         "bug",
         "test",
         "code"
@@ -80,6 +79,17 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/120400981?v=4",
       "profile": "https://vaibhav-jain.me",
       "contributions": [
+        "research",
+        "code"
+      ]
+    },
+    {
+      "login": "iqra-codes",
+      "name": "Iqra Khan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/220503709?v=4",
+      "profile": "https://github.com/iqra-codes",
+      "contributions": [
+        "code",
         "research"
       ]
     }

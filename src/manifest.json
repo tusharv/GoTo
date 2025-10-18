@@ -2,7 +2,7 @@
   "name": "GoTo",
   "short_name" : "GoTo",
   "description": "GoTo and Search popular sites from your NewTab",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "background": {
     "service_worker": "js/background.js"
   },
