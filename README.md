@@ -173,8 +173,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tusharv"><img src="https://avatars.githubusercontent.com/u/358703?v=4?s=100" width="100px;" alt="Tushar"/><br /><sub><b>Tushar</b></sub></a><br /><a href="#infra-tusharv" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/tusharv/GoTo/commits?author=tusharv" title="Tests">⚠️</a> <a href="https://github.com/tusharv/GoTo/issues?q=author%3Atusharv" title="Bug reports">🐛</a> <a href="https://github.com/tusharv/GoTo/commits?author=tusharv" title="Code">💻</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://vaibhav-jain.me"><img src="https://avatars.githubusercontent.com/u/120400981?v=4?s=100" width="100px;" alt="Vaibhav Jain"/><br /><sub><b>Vaibhav Jain</b></sub></a><br /><a href="#research-v-aibha-v-jain" title="Research">🔬</a> <a href="https://github.com/tusharv/GoTo/commits?author=v-aibha-v-jain" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/iqra-codes"><img src="https://avatars.githubusercontent.com/u/220503709?v=4?s=100" width="100px;" alt="Iqra Khan"/><br /><sub><b>Iqra Khan</b></sub></a><br /><a href="https://github.com/tusharv/GoTo/commits?author=iqra-codes" title="Code">💻</a> <a href="#research-iqra-codes" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://vaibhav-jain.me"><img src="https://avatars.githubusercontent.com/u/120400981?v=4?s=100" width="100px;" alt="Vaibhav Jain"/><br /><sub><b>Vaibhav Jain</b></sub></a><br /><a href="#research-v-aibha-v-jain" title="Research">🔬</a></td>
     </tr>
   </tbody>
 </table>
