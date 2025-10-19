@@ -84,17 +84,11 @@ test.describe('New Tab page', () => {
 
     // First click collapses
     await page.getByRole('button', { name: 'Notes' }).click();
-    await expect(async () => {
-      const collapsed = await notesWidget.evaluate(el => el.classList.contains('collapsed'));
-      expect(collapsed).toBe(true);
-    }).toPass();
+    await expect.poll(async () => notesWidget.evaluate(el => el.classList.contains('collapsed'))).toBe(true);
 
     // Second click expands
     await page.getByRole('button', { name: 'Notes' }).click();
-    await expect(async () => {
-      const collapsed = await notesWidget.evaluate(el => el.classList.contains('collapsed'));
-      expect(collapsed).toBe(false);
-    }).toPass();
+    await expect.poll(async () => notesWidget.evaluate(el => el.classList.contains('collapsed'))).toBe(false);
   });
 });
 
