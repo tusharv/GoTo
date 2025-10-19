@@ -65,3 +65,9 @@ secret.js
 backup/*
 
 *.zip
+
+# Playwright test artifacts
+playwright-report/
+test-results/
+# (optional if you enable blob reporter)
+blob-report/

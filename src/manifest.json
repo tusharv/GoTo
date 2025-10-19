@@ -15,6 +15,9 @@
   "permissions": [
     "storage"
   ],
+  "host_permissions": [
+    "https://api.unsplash.com/*"
+  ],
   "action": {
     "default_icon": {
       "16": "image/icon16.png",
@@ -30,7 +33,7 @@
     "128": "image/icon128.png"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.unsplash.com"
   },
   "web_accessible_resources": [
     {

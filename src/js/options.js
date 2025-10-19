@@ -3,17 +3,26 @@ let config = {};
 
 // Load config from JSON file and initialize UI
 (async () => {
-	try {
-		const response = await fetch(chrome.runtime.getURL('config.json'));
-		config = await response.json();
-		// Initialize UI after config is loaded
-		if (typeof init === 'function') {
-			init();
-		}
-	} catch (error) {
-		console.error('Error loading config:', error);
-		// Keep empty config as fallback
-	}
+    try {
+        const response = await fetch(chrome.runtime.getURL('config.json'));
+        config = await response.json();
+        // Initialize UI after config is loaded and DOM is ready
+        const startInit = () => { if (typeof init === 'function') init(); };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startInit, { once: true });
+        } else {
+            startInit();
+        }
+    } catch (error) {
+        console.error('Error loading config:', error);
+        // Keep empty config as fallback
+        const startInit = () => { if (typeof init === 'function') init(); };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startInit, { once: true });
+        } else {
+            startInit();
+        }
+    }
 })();
 
 let tableContainner;
