@@ -60,6 +60,42 @@ test.describe('New Tab page', () => {
     await page.reload();
     await expect(page.locator('#notesList .note-item .note-content').first()).toContainText('My persistent note');
   });
+
+  test('footer Options link navigates to Options page', async () => {
+    await page.goto(`chrome-extension://${extensionId}/page/new.html`);
+
+    await page.getByRole('link', { name: 'Options' }).click();
+    await expect(page).toHaveURL(new RegExp(`^chrome-extension://${extensionId}/page/options.html`));
+    // Basic sanity check for options page content
+    await expect(page.locator('header.options-header')).toBeVisible();
+  });
+
+  test('footer Feedback link uses mailto', async () => {
+    await page.goto(`chrome-extension://${extensionId}/page/new.html`);
+
+    await expect(page.getByRole('link', { name: 'Feedback' })).toHaveAttribute('href', 'mailto:tusharvaghela@gmail.com');
+  });
+
+  test('Notes footer button toggles notes widget', async () => {
+    await page.goto(`chrome-extension://${extensionId}/page/new.html`);
+
+    const notesWidget = page.locator('#notesWidget');
+    await expect(notesWidget).toBeVisible();
+
+    // First click collapses
+    await page.getByRole('button', { name: 'Notes' }).click();
+    await expect(async () => {
+      const collapsed = await notesWidget.evaluate(el => el.classList.contains('collapsed'));
+      expect(collapsed).toBe(true);
+    }).toPass();
+
+    // Second click expands
+    await page.getByRole('button', { name: 'Notes' }).click();
+    await expect(async () => {
+      const collapsed = await notesWidget.evaluate(el => el.classList.contains('collapsed'));
+      expect(collapsed).toBe(false);
+    }).toPass();
+  });
 });
 
 

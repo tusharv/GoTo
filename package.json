@@ -7,7 +7,8 @@
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
-    "test:install": "playwright install chromium"
+    "test:install": "playwright install chromium",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/tusharv/GoTo#readme",
   "devDependencies": {
-    "@playwright/test": "^1.47.2"
+    "@playwright/test": "^1.47.2",
+    "husky": "^9.0.11"
   }
 }
