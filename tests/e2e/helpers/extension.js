@@ -4,7 +4,8 @@ const path = require('path');
 const { chromium } = require('@playwright/test');
 
 async function tryGetIdFromServiceWorker(context) {
-  for (let i = 0; i < 20; i++) {
+  // Poll longer to allow MV3 service worker to spin up lazily
+  for (let i = 0; i < 50; i++) {
     const workers = context.serviceWorkers();
     if (workers.length > 0) {
       const url = workers[0].url();
@@ -34,6 +35,43 @@ async function tryGetIdFromNewTab(context) {
   return null;
 }
 
+async function tryGetIdFromPreferences(userDataDir, extensionPath) {
+  // Chromium stores extension settings keyed by id in the Preferences file
+  // Example path: <userDataDir>/Default/Preferences
+  const prefPath = path.join(userDataDir, 'Default', 'Preferences');
+  // Wait up to ~10s for Preferences to be written
+  for (let i = 0; i < 50; i++) {
+    try {
+      if (fs.existsSync(prefPath)) {
+        const raw = fs.readFileSync(prefPath, 'utf-8');
+        const json = JSON.parse(raw);
+        const settings = json?.extensions?.settings;
+        if (settings && typeof settings === 'object') {
+          // Find the extension whose path matches our loaded extension
+          for (const [id, info] of Object.entries(settings)) {
+            const installPath = info?.path || info?.location?.path || '';
+            // Some Chromium variants store absolute paths; normalize both sides
+            if (installPath && path.resolve(installPath) === path.resolve(extensionPath)) {
+              return id;
+            }
+            // Fallback: match by manifest name if available
+            if (info?.manifest?.name === 'GoTo') {
+              return id;
+            }
+          }
+          // If only one extension is present in settings, assume it is ours
+          const ids = Object.keys(settings);
+          if (ids.length === 1) return ids[0];
+        }
+      }
+    } catch (_) {
+      // Ignore parse errors while file is being written; retry
+    }
+    await new Promise(r => setTimeout(r, 200));
+  }
+  return null;
+}
+
 async function launchContextWithExtension(projectRoot) {
   // Resolve extension path and verify manifest exists
   const extensionPath = path.join(projectRoot, 'src');
@@ -57,6 +95,11 @@ async function launchContextWithExtension(projectRoot) {
   // Strategy 2: fall back to service worker URL
   if (!extensionId) {
     extensionId = await tryGetIdFromServiceWorker(context);
+  }
+
+  // Strategy 3: read from Chromium Preferences (robust for MV3 lazy workers)
+  if (!extensionId) {
+    extensionId = await tryGetIdFromPreferences(userDataDir, extensionPath);
   }
 
   if (!extensionId) {
