@@ -7,12 +7,12 @@
 
 - Releases page added
 - Streamlined page and RELEASE_NOTES.md through @scripts/
+- Added NPM support for npm.com/search
 
 ### Documentation & Metadata
 
-- Version bumped to 1.0.4 in src/manifest.json
-- Updated package.json version to 1.0.4
 - Landing page now links to Releases page
+- RELEASE_NOTES.md streamlined through @scripts/generate-release-notes.js
 
 ### Impact
 

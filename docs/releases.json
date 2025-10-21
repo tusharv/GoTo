@@ -9,12 +9,12 @@
             "sections": [
                 { "heading": "What's New", "items": [
                     "Releases page added",
-                    "Streamlined page and RELEASE_NOTES.md through @scripts/"
+                    "Streamlined page and RELEASE_NOTES.md through @scripts/",
+                    "Added NPM support for npm.com/search"
                 ]},
                 { "heading": "Documentation & Metadata", "items": [
-                    "Version bumped to 1.0.4 in src/manifest.json",
-                    "Updated package.json version to 1.0.4",
-                    "Landing page now links to Releases page"
+                    "Landing page now links to Releases page",
+                    "RELEASE_NOTES.md streamlined through @scripts/generate-release-notes.js"
                 ]},
                 { "heading": "Impact", "items": [
                     "Docs and metadata only; no breaking changes"
