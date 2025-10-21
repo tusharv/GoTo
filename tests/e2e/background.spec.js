@@ -27,6 +27,7 @@ test.describe('Background messaging', () => {
     expect(result).toBeTruthy();
     expect(result.success).toBe(true);
     expect(result.configKeys).toContain('git');
+    expect(result.configKeys).toContain('npm');
   });
 
   test('handles refreshConfig message', async () => {

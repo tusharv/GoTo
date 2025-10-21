@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Releases - GoTo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #2C3E50;
+            --bg-color: #F8FAFC;
+            --text-color: #2C3E50;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); background: var(--bg-color); }
+
+        header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.06); padding: 14px 0; position: sticky; top: 0; z-index: 10; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .header-content { display: flex; align-items: center; gap: 12px; }
+        .logo img { width: 32px; height: 32px; }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-text h1 { font-size: 18px; color: var(--primary-color); }
+
+        main { padding: 32px 0 80px; }
+        .card { background: #fff; border: 1px solid #E5E7EB; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); padding: 24px; }
+        h1 { font-size: 28px; color: var(--secondary-color); margin-bottom: 8px; }
+        .updated { color: #64748B; margin-bottom: 24px; }
+        h2 { font-size: 22px; margin-top: 28px; margin-bottom: 8px; color: var(--secondary-color); }
+        h3 { font-size: 18px; margin-top: 6px; margin-bottom: 8px; color: var(--secondary-color); }
+        p { margin: 10px 0; }
+        ul { margin: 8px 0 12px 20px; }
+        li { margin: 6px 0; }
+        .footer-nav { margin-top: 28px; font-size: 14px; }
+        .footer-nav a { color: var(--primary-color); text-decoration: underline; }
+        .badge { display: inline-block; font-size: 12px; background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; padding: 2px 8px; border-radius: 999px; }
+    </style>
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Releases and changelog for the GoTo browser extension." />
+    <link rel="icon" href="./images/logo.png" />
+    <link rel="canonical" href="./releases.html" />
+    <meta name="theme-color" content="#4A90E2" />
+    <meta name="og:title" content="GoTo Releases" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="./images/logo.png" />
+    <meta name="og:url" content="./releases.html" />
+    <meta name="og:description" content="What's new in each GoTo version." />
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="./images/logo.png" alt="GoTo Logo">
+            </div>
+            <div class="logo-text">
+                <h1>GoTo</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1>Releases</h1>
+                <p class="updated" id="last-updated">Last updated: —</p>
+
+                <div id="version-badges"></div>
+
+                <div id="release-sections" style="margin-top: 12px;"></div>
+
+                <div class="footer-nav" style="margin-top: 28px;">
+                    <a href="./index.html">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        (async function renderReleases() {
+            try {
+                const res = await fetch('./releases.json', { cache: 'no-cache' });
+                const data = await res.json();
+                const badges = document.getElementById('version-badges');
+                const sections = document.getElementById('release-sections');
+                const updated = document.getElementById('last-updated');
+                if (data.lastUpdated) {
+                    updated.textContent = `Last updated: ${data.lastUpdated}`;
+                }
+
+                function slug(version) { return 'v' + version.replaceAll('.', '-'); }
+
+                // Badges
+                badges.innerHTML = '';
+                data.releases.forEach((r, idx) => {
+                    const a = document.createElement('a');
+                    a.href = `#${slug(r.version)}`;
+                    a.className = 'badge';
+                    a.textContent = r.version;
+                    if (idx > 0) a.style.marginLeft = '8px';
+                    badges.appendChild(a);
+                });
+
+                // Sections
+                sections.innerHTML = '';
+                data.releases.forEach(r => {
+                    const sec = document.createElement('section');
+                    sec.id = slug(r.version);
+                    const h2 = document.createElement('h2');
+                    h2.textContent = `Version ${r.version} — ${r.title || ''}`.trim();
+                    sec.appendChild(h2);
+                    if (r.date) {
+                        const p = document.createElement('p');
+                        p.className = 'updated';
+                        p.textContent = `Release Date: ${r.date}`;
+                        sec.appendChild(p);
+                    }
+                    (r.sections || []).forEach(section => {
+                        if (!section) return;
+                        const h3 = document.createElement('h3');
+                        h3.textContent = section.heading || '';
+                        sec.appendChild(h3);
+                        const ul = document.createElement('ul');
+                        (section.items || []).forEach(item => {
+                            const li = document.createElement('li');
+                            if (typeof item === 'string') {
+                                li.textContent = item;
+                            } else if (item && typeof item === 'object' && item.text) {
+                                const strong = document.createElement('strong');
+                                strong.textContent = item.text;
+                                li.appendChild(strong);
+                                if (Array.isArray(item.items) && item.items.length) {
+                                    const sub = document.createElement('ul');
+                                    item.items.forEach(subItem => {
+                                        const sli = document.createElement('li');
+                                        sli.textContent = subItem;
+                                        sub.appendChild(sli);
+                                    });
+                                    li.appendChild(sub);
+                                }
+                            }
+                            ul.appendChild(li);
+                        });
+                        sec.appendChild(ul);
+                    });
+                    sections.appendChild(sec);
+                });
+            } catch (e) {
+                document.getElementById('release-sections').innerHTML = '<p>Could not load releases at this time.</p>';
+                // eslint-disable-next-line no-console
+                console.error('Failed to load releases.json', e);
+            }
+        })();
+    </script>
+</body>
+</html>
+
+

@@ -1,103 +1,125 @@
 # GoTo Extension - Release Notes
+## Version 1.0.4 - Releases Page & Metadata Update
+
+**Release Date:** October 2025
+
+### What's New
+
+- Releases page added
+- Streamlined page and RELEASE_NOTES.md through @scripts/
+
+### Documentation & Metadata
+
+- Version bumped to 1.0.4 in src/manifest.json
+- Updated package.json version to 1.0.4
+- Landing page now links to Releases page
+
+### Impact
+
+- Docs and metadata only; no breaking changes
+
+---
 
 ## Version 1.0.3 - Version Bump & Contributors Update
 
 **Release Date:** October 2025
 
-### ✨ What's New
+### What's New
 
-- **Notes**: A lightweight Notes widget on the New Tab page
+- **Notes: Lightweight Notes widget on the New Tab page**
   - Add, edit, complete, and delete notes
   - Draggable panel with snap-back and viewport clamping
   - Collapsible with persistent state; quick toggle via footer button
   - Local-only storage (no sync/server), supports up to 50 notes
   - Character counter with soft/limit thresholds
-- **Calendar Shortcut**: Added `cal` keyword to open Google Calendar; supports searching via `goto cal {query}`
+- Calendar Shortcut: Added cal keyword to open Google Calendar; supports searching via goto cal {query}
 
-### 🧾 Documentation & Metadata
+### Documentation & Metadata
 
-- **Version Update**: Bumped extension version to `1.0.3` in `src/manifest.json`
-- **Package Metadata**: Updated `package.json` version to `1.0.3`
-- **Contributors (README.md)**:
-  - Added `Iqra Khan` with Code and Research contributions
-  - Added Code contribution link for `Vaibhav Jain`
-  - Fixed duplicate contribution entry for `KIRAN SATDIVE`
-- **all-contributors**: Synced `.all-contributorsrc` to reflect the above changes
+- Version updated to 1.0.3 in src/manifest.json
+- Updated package.json version to 1.0.3
+- Contributors updates in README.md and synced .all-contributorsrc
 
-### 🎯 Impact
-
-- Minor feature additions and UI/UX improvements
-- Backward compatible; no migrations required
-
-### 🎨 UI & UX
+### UI & UX
 
 - Refined Options and New Tab layouts, spacing, and affordances
 - Improved wallpaper refresh behavior and helpful console messages
 - Better empty states and focus management in Notes
 
-### ✅ Changes since f9bc0207fb97fee224c03ebb8b4c5c4d277ef3b1
+---
 
-- Added Notes widget with drag/collapse, local storage, and completion support
-- Introduced `cal` keyword for Google Calendar (with query support)
-- UI fixes: responsive footer link, text overlap/outline corrections, duplicate class cleanup
+## Version 1.0.2 - Custom Keyword Support
+
+### What's New
+
+- Support for custom keyword
 
 ---
 
-## Version 1.0.1 - Code Cleanup & Debug Removal
+## Version 1.0.1 - Manifest V3 and UI Refresh
 
-**Release Date:** December 2024
+### What's New
 
-### 🧹 Code Cleanup & Maintenance
-
-This release focuses on cleaning up the codebase by removing development and debugging artifacts to prepare for production deployment.
-
-#### ✨ What's New
-- **Cleaner Options Page**: Removed development-only test button from the custom keywords section
-- **Streamlined User Interface**: Simplified the custom keywords management interface by removing debug controls
-- **Production-Ready Code**: Eliminated all debug logging and test functions from the codebase
-
-#### 🔧 Changes Made
-
-**Options Page (options.html)**
-- Removed "Test Custom Keywords" button from the custom keywords management section
-- Updated help text to remove references to debug functionality
-- Streamlined the reset controls interface
-
-**Options Script (options.js)**
-- Removed `testCustomKeywords()` debug function
-- Removed `testGetServiceLocally()` debug function  
-- Eliminated all debug console.log statements from the `saveCustomKeywords()` function
-- Removed test button event listeners and references
-- Cleaned up variable declarations and initialization code
-
-#### 🎯 Impact
-- **Smaller Bundle Size**: Reduced JavaScript bundle size by removing unused debug code
-- **Better Performance**: Eliminated unnecessary console logging operations
-- **Cleaner Console**: No more debug output cluttering the browser console
-- **Professional UI**: Removed development artifacts from the user interface
-
-#### 🔄 Migration Notes
-- No user data or settings are affected by this update
-- All existing custom keywords and configurations remain intact
-- No breaking changes to existing functionality
-
-#### 🐛 Bug Fixes
-- Fixed potential memory leaks from debug event listeners
-- Resolved console pollution from debug logging statements
-
-#### 📋 Technical Details
-- Removed approximately 60 lines of debug code
-- Eliminated 5 console.log statements from production code
-- Cleaned up 2 unused JavaScript functions
-- Removed 1 HTML button element and associated styling
+- Support for Manifest 3
+- New Layout
+- Updated Option Page
+- New Tab background configuration
+- Fix dead links
 
 ---
 
-### Previous Version: 1.0.0
-- Custom keywords functionality
-- Background image customization
-- Enhanced options page with FAQ section
+## Version 0.3.0 - Structure and Visual Updates
 
+### What's New
+
+- Structure Updated
+- Auto Suggest added
+- Gradient images added
+- Added Saavn, Gaana, Spotify
+
+---
+
+## Version 0.2.3 - Site Support
+
+### What's New
+
+- Added Producthunt and localhost
+
+---
+
+## Version 0.2.2 - Keyword Updates and Performance
+
+### What's New
+
+- Added urbandictionary, update flipkart
+- Loading new image after 5 mins
+- Default image optimized
+
+---
+
+## Version 0.2.1 - Content and UX Improvements
+
+### What's New
+
+- Added https://www.geeksforgeeks.org/ and Updated WebMakerApp to new url https://webmaker.app/app/
+- Added visibility check for optimization
+- Message and Time/Date are not selectable
+- Message is not looping forever, Stops after 1 cycle
+- Unsplash attribution update
+- Updating category from Productivity to Search tool
+
+---
+
+## Version 0.2.0 - Renamed to GoTo; Visual Refresh
+
+### What's New
+
+- ramu is replaced with goto keyword
+- icon and logo updated (Logo by https://www.onlinewebfonts.com/icon/ )
+- Beautiful background images powered by Unsplash
+- GoTo was previously Ramu and updated to 0.2.0 with better graphics and more site support
+
+---
 ---
 
 **Installation:** [Chrome Web Store](https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd)

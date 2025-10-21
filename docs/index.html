@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoTo Extension - Quick Search & Navigation Tool</title>
+    <title>GoTo - Stop Repetitive Browsing. Command the Web.</title>
     <link rel="icon" href="./images/logo.png" type="image/png" sizes="128x128">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Bricolage+Grotesque:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4A90E2;
@@ -22,10 +23,14 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Nunito', 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+        }
+
+        h1, h2, h3, .logo-text h1 {
+            font-family: 'Bricolage Grotesque', 'Nunito', 'Inter', sans-serif;
         }
 
         .container {
@@ -120,7 +125,9 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            -webkit-text-fill-color: transparent;
         }
+
 
         .badge {
             display: inline-flex;
@@ -267,6 +274,13 @@
             font-family: monospace;
             margin: 10px 0;
         }
+
+        /* Problem → Solution Section */
+        .problem-solution { padding: 80px 0; background-color: white; }
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .ps-card { background: #F8FAFC; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; }
+        .ps-card h3 { margin-bottom: 10px; }
+        .ps-list { margin-top: 10px; padding-left: 18px; }
     </style>
 </head>
 <body>
@@ -288,26 +302,51 @@
             <div class="blob b3"></div>
         </div>
         <div class="container">
-            <h1 class="gradient-text">Navigate the Web, Faster Than Ever</h1>
-            <p>GoTo transforms your new tab into a powerful command center that saves you precious time. No more typing long URLs or switching between tabs - just type and go!</p>
+            <h1 class="gradient-text">Stop Repeating Yourself. <br/>Command the Web.</h1>
+            <p>Every search is the same dance: new tab → site → search. GoTo turns that into one action: open a tab, type <strong>goto</strong> + a keyword, hit enter. That’s it.</p>
             <a href="https://chromewebstore.google.com/detail/goto/iabecofjidglogmhkccmgihafpoaccmd" class="store-badge-link" target="_blank" rel="noopener" style="display:inline-block; background:rgba(255,255,255,0.80); border-radius:12px; padding:8px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.10);">
                 <img class="store-badge" src="./images/store_badge.png" alt="Available in the Chrome Web Store" style="display:block; background:transparent;">
             </a>
-            <div style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+            <div style="margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.9);">Keyboard‑first. No tracking. Free.</div>
+            <div style="margin-top: 16px; color: rgba(255,255,255,0.8);">
                 <span class="badge">⭐ 4.3/5 rating</span>
                 <span class="badge" style="margin-left:10px;">👥 50+ users</span>
             </div>
         </div>
     </section>
 
+    <section class="problem-solution">
+        <div class="container">
+            <div class="two-col">
+                <div class="ps-card">
+                    <h3>The problem</h3>
+                    <p>Finding anything on GitHub, YouTube, Gmail, Drive… takes the same 4–5 clicks every time.</p>
+                    <ul class="ps-list">
+                        <li>Open a new tab, navigate to site, focus the search, type query</li>
+                        <li>Breaks your flow, especially when you do this dozens of times a day</li>
+                        <li>Mouse‑heavy, slow, and easy to get distracted</li>
+                    </ul>
+                </div>
+                <div class="ps-card">
+                    <h3>The solution</h3>
+                    <p>GoTo makes your new tab a command palette for the web. Type a short keyword + your query and you’re there.</p>
+                    <div class="code-example">goto git auth middleware</div>
+                    <div class="code-example">goto yt rust ownership</div>
+                    <p style="margin-top:10px; font-size:14px; color:#374151;">Works with popular sites out of the box. Add your own for internal tools.</p>
+                    <a href="https://chromewebstore.google.com/detail/goto/iabecofjidglogmhkccmgihafpoaccmd" class="cta-button" target="_blank" rel="noopener" style="margin-top:10px;">Install free on Chrome</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Key Features</h2>
+            <h2 class="section-title">Benefits</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🚀</div>
-                    <h3>Lightning Fast Access</h3>
-                    <p>Save hours of your time with instant access to any website. What used to take 30 seconds now takes just 3!</p>
+                    <h3>Faster, fewer steps</h3>
+                    <p>Skip the site‑first dance. Go straight to results with one command from your new tab.</p>
                     <div class="time-saved" style="margin-top: 15px; background: #f0f9ff; padding: 10px; border-radius: 6px;">
                         <strong>Time Saved:</strong> Instead of:
                         <ol style="margin: 10px 0; padding-left: 20px;">
@@ -319,29 +358,28 @@
                         Just type: <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">goto git your-search</code>
                     </div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Beautiful Backgrounds</h3>
-                    <p>Personalize your new tab experience with stunning wallpapers that automatically refresh every 5 minutes. Choose your preferred background style or keep it dynamic!</p>
-                    <ul style="list-style: none; padding: 0; margin-top: 15px;">
-                        <li>✓ Auto-refreshing wallpapers</li>
-                        <li>✓ Custom background preferences</li>
-                        <li>✓ Beautiful gradients option</li>
-                        <li>✓ Powered by Unsplash</li>
-                    </ul>
-                </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">⚙️</div>
                     <h3>Custom Keywords</h3>
-                    <p>Make GoTo truly yours by creating custom keywords for your favorite websites. Perfect for internal tools and frequently visited pages.</p>
+                    <p>Create your own shortcuts for internal tools and frequently visited pages. Perfect for teams.</p>
                     <div style="margin-top: 15px; background: #f0f9ff; padding: 10px; border-radius: 6px;">
                         <strong>Example:</strong><br>
                         Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">jira</code> to open your company's JIRA<br>
-                        Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">wiki</code> for your team's documentation<br>
+                        Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">org-wiki</code> for your team's documentation<br>
                         Set <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 4px;">dev</code> for your development environment
                     </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Keyboard‑first</h3>
+                    <p>Stay in flow. Tap ⌘L, type <code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">goto</code>, your keyword, hit enter. No mouse required.</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                        <li>✓ Omnibox‑native</li>
+                        <li>✓ Zero learning curve</li>
+                        <li>✓ Works with your logged‑in sessions</li>
+                    </ul>
                 </div>
             </div>
 
@@ -358,7 +396,7 @@
 
     <section class="how-to-use">
         <div class="container">
-            <h2 class="section-title">How to Use GoTo</h2>
+            <h2 class="section-title">How it Works</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -415,12 +453,11 @@
             <h2 class="section-title">Latest Updates</h2>
             <div style="max-width: 800px; margin: 0 auto;">
                 <div class="feature-card" style="margin-bottom: 20px;">
-                    <h3>Version 1.0.2 - Latest Release</h3>
+                    <h3>Version 1.0.4 - Latest Release</h3>
                     <ul style="list-style: none; padding: 0;">
-                        <li>✨ Support for custom keywords</li>
-                        <li>🎨 New Tab background configuration</li>
-                        <li>🔄 Updated Option Page</li>
-                        <li>🐛 Fixed dead links</li>
+                        <li>📝 Notes widget on New Tab: add/edit/delete, complete, drag, collapse</li>
+                        <li>📅 <code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">cal</code> shortcut for Google Calendar (e.g., <code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">goto cal meeting</code>)</li>
+                        <li>🧭 UI and UX refinements across Options and New Tab</li>
                     </ul>
                 </div>
             </div>
@@ -447,6 +484,8 @@
                 <a href="https://github.com/tusharv/GoTo" style="color: white; text-decoration: underline;">View on GitHub</a>
                 <span style="margin: 0 10px; opacity: 0.7;">|</span>
                 <a href="./privacy-policy.html" style="color: white; text-decoration: underline;">Privacy Policy</a>
+                    <span style="margin: 0 10px; opacity: 0.7;">|</span>
+                    <a href="./releases.html" style="color: white; text-decoration: underline;">Release Notes</a>
             </p>
         </div>
     </footer>

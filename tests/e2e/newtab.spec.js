@@ -92,15 +92,17 @@ test.describe('New Tab page', () => {
     await expect.poll(async () => notesWidget.evaluate(el => el.classList.contains('collapsed'))).toBe(false);
   });
 
-  test('config URLs are reachable (default/search)', async () => {
+  test('config URLs are reachable (all URL fields)', async () => {
     const configPath = path.resolve(__dirname, '../../src/config.json');
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
     const urlsToCheck = [];
     for (const [key, entry] of Object.entries(config)) {
-      for (const field of ['default']) {
-        const template = entry[field];
-        if (!template) continue;
+      if (!entry || typeof entry !== 'object') continue;
+      for (const [field, template] of Object.entries(entry)) {
+        if (typeof template !== 'string') continue;
+        // Skip non-URL-ish placeholders like 'param'
+        if (field === 'param') continue;
 
         let url = template;
         if (template.includes('{0}')) {

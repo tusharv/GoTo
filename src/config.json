@@ -130,7 +130,7 @@
 	},
 	"saavn": {
 		"default": "https://www.jiosaavn.com/",
-		"search": "https://www.jiosaavn.com/search/{0}",
+		"search": "https://www.jiosaavn.com/search/song/{0}",
 		"param": "Emiway"
 	},
 	"spot": {

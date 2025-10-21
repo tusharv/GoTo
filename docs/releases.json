@@ -1,0 +1,139 @@
+{
+    "project": "GoTo",
+    "lastUpdated": "October 2025",
+    "releases": [
+        {
+            "version": "1.0.4",
+            "date": "October 2025",
+            "title": "Releases Page & Metadata Update",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Releases page added",
+                    "Streamlined page and RELEASE_NOTES.md through @scripts/"
+                ]},
+                { "heading": "Documentation & Metadata", "items": [
+                    "Version bumped to 1.0.4 in src/manifest.json",
+                    "Updated package.json version to 1.0.4",
+                    "Landing page now links to Releases page"
+                ]},
+                { "heading": "Impact", "items": [
+                    "Docs and metadata only; no breaking changes"
+                ]}
+            ]
+        },
+        {
+            "version": "1.0.3",
+            "date": "October 2025",
+            "title": "Version Bump & Contributors Update",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    { "text": "Notes: Lightweight Notes widget on the New Tab page", "items": [
+                        "Add, edit, complete, and delete notes",
+                        "Draggable panel with snap-back and viewport clamping",
+                        "Collapsible with persistent state; quick toggle via footer button",
+                        "Local-only storage (no sync/server), supports up to 50 notes",
+                        "Character counter with soft/limit thresholds"
+                    ]},
+                    "Calendar Shortcut: Added cal keyword to open Google Calendar; supports searching via goto cal {query}"
+                ]},
+                { "heading": "Documentation & Metadata", "items": [
+                    "Version updated to 1.0.3 in src/manifest.json",
+                    "Updated package.json version to 1.0.3",
+                    "Contributors updates in README.md and synced .all-contributorsrc"
+                ]},
+                { "heading": "UI & UX", "items": [
+                    "Refined Options and New Tab layouts, spacing, and affordances",
+                    "Improved wallpaper refresh behavior and helpful console messages",
+                    "Better empty states and focus management in Notes"
+                ]}
+            ]
+        },
+        {
+            "version": "1.0.2",
+            "title": "Custom Keyword Support",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Support for custom keyword"
+                ]}
+            ]
+        },
+        {
+            "version": "1.0.1",
+            "title": "Manifest V3 and UI Refresh",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Support for Manifest 3",
+                    "New Layout",
+                    "Updated Option Page",
+                    "New Tab background configuration",
+                    "Fix dead links"
+                ]}
+            ]
+        },
+        {
+            "version": "0.3.0",
+            "title": "Structure and Visual Updates",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Structure Updated",
+                    "Auto Suggest added",
+                    "Gradient images added",
+                    "Added Saavn, Gaana, Spotify"
+                ]}
+            ]
+        },
+        {
+            "version": "0.2.3",
+            "title": "Site Support",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Added Producthunt and localhost"
+                ]}
+            ]
+        },
+        {
+            "version": "0.2.2",
+            "title": "Keyword Updates and Performance",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Added urbandictionary, update flipkart",
+                    "Loading new image after 5 mins",
+                    "Default image optimized"
+                ]}
+            ]
+        },
+        {
+            "version": "0.2.1",
+            "title": "Content and UX Improvements",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Added https://www.geeksforgeeks.org/ and Updated WebMakerApp to new url https://webmaker.app/app/",
+                    "Added visibility check for optimization",
+                    "Message and Time/Date are not selectable",
+                    "Message is not looping forever, Stops after 1 cycle",
+                    "Unsplash attribution update",
+                    "Updating category from Productivity to Search tool"
+                ]}
+            ]
+        },
+        {
+            "version": "0.2.0",
+            "title": "Renamed to GoTo; Visual Refresh",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "ramu is replaced with goto keyword",
+                    "icon and logo updated (Logo by https://www.onlinewebfonts.com/icon/ )",
+                    "Beautiful background images powered by Unsplash",
+                    "GoTo was previously Ramu and updated to 0.2.0 with better graphics and more site support"
+                ]}
+            ]
+        }
+    ],
+    "links": {
+        "chromeWebStore": "https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd",
+        "github": "https://github.com/tusharv/GoTo"
+    },
+    "license": "GNU General Public License v3.0"
+}
+
+

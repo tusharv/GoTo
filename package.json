@@ -1,6 +1,6 @@
 {
   "name": "goto",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "GoTo and Search popular sites from your NewTab",
   "main": "src/js/background.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:install": "playwright install chromium",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:release-notes": "node scripts/generate-release-notes.js"
   },
   "repository": {
     "type": "git",
