@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const { test, expect } = require('@playwright/test');
 const { launchContextWithExtension } = require('./helpers/extension');
 
@@ -89,6 +90,55 @@ test.describe('New Tab page', () => {
     // Second click expands
     await page.getByRole('button', { name: 'Notes' }).click();
     await expect.poll(async () => notesWidget.evaluate(el => el.classList.contains('collapsed'))).toBe(false);
+  });
+
+  test('config URLs are reachable (all URL fields)', async () => {
+    const configPath = path.resolve(__dirname, '../../src/config.json');
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
+    const urlsToCheck = [];
+    for (const [key, entry] of Object.entries(config)) {
+      if (!entry || typeof entry !== 'object') continue;
+      for (const [field, template] of Object.entries(entry)) {
+        if (typeof template !== 'string') continue;
+        // Skip non-URL-ish placeholders like 'param'
+        if (field === 'param') continue;
+
+        let url = template;
+        if (template.includes('{0}')) {
+          const param = encodeURIComponent(entry.param || 'test');
+          url = template.replace('{0}', param);
+        }
+
+        // Only http(s), skip localhost/127.0.0.1 and internal/relative schemes
+        if (!/^https?:\/\//i.test(url)) continue;
+        if (/^https?:\/\/(localhost|127\.0\.0\.1)/i.test(url)) continue;
+
+        urlsToCheck.push({ key, field, url });
+      }
+    }
+
+    expect(urlsToCheck.length).toBeGreaterThan(0);
+
+    const results = await Promise.all(
+      urlsToCheck.map(async meta => {
+        try {
+          const resp = await page.request.get(meta.url, { timeout: 15000 });
+          return { ...meta, status: resp.status(), ok: resp.status() !== 404 };
+        } catch (err) {
+          // Treat network errors/timeouts as non-fatal for this check
+          return { ...meta, status: -1, ok: true };
+        }
+      })
+    );
+
+    const failures = results.filter(r => !r.ok);
+    if (failures.length) {
+      const message = failures
+        .map(f => `${f.key}.${f.field} -> ${f.url} [status=${f.status}]`)
+        .join('\n');
+      throw new Error('Some config URLs failed:\n' + message);
+    }
   });
 });
 

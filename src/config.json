@@ -130,7 +130,7 @@
 	},
 	"saavn": {
 		"default": "https://www.jiosaavn.com/",
-		"search": "https://www.jiosaavn.com/search/{0}",
+		"search": "https://www.jiosaavn.com/search/song/{0}",
 		"param": "Emiway"
 	},
 	"spot": {
@@ -437,6 +437,11 @@
 	"css": {
 		"default": "https://cssbattle.dev/",
 		"param": ""
+	},
+	"npm": {
+		"default": "https://www.npmjs.com/",
+		"search": "https://www.npmjs.com/search?q={0}",
+		"param": "react"
 	},
 	"me": {
 		"default": "https://www.linkedin.com/in/tusharvaghela/",
