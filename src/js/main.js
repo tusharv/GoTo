@@ -107,6 +107,7 @@ async function getKeywordConflicts(){
 		const { keywordConflicts } = await chrome.storage.local.get(['keywordConflicts']);
 		return Array.isArray(keywordConflicts) ? keywordConflicts : [];
 	}catch(e){
+		console.error('Error getting keyword conflicts:', e);
 		return [];
 	}
 }
@@ -264,6 +265,7 @@ function fetchNewWallpaper() {
 			}
 		}
 	} catch (e) {
+		console.error('Error fetching new wallpaper:', e);
 		// fallback to default
 	}
 	// Randomly select one query to increase variety
@@ -497,7 +499,9 @@ function setNotesCollapsed(collapsed) {
 		try {
 			const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
 			if (raw) saved = JSON.parse(raw) || {};
-		} catch (e) {}
+		} catch (e) {
+			console.error('Error applying saved notes widget state:', e);
+		}
 		if (typeof saved.left === 'number' && typeof saved.top === 'number') {
 			notesWidget.style.left = saved.left + 'px';
 			notesWidget.style.top = saved.top + 'px';
@@ -516,7 +520,7 @@ function applySavedNotesWidgetState() {
 		const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
 		if (raw) saved = JSON.parse(raw) || {};
 	} catch (e) {
-		// ignore
+		console.error('Error applying saved notes widget state:', e);
 	}
 	if (saved.collapsed) {
 		notesWidget.classList.add('collapsed');
@@ -545,10 +549,12 @@ function saveNotesWidgetState(partial) {
 		const raw = localStorage.getItem(NOTES_WIDGET_STORAGE_KEY);
 		if (raw) prev = JSON.parse(raw) || {};
 	} catch (e) {
-		// ignore
+		console.error('Error saving notes widget state:', e);
 	}
 	const next = { ...prev, ...partial };
-	try { localStorage.setItem(NOTES_WIDGET_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+	try { localStorage.setItem(NOTES_WIDGET_STORAGE_KEY, JSON.stringify(next)); } catch (e) {
+		console.error('Error saving notes widget state:', e);
+	}
 }
 
 // Notes widget: drag support (mouse + touch)

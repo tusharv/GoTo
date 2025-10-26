@@ -67,7 +67,7 @@ async function loadCustomKeywords() {
 							break;
 						}
 					} catch (e) {
-						// Tab might not have content script, continue
+						console.error('Error getting custom keywords from tab:', e);
 					}
 				}
 			}
@@ -189,13 +189,13 @@ function getService(options){
 		return 'https://www.google.com/search?q=' + encodeURIComponent(options);
 	}
 	
-	if(params.length === 1 && config.hasOwnProperty(keyAction)){
+	if(params.length === 1 && Object.prototype.hasOwnProperty.call(config, keyAction)){
 		//Single Param 
 		return config[keyAction].default;
-	}else if(params.length === 2 && config.hasOwnProperty(keyAction) && config[keyAction].search){
+	}else if(params.length === 2 && Object.prototype.hasOwnProperty.call(config, keyAction) && config[keyAction].search){
 		//Two Params
 		return (config[keyAction].search).replace('{0}',params[1]);
-	}else if(params.length >= 2 && config.hasOwnProperty(keyAction) && config[keyAction].search){
+	}else if(params.length >= 2 && Object.prototype.hasOwnProperty.call(config, keyAction) && config[keyAction].search){
 		//Multiple Params
 		var query = params.slice(1).join(' ');
 		return (config[keyAction].search).replace('{0}',encodeURIComponent(query));
@@ -252,7 +252,7 @@ async function resolveAndStoreConflicts(baseConfig, loadedCustomKeywords) {
 		const conflicts = [];
 		const filteredCustom = { ...loadedCustomKeywords };
 		for (const name of Object.keys(loadedCustomKeywords)) {
-			if (baseConfig.hasOwnProperty(name)) {
+			if (Object.prototype.hasOwnProperty.call(baseConfig, name)) {
 				conflicts.push({
 					name,
 					defaultUrl: baseConfig[name] && baseConfig[name].default ? baseConfig[name].default : '',
@@ -295,14 +295,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		console.log('Test config requested');
 		console.log('Current config keys:', Object.keys(config));
 		console.log('Current custom keywords:', Object.keys(customKeywords));
-		console.log('Has peer:', config.hasOwnProperty('peer'));
+		console.log('Has peer:', Object.prototype.hasOwnProperty.call(config, 'peer'));
 		console.log('Peer config:', config.peer);
 		
 		sendResponse({ 
 			success: true, 
 			configKeys: Object.keys(config),
 			customKeywords: Object.keys(customKeywords),
-			hasPeer: config.hasOwnProperty('peer'),
+			hasPeer: Object.prototype.hasOwnProperty.call(config, 'peer'),
 			peerConfig: config.peer,
 			totalConfigKeys: Object.keys(config).length
 		});
