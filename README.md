@@ -1,7 +1,7 @@
 # GoTo
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://www.codacy.com/app/tusharv/GoTo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tusharv/GoTo&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://app.codacy.com/gh/tusharv/GoTo/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 GoTo and search popular sites from your New Tab.
 
