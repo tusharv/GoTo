@@ -28,6 +28,54 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+            /* Subtle page texture using only CSS gradients (no external assets) */
+            background-image:
+                /* soft grid */
+                repeating-linear-gradient(0deg, rgba(2, 6, 23, 0.02) 0px, rgba(2, 6, 23, 0.02) 1px, transparent 1px, transparent 24px),
+                repeating-linear-gradient(90deg, rgba(2, 6, 23, 0.02) 0px, rgba(2, 6, 23, 0.02) 1px, transparent 1px, transparent 24px),
+                /* gentle corner glows */
+                radial-gradient(60% 50% at 0% 0%, rgba(99, 102, 241, 0.05), transparent 70%),
+                radial-gradient(70% 60% at 100% 10%, rgba(234, 88, 12, 0.04), transparent 70%),
+                radial-gradient(80% 50% at 50% 120%, rgba(15, 23, 42, 0.03), transparent 70%);
+            background-attachment: fixed, fixed, fixed, fixed, fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated geographic decor: topographic rings and drifting lines */
+        body::before,
+        body::after { content: ""; position: fixed; inset: -5%; pointer-events: none; z-index: 0; }
+
+        /* Topographic rings (a few "islands") */
+        body::before {
+            background:
+                repeating-radial-gradient(circle at 18% 82%, rgba(16,185,129,0.035) 0 2px, transparent 2px 18px),
+                repeating-radial-gradient(circle at 80% 22%, rgba(59,130,246,0.035) 0 2px, transparent 2px 20px),
+                repeating-radial-gradient(circle at 45% -8%, rgba(234,179,8,0.03) 0 2px, transparent 2px 22px);
+            -webkit-mask-image: radial-gradient(90% 70% at 50% 50%, transparent 0 52%, #000 76%);
+                    mask-image: radial-gradient(90% 70% at 50% 50%, transparent 0 52%, #000 76%);
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            animation: topoDrift 90s ease-in-out infinite alternate;
+        }
+
+        /* Slow panning diagonal lines like ocean currents */
+        body::after {
+            background:
+                repeating-linear-gradient(135deg, rgba(2,6,23,0.015) 0 1px, transparent 1px 22px);
+            -webkit-mask-image: radial-gradient(95% 75% at 50% 50%, transparent 0 58%, #000 82%);
+                    mask-image: radial-gradient(95% 75% at 50% 50%, transparent 0 58%, #000 82%);
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            animation: linesPan 120s linear infinite;
+        }
+
+        @keyframes topoDrift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(-10px, -15px, 0) scale(1.02); }
+        }
+
+        @keyframes linesPan {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 400px; }
         }
 
         h1, h2, h3, .logo-text h1 {
@@ -282,6 +330,31 @@
         .ps-card { background: #F8FAFC; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; }
         .ps-card h3 { margin-bottom: 10px; }
         .ps-list { margin-top: 10px; padding-left: 18px; }
+
+        /* Video Section */
+        .video-section { padding: 80px 0; background-color: white; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* Background Gallery */
+        .bg-gallery { padding: 80px 0; background-color: var(--bg-color); }
+        .bg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+        .bg-card { position: relative; overflow: hidden; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background: #0b1220; }
+        .bg-thumb { width: 100%; aspect-ratio: 16/9; height: auto; object-fit: cover; display: block; transition: transform 0.35s ease, opacity 0.35s ease; opacity: 0.95; }
+        .bg-card:hover .bg-thumb { transform: scale(1.06); opacity: 1; }
+        .bg-caption { position: absolute; left: 10px; bottom: 10px; background: rgba(15,23,42,0.55); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 12px; backdrop-filter: blur(4px); }
+        .bg-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0) 60%); opacity: 0.9; pointer-events: none; }
+
+        /* Lightbox */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+        .lightbox.open { display: flex; }
+        .lightbox-content { position: relative; max-width: 92vw; max-height: 92vh; }
+        .lightbox-img { max-width: 92vw; max-height: 82vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.45); display: block; }
+        .lightbox-caption { color: #E5E7EB; text-align: center; margin-top: 10px; font-size: 14px; }
+        .lightbox-close { position: absolute; top: -12px; right: -12px; background: rgba(0,0,0,0.6); color: #fff; border: 0; width: 36px; height: 36px; border-radius: 999px; cursor: pointer; font-size: 18px; }
+        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; background: rgba(0,0,0,0.55); color: #fff; border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .lightbox-prev { left: -56px; }
+        .lightbox-next { right: -56px; }
     </style>
 </head>
 <body>
@@ -312,6 +385,15 @@
             <div style="margin-top: 16px; color: rgba(255,255,255,0.8);">
                 <span class="badge">⭐ 4.3/5 rating</span>
                 <span class="badge" style="margin-left:10px;">👥 50+ users</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title">Watch GoTo in Action</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/3IhMEtY3xO8" title="GoTo Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </section>
@@ -449,16 +531,59 @@
         </div>
     </section>
 
+    <section class="bg-gallery">
+        <div class="container">
+            <h2 class="section-title">Background Gallery</h2>
+            <div class="bg-grid" id="bgGrid">
+                <div class="bg-card" data-index="0" data-src="./images/bg/bg-1.png" data-name="Maldives — Sergey Kim (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-1.png" alt="Maldives — photo by Sergey Kim on Unsplash">
+                    <div class="bg-caption">Maldives — Sergey Kim (Unsplash)</div>
+                </div>
+                <div class="bg-card" data-index="1" data-src="./images/bg/bg-2.png" data-name="Isle of Skye, Scotland — Andrew Ridley (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-2.png" alt="Isle of Skye, Scotland — photo by Andrew Ridley on Unsplash">
+                    <div class="bg-caption">Isle of Skye — Andrew Ridley</div>
+                </div>
+                <div class="bg-card" data-index="2" data-src="./images/bg/bg-3.png" data-name="Swiss Alps Cabin — Dino Reichmuth (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-3.png" alt="Swiss Alps cabin — photo by Dino Reichmuth on Unsplash">
+                    <div class="bg-caption">Swiss Alps Cabin — Dino Reichmuth</div>
+                </div>
+                <div class="bg-card" data-index="3" data-src="./images/bg/bg-4.png" data-name="Abstract Layers — Clark Van Der Beken (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-4.png" alt="Abstract layers — artwork by Clark Van Der Beken on Unsplash">
+                    <div class="bg-caption">Abstract Layers — Clark Van Der Beken</div>
+                </div>
+                <div class="bg-card" data-index="4" data-src="./images/bg/bg-5.png" data-name="Atrium Geometry — Denys Nevozhai (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-5.png" alt="Atrium geometry — photo by Denys Nevozhai on Unsplash">
+                    <div class="bg-caption">Atrium Geometry — Denys Nevozhai</div>
+                </div>
+                <div class="bg-card" data-index="5" data-src="./images/bg/bg-6.png" data-name="Desert Sunset — NEOM (Unsplash)">
+                    <img class="bg-thumb" src="./images/bg/bg-6.png" alt="Desert sunset — photo by NEOM on Unsplash">
+                    <div class="bg-caption">Desert Sunset — NEOM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lbClose" aria-label="Close">×</button>
+            <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
+            <img class="lightbox-img" id="lbImg" src="" alt="Background preview">
+            <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">›</button>
+            <div class="lightbox-caption" id="lbCaption"></div>
+        </div>
+    </div>
+
     <section class="updates" style="padding: 80px 0; background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">Latest Updates</h2>
             <div style="max-width: 800px; margin: 0 auto;">
                 <div class="feature-card" style="margin-bottom: 20px;">
-                    <h3>Version 1.0.4 - Latest Release</h3>
+                    <h3>Version 1.0.4 - Releases Page & Metadata Update</h3>
                     <ul style="list-style: none; padding: 0;">
-                        <li>📝 Notes widget on New Tab: add/edit/delete, complete, drag, collapse</li>
-                        <li>📅 <code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">cal</code> shortcut for Google Calendar (e.g., <code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">goto cal meeting</code>)</li>
-                        <li>🧭 UI and UX refinements across Options and New Tab</li>
+                        <li>🗞️ Releases page added; landing page links to detailed notes</li>
+                        <li>🧰 Streamlined docs and release notes via scripts/generate-release-notes.js</li>
+                        <li>📦 Added NPM search support (<code style="background:#e0e0e0; padding:2px 6px; border-radius:4px;">goto npm react</code>)</li>
                     </ul>
                 </div>
             </div>
@@ -490,6 +615,55 @@
             </p>
         </div>
     </footer>
+    <script>
+        (function() {
+            var cards = Array.prototype.slice.call(document.querySelectorAll('.bg-card'));
+            var lightbox = document.getElementById('lightbox');
+            var lbImg = document.getElementById('lbImg');
+            var lbCaption = document.getElementById('lbCaption');
+            var lbClose = document.getElementById('lbClose');
+            var lbPrev = document.getElementById('lbPrev');
+            var lbNext = document.getElementById('lbNext');
+            var current = 0;
+
+            function open(index) {
+                current = index;
+                var card = cards[current];
+                if (!card) return;
+                lbImg.src = card.getAttribute('data-src');
+                lbCaption.textContent = card.getAttribute('data-name');
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                lightbox.classList.remove('open');
+                document.body.style.overflow = '';
+                lbImg.src = '';
+            }
+
+            function next() { open((current + 1) % cards.length); }
+            function prev() { open((current - 1 + cards.length) % cards.length); }
+
+            cards.forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var idx = parseInt(card.getAttribute('data-index'), 10) || 0;
+                    open(idx);
+                });
+            });
+
+            lbClose.addEventListener('click', close);
+            lbNext.addEventListener('click', next);
+            lbPrev.addEventListener('click', prev);
+            lightbox.addEventListener('click', function(e){ if (e.target === lightbox) close(); });
+            document.addEventListener('keydown', function(e){
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowRight') next();
+                if (e.key === 'ArrowLeft') prev();
+            });
+        })();
+    </script>
 </body>
 </html>
 

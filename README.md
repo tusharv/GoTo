@@ -3,21 +3,23 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4100ff62dc24ad0892d98e84152fbdb)](https://www.codacy.com/app/tusharv/GoTo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tusharv/GoTo&amp;utm_campaign=Badge_Grade)
 
-GoTo and Search popular sites from your NewTab.
+GoTo and search popular sites from your New Tab.
 
-GoTo is your digital assistant, it can open and search popular sites quickly with a simple command on Google chrome omnibar. (command is "goto" in lowercase)
+GoTo is your digital assistant.
 
-GoTo can open and search YouTube, Git, GMail, Drive, Reddit and many more. Goto Options or type "goto help" after install for full list.
+GoTo can open and search popular sites quickly with a simple command in the Google Chrome omnibox (keyword is "goto" in lowercase).
 
-GoTo is not storing or using your data. It searches sites publicly or by using your account if already logged in. 
+GoTo can open and search YouTube, GitHub, Gmail, Drive, Reddit and many more. Open Options or type "goto help" after install for the full list.
+
+GoTo does not store or use your data. It searches sites publicly, or uses your existing login session if you are already signed in.
 
 [![Install](https://raw.githubusercontent.com/tusharv/QRHost/master/screenshots/store_badge.png)](https://chrome.google.com/webstore/detail/goto/iabecofjidglogmhkccmgihafpoaccmd)
 
-## New in v1.0.3
+## New in v1.0.4
 
-- Notes widget on New Tab: add/edit/delete, complete, drag, and collapse
-- `cal` shortcut for Google Calendar with query support (e.g., `goto cal meeting`)
-- UI and UX refinements across Options and New Tab
+- Releases page added and linked from the landing page
+- Streamlined docs and release notes via `scripts/generate-release-notes.js`
+- Added NPM search support (`goto npm {query}`)
 
 ## Why?
 
