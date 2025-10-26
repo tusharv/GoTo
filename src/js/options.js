@@ -167,33 +167,6 @@ function initFAQ() {
 	});
 }
 
-function copyToClipboard(text) {
-	if (navigator.clipboard) {
-		navigator.clipboard.writeText(text).catch(err => {
-			console.error('Failed to copy text: ', err);
-		});
-	} else {
-		// Fallback for older browsers
-		const textArea = document.createElement('textarea');
-		textArea.value = text;
-		document.body.appendChild(textArea);
-		textArea.select();
-		document.execCommand('copy');
-		document.body.removeChild(textArea);
-	}
-}
-
-function showCopyFeedback(element) {
-	const originalText = element.querySelector('.keyword-name').textContent;
-	element.querySelector('.keyword-name').textContent = 'Copied!';
-	element.style.background = '#38a169';
-	
-	setTimeout(() => {
-		element.querySelector('.keyword-name').textContent = originalText;
-		element.style.background = '';
-	}, 1000);
-}
-
 // Unsplash Queries Management Functions
 function initUnsplashQueries() {
 	if (!queriesListContainer || !newQueryInput || !addQueryBtn || !resetDefaultsBtn) return;
@@ -678,7 +651,7 @@ async function requestRefresh(){
 			await chrome.runtime.sendMessage({ action: 'refreshConfig' });
 		}
 	}catch(e){
-		// ignore
+		console.error('Error requesting refresh:', e);
 	}
 }
 
