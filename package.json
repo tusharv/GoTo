@@ -1,6 +1,6 @@
 {
   "name": "goto",
-  "version": "1.0.4",
+  "version": "1.0.4.1",
   "description": "GoTo and Search popular sites from your NewTab",
   "main": "src/js/background.js",
   "scripts": {

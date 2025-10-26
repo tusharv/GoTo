@@ -2,7 +2,7 @@
   "name": "GoTo",
   "short_name" : "GoTo",
   "description": "GoTo and Search popular sites from your NewTab",
-  "version": "1.0.4",
+  "version": "1.0.4.1",
   "background": {
     "service_worker": "js/background.js"
   },
@@ -14,9 +14,6 @@
   "options_page": "page/options.html",
   "permissions": [
     "storage"
-  ],
-  "host_permissions": [
-    "https://api.unsplash.com/*"
   ],
   "action": {
     "default_icon": {

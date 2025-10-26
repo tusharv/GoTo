@@ -1,4 +1,20 @@
 # GoTo Extension - Release Notes
+## Version 1.0.4.1 - Documentation Update & Peerlist Keywords
+
+**Release Date:** October 2025
+
+### What's New
+
+- Added Peerlist search keywords to README (peerlist, peer)
+- Release notes updated and landing page mentions Peerlist
+- Host permissions removed from manifest.json
+
+### Impact
+
+- Documentation-only update; no functional or permission changes
+
+---
+
 ## Version 1.0.4 - Releases Page & Metadata Update
 
 **Release Date:** October 2025

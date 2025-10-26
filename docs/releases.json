@@ -3,6 +3,21 @@
     "lastUpdated": "October 2025",
     "releases": [
         {
+            "version": "1.0.4.1",
+            "date": "October 2025",
+            "title": "Documentation Update & Peerlist Keywords",
+            "sections": [
+                { "heading": "What's New", "items": [
+                    "Added Peerlist search keywords to README (peerlist, peer)",
+                    "Release notes updated and landing page mentions Peerlist",
+                    "Host permissions removed from manifest.json"
+                ]},
+                { "heading": "Impact", "items": [
+                    "Documentation-only update; no functional or permission changes"
+                ]}
+            ]
+        },
+        {
             "version": "1.0.4",
             "date": "October 2025",
             "title": "Releases Page & Metadata Update",
