@@ -10,7 +10,8 @@
                 { "heading": "What's New", "items": [
                     "Releases page added",
                     "Streamlined page and RELEASE_NOTES.md through @scripts/",
-                    "Added NPM support for npm.com/search"
+                    "Added NPM support for npm.com/search",
+                    "Added Peerlist search support (peerlist, peer)"
                 ]},
                 { "heading": "Documentation & Metadata", "items": [
                     "Landing page now links to Releases page",

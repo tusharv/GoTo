@@ -443,6 +443,16 @@
 		"search": "https://www.npmjs.com/search?q={0}",
 		"param": "react"
 	},
+	"peerlist": {
+		"default": "https://peerlist.io/",
+		"search": "https://peerlist.io/search/{0}",
+		"param": ""
+	},
+	"peer": {
+		"default": "https://peerlist.io/",
+		"search": "https://peerlist.io/search/{0}",
+		"param": ""
+	},
 	"me": {
 		"default": "https://www.linkedin.com/in/tusharvaghela/",
 		"param": ""

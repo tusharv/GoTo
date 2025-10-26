@@ -20,6 +20,7 @@ GoTo does not store or use your data. It searches sites publicly, or uses your e
 - Releases page added and linked from the landing page
 - Streamlined docs and release notes via `scripts/generate-release-notes.js`
 - Added NPM search support (`goto npm {query}`)
+- Added Peerlist search support (`goto peerlist {query}` or `goto peer {query}`)
 
 ## Why?
 
@@ -71,6 +72,8 @@ Traditional searching is a two-step process for GMail, Drive, GitHub and many mo
 | map | <https://www.google.com/maps/> | goto map Goa |
 | medium | <https://medium.com/> | goto medium |
 | options | options.html | goto options |
+| peerlist | <https://peerlist.io/> | goto peerlist react |
+| peer | <https://peerlist.io/> | goto peer react |
 | ph | <https://www.producthunt.com/> | goto ph |
 | photopea | <https://www.photopea.com/> | goto photopea |
 | pin | <https://www.pinterest.com/> | goto pin infographics |

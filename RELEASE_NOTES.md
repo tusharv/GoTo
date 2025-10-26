@@ -8,6 +8,7 @@
 - Releases page added
 - Streamlined page and RELEASE_NOTES.md through @scripts/
 - Added NPM support for npm.com/search
+- Added Peerlist search support (peerlist, peer)
 
 ### Documentation & Metadata
 
